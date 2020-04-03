@@ -1,3 +1,5 @@
+import actionTypes from "../util/actionTypes";
+
 const initialState = {
   comments: [{ id: 0, title: "Test Comment 0" }],
 };
@@ -14,13 +16,13 @@ const commentsHistory = [
 ];
 
 const commentReducer = (state = initialState, action) => {
-  if (action.type === "ADD_COMMENT") {
+  if (action.type === actionTypes.ADD_COMMENT) {
     return Object.assign({}, state, {
       comments: state.comments.concat(action.payload)
     });
   }
 
-  if (action.type === "LOAD_COMMENTS") {
+  if (action.type === actionTypes.LOAD_COMMENTS) {
     return {
       ...state,
       comments: state.comments.concat(commentsHistory)

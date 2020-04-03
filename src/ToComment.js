@@ -3,6 +3,7 @@ import "./App.css";
 import axios from "axios";
 import { connect } from "react-redux";
 import URLS from "./util/constants";
+import actionTypes from "./util/actionTypes";
 
 function ToComment({ comments, dispatch }) {
   let [comment, setComment] = useState("");
@@ -26,7 +27,7 @@ function ToComment({ comments, dispatch }) {
     let max = Math.max.apply(null, result);
     let newId = max + 1;
     dispatch({
-      type: "ADD_COMMENT",
+      type: actionTypes.ADD_COMMENT,
       payload: { id: newId, title: comment }
     });
 
@@ -39,7 +40,7 @@ function ToComment({ comments, dispatch }) {
       .then(response => response.json())
       .then(json => {
         dispatch({
-          type: "LOAD_COMMENTS",
+          type: actionTypes.LOAD_COMMENTS,
           payload: json
         });
       });

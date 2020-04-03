@@ -1,3 +1,5 @@
+import actionTypes from "../util/actionTypes";
+
 const initialState = {
   posts: [{ id: 0, title: "Test Post" }],
   signUpModal: {
@@ -6,13 +8,13 @@ const initialState = {
 };
 
 const toDoReducer = (state = initialState, action) => {
-  if (action.type === "ADD_POST") {
+  if (action.type === actionTypes.ADD_POST) {
     return Object.assign({}, state, {
       posts: state.posts.concat(action.payload)
     });
   }
 
-  if (action.type === "LOAD_POSTS") {
+  if (action.type === actionTypes.LOAD_POSTS) {
     return {
       ...state,
       posts: state.posts.concat(action.payload)

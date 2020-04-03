@@ -3,6 +3,7 @@ import "./App.css";
 import axios from "axios";
 import { connect } from "react-redux";
 import URLS from "./util/constants";
+import actionTypes from "./util/actionTypes";
 
 function ToDo({ posts, dispatch }) {
   let [post, setPost] = useState("");
@@ -26,7 +27,7 @@ function ToDo({ posts, dispatch }) {
     let max = Math.max.apply(null, result);
     let newId = max + 1;
     dispatch({
-      type: "ADD_POST",
+      type: actionTypes.ADD_POST,
       payload: { id: newId, title: post }
     });
 
@@ -39,7 +40,7 @@ function ToDo({ posts, dispatch }) {
       .then(response => response.json())
       .then(json => {
         dispatch({
-          type: "LOAD_POSTS",
+          type: actionTypes.LOAD_POSTS,
           payload: json
         });
       });
