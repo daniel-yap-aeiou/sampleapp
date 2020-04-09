@@ -5,15 +5,21 @@ const initialState = {
 };
 
 export default function users(state = initialState, action) {
-  switch (action.Types) {
+  switch (action.type) {
     case Types.GET_USERS_SUCCESS: {
       return {
         ...state,
         items: action.payload.items
       };
     }
-    default : {
-        return state;
+    case Types.USERS_ERROR: {
+      return {
+        ...state,
+        error: action.payload.error
+      };
+    }
+    default: {
+      return state;
     }
   }
 }
