@@ -16,13 +16,22 @@ const ToDo = props => {
     createUserRequest
   } = props;
 
+  const [message, setMessage] = useState("Nothing to display");
+
   useEffect(() => {
+    users.items = [];
+    setMessage("Nothing to display");
+
     getUsersRequest();
+
+    if (users.error) {
+      setMessage(users.error);
+    }
 
     return () => {
       console.log("cleaned up");
     };
-  }, [getUsersRequest]);
+  }, [getUsersRequest, users.error]);
 
   function handleDelete(event) {
     let id = event.target.getAttribute("data-id");
@@ -37,7 +46,7 @@ const ToDo = props => {
       <div className="row">
         <div className="col-lg-6">
           {users.items.length === 0 ? (
-            <div>Nothing to display</div>
+            <div>{message}</div>
           ) : (
             <table className="table">
               <tbody>
@@ -68,6 +77,8 @@ const ToDo = props => {
 };
 
 const mapStateToProps = state => {
+  console.log(state);
+
   return { users: state.users };
 };
 

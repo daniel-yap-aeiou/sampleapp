@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Home from './Home';
 import ToDo from './ToDo';
 import ToComment from './ToComment';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, BrowserRouter } from 'react-router-dom';
 
 // The Main component renders one of the three provided
 // Routes (provided that one matches). Both the /roster
