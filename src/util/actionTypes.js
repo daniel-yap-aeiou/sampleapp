@@ -6,6 +6,7 @@ const actionTypes = {
     "DEL_ALL_POSTS": "DEL_ALL_POSTS",
     "ADD_COMMENT": "ADD_COMMENT",
     "LOAD_COMMENTS": "LOAD_COMMENTS",
+    "DEL_COMMENT": "DEL_COMMENT",
 };
 
 export default actionTypes;

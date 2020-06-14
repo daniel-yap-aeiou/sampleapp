@@ -25,7 +25,8 @@ function ToComment({ comments, dispatch }) {
 
     let result = comments.map(a => a.id);
     let max = Math.max.apply(null, result);
-    let newId = max + 1;
+    //let newId = max + 1;
+    let newId = Math.random();
     dispatch({
       type: actionTypes.ADD_COMMENT,
       payload: { id: newId, title: comment }
@@ -44,6 +45,13 @@ function ToComment({ comments, dispatch }) {
           payload: json
         });
       });
+  }
+  
+  function handleDelete(id) {
+    dispatch({
+      type: actionTypes.DEL_COMMENT,
+      payload: { id: id }
+    });
   }
 
   return (
@@ -64,7 +72,11 @@ function ToComment({ comments, dispatch }) {
           &nbsp;
           <ul>
             {comments.map(comment => (
-              <li key={comment.id}>{comment.title}</li>
+              <li key={comment.id}>
+                {comment.title}
+                &nbsp;
+                <button onClick={() => handleDelete(comment.id)}>X</button>
+              </li>
             ))}
           </ul>
         </div>

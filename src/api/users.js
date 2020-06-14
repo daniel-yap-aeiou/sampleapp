@@ -10,7 +10,7 @@ export const getUsers = () => {
   return new Promise(resolve => {
     axios
       .get(
-        "https://cors-anywhere.herokuapp.com/https://rem.dbwebb.se/api/users",
+        "https://cors-anywhere.herokuapp.com/https://rem.tomphill.co.uk/api/users",
         header
       )
       .then(result => {

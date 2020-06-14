@@ -1,19 +1,11 @@
 import actionTypes from "../util/actionTypes";
+import { matchPath } from "react-router-dom";
 
 const initialState = {
   comments: [{ id: 0, title: "Test Comment 0" }],
 };
 
-const commentsHistory = [
-  { id: 1, title: "Test Comment 1" },
-  { id: 2, title: "Test Comment 2" },
-  { id: 3, title: "Test Comment 3" },
-  { id: 4, title: "Test Comment 4" },
-  { id: 5, title: "Test Comment 5" },
-  { id: 6, title: "Test Comment 6" },
-  { id: 7, title: "Test Comment 7 " },
-  { id: 8, title: "Test Comment 8" },
-];
+let counter = 1;
 
 const commentReducer = (state = initialState, action) => {
   if (action.type === actionTypes.ADD_COMMENT) {
@@ -23,10 +15,27 @@ const commentReducer = (state = initialState, action) => {
   }
 
   if (action.type === actionTypes.LOAD_COMMENTS) {
+    let commentsHistory = [];
+
+    for (var i = counter; i <= counter + 8; i++)
+    {
+      let id = i;
+      commentsHistory.push({ id: id, title: "Test Comment " + id });
+    }
+    counter += 9;
+    
     return {
       ...state,
       comments: state.comments.concat(commentsHistory)
     };
+  }
+
+  if (action.type === actionTypes.DEL_COMMENT)   {
+    return Object.assign({}, state, {
+        comments: state.comments.filter((data) => {
+          return data.id !== action.payload.id;
+        })
+      });
   }
 
   return state;
