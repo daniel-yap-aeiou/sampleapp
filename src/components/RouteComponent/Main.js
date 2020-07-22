@@ -48,6 +48,12 @@ function Main(props) {
     </div>
   );
 
+  let pathPrefix = "";
+
+  // if (window.location.host && window.location.host.includes("localhost")) {
+  //   pathPrefix = "";
+  // }
+
   return (
     <main>
       <Title title={title} />
@@ -57,7 +63,7 @@ function Main(props) {
       />
 
       <Switch>
-        <Route path="/" exact={true}>
+        <Route path={pathPrefix + "/"} exact={true}>
           <RegistrationForm
             showError={updateErrorMessage}
             updateTitle={updateTitle}
@@ -65,7 +71,7 @@ function Main(props) {
             showLoader={showLoader}
           />
         </Route>
-        <Route path="/register">
+        <Route path={pathPrefix + "/register"}>
           <RegistrationForm
             showError={updateErrorMessage}
             updateTitle={updateTitle}
@@ -73,7 +79,7 @@ function Main(props) {
             showLoader={showLoader}
           />
         </Route>
-        <Route path="/login">
+        <Route path={pathPrefix + "/login"}>
           <LoginForm
             showError={updateErrorMessage}
             updateTitle={updateTitle}
@@ -83,42 +89,42 @@ function Main(props) {
         </Route>
 
         <Route
-          path="/home"
+          path={pathPrefix + "/home"}
           component={() => (
             <Home hideLoader={hideLoader} showLoader={showLoader} />
           )}
         />
         <Route
-          path="/todo"
+          path={pathPrefix + "/todo"}
           component={() => (
             <ToDo hideLoader={hideLoader} showLoader={showLoader} />
           )}
         />
         <Route
-          path="/comment"
+          path={pathPrefix + "/comment"}
           component={() => (
             <Comment hideLoader={hideLoader} showLoader={showLoader} />
           )}
         />
         <Route
-          path="/chat"
+          path={pathPrefix + "/chat"}
           component={() => (
             <Chat hideLoader={hideLoader} showLoader={showLoader} />
           )}
         />
         <Route
-          path="/paginate"
+          path={pathPrefix + "/paginate"}
           component={() => (
             <Paginate hideLoader={hideLoader} showLoader={showLoader} />
           )}
         />
 
-        <Route path="/shopping" component={ShoppingIndex} />
-        <Route path="/cart" component={Cart} />
-        <Route path="/account" component={Account} />
-        <Route path="/news" component={News} />
-        <Route path="/githubapi" component={GithubApi} />
-        <Route path="/youtubeapi" component={YoutubeApi} />
+        <Route path={pathPrefix + "/shopping"} component={ShoppingIndex} />
+        <Route path={pathPrefix + "/cart"} component={Cart} />
+        <Route path={pathPrefix + "/account"} component={Account} />
+        <Route path={pathPrefix + "/news"} component={News} />
+        <Route path={pathPrefix + "/githubapi"} component={GithubApi} />
+        <Route path={pathPrefix + "/youtubeapi"} component={YoutubeApi} />
 
         <Route component={Page404} />
       </Switch>

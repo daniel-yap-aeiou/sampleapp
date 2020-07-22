@@ -1,4 +1,5 @@
 {
+    "homepage": "https://daniel-yap-aeiou.github.io",
     "name": "my-app",
     "version": "0.1.0",
     "private": true,
@@ -22,7 +23,9 @@
         "start": "react-scripts start",
         "build": "react-scripts build",
         "test": "react-scripts test",
-        "eject": "react-scripts eject"
+        "eject": "react-scripts eject",
+        "predeploy": "npm run build",
+        "deploy": "gh-pages -b master -d build"
     },
     "eslintConfig": {
         "extends": "react-app"
@@ -40,6 +43,7 @@
         ]
     },
     "devDependencies": {
+        "gh-pages": "^3.1.0",
         "redux-devtools": "^3.5.0"
     }
 }
