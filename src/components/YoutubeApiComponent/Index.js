@@ -4,6 +4,7 @@ import youtube from "./Api/youtube";
 import VideoList from "./VideoList";
 import VideoDetail from "./VideoDetail";
 import KEY from "./Api/key";
+import { withRouter } from "react-router-dom";
 
 function Index() {
   const [state, setState] = useState({
@@ -60,4 +61,4 @@ function Index() {
   );
 }
 
-export default Index;
+export default withRouter(Index);

@@ -112,21 +112,22 @@ function Header({ itemCount, props }) {
                 data-toggle="dropdown"
                 aria-haspopup="true"
                 aria-expanded="false"
+                style={{ display: showLoggedInMenu }}
               >
                 Random
               </a>
               <div className="dropdown-menu" aria-labelledby="navbarDropdown1">
                 {menus.menuLeftDropdown1.map((m) => {
                   return (
-                    <a
+                    <Link
                       key={m.id}
+                      to={m.to}
                       className="dropdown-item"
-                      href={m.to}
                       style={{ display: showLoggedInMenu }}
                       onClick={() => props.showLoader}
                     >
                       {m.text}
-                    </a>
+                    </Link>
                   );
                 })}
               </div>
@@ -141,21 +142,22 @@ function Header({ itemCount, props }) {
                 data-toggle="dropdown"
                 aria-haspopup="true"
                 aria-expanded="false"
+                style={{ display: showLoggedInMenu }}
               >
                 Api
               </a>
               <div className="dropdown-menu" aria-labelledby="navbarDropdown2">
                 {menus.menuLeftDropdown2.map((m) => {
                   return (
-                    <a
+                    <Link
                       key={m.id}
+                      to={m.to}
                       className="dropdown-item"
-                      href={m.to}
                       style={{ display: showLoggedInMenu }}
                       onClick={() => props.showLoader}
                     >
                       {m.text}
-                    </a>
+                    </Link>
                   );
                 })}
               </div>

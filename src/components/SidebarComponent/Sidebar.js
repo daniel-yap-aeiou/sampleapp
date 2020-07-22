@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { withRouter, useHistory } from "react-router-dom";
+import { Link, withRouter, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 //import Logo from "../../logo.svg";
 
@@ -48,65 +48,66 @@ function Sidebar({ itemCount, props }) {
         </a>
         {menus.menuLeft.map((m) => {
           return (
-            <a
+            <Link
               key={m.id}
-              href={m.to}
+              to={m.to}
               style={{ display: showLoggedInMenu }}
               onClick={() => props.showLoader}
             >
               {m.text}
-            </a>
+            </Link>
           );
         })}
 
         {menus.menuLeftDropdown1.map((m) => {
           return (
-            <a
+            <Link
               key={m.id}
-              href={m.to}
+              to={m.to}
               style={{ display: showLoggedInMenu }}
               onClick={() => props.showLoader}
             >
               {m.text}
-            </a>
+            </Link>
           );
         })}
 
         {menus.menuLeftDropdown2.map((m) => {
           return (
-            <a
+            <Link
               key={m.id}
-              href={m.to}
+              to={m.to}
               style={{ display: showLoggedInMenu }}
               onClick={() => props.showLoader}
             >
               {m.text}
-            </a>
+            </Link>
           );
         })}
 
-        <a
-          href="/shopping"
+        <Link
+          to="/shopping"
           style={{ display: showLoggedInMenu }}
           onClick={() => props.showLoader}
         >
           Shopping
-        </a>
-        <a
-          href="/cart"
+        </Link>
+        <Link
+          to="/cart"
           style={{ display: showLoggedInMenu }}
           onClick={() => props.showLoader}
         >
           <i className="material-icons">shopping_cart</i> ({itemCount})
-        </a>
+        </Link>
 
         <User showLoggedInMenu={showLoggedInMenu} loggedInAs={loggedInAs} />
 
         {menus.menuRight.map((m) => {
           return (
-            <a
+            <Link
               key={m.id}
-              href={m.to}
+              to={m.to}
+              className="nav-link"
               style={{ display: showLoggedInMenu, marginTop: "6px" }}
               onClick={() => {
                 if (m.text === "Sign Out") {
@@ -117,7 +118,7 @@ function Sidebar({ itemCount, props }) {
               }}
             >
               {m.text}
-            </a>
+            </Link>
           );
         })}
       </div>

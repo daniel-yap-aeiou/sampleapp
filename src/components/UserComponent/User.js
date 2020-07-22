@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { withRouter } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import "./User.css";
 
 export function User(props) {
@@ -19,15 +19,15 @@ export function User(props) {
 
   return (
     <li className="nav-item">
-      <a
-        href="/account"
+      <Link
+        to="/account"
         className="nav-link"
         style={{ display: showLoggedInMenu }}
         onClick={() => handleLink}
       >
         <span data-letters={initial}></span>
         {loggedInAs}
-      </a>
+      </Link>
     </li>
   );
 }
