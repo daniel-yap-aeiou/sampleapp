@@ -1,0 +1,22 @@
+.rcw-conversation-container>.rcw-header {
+    background-color: brown;
+}
+
+.rcw-message>.rcw-response {
+    background-color: rgb(43, 42, 42);
+    color: white;
+    border-radius: 10px;
+}
+
+.rcw-message>.rcw-response>.rcw-message-text {
+    background-color: rgb(43, 42, 42);
+    color: white;
+}
+
+.rcw-message>.rcw-response>.rcw-timestamp {
+    margin-left: 5px;
+}
+
+.rcw-client>.rcw-message-text {
+    background-color: rgb(233, 167, 44);
+}

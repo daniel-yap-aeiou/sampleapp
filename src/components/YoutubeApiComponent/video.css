@@ -1,0 +1,20 @@
+.video-item {
+    display: flex !important;
+    align-items: center !important;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.video-item.item img {
+    max-width: 200px;
+    max-height: 250px;
+}
+
+.video-item>.content {
+    margin: 10px;
+}
+
+iframe.video {
+    height: 350px;
+    width: 650px;
+}

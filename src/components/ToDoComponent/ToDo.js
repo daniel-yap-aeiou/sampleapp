@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from "react";
-import "./App.css";
 import { connect } from "react-redux";
 import {
   getUsersRequest,
   deleteUserRequest,
   createUserRequest
-} from "./actions/users";
+} from "../../actions/users";
+
+import { withRouter } from "react-router-dom";
 
 const ToDo = props => {
   let {
     users,
-    dispatch,
+    //dispatch,
     getUsersRequest,
     deleteUserRequest,
-    createUserRequest
+    //createUserRequest
   } = props;
 
   const [message, setMessage] = useState("Nothing to display");
@@ -28,7 +29,12 @@ const ToDo = props => {
       setMessage(users.error);
     }
 
+    setTimeout(() => {
+        props.hideLoader();
+      }, 1000);
+
     return () => {
+      props.hideLoader();
       console.log("cleaned up");
     };
   }, [getUsersRequest, users.error]);
@@ -93,4 +99,4 @@ export default connect(mapStateToProps, {
   getUsersRequest,
   deleteUserRequest,
   createUserRequest
-})(ToDo);
+})(withRouter(ToDo));

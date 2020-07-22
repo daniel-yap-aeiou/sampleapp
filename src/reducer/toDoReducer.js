@@ -3,21 +3,21 @@ import actionTypes from "../util/actionTypes";
 const initialState = {
   posts: [],
   signUpModal: {
-    open: false
-  }
+    open: false,
+  },
 };
 
 const toDoReducer = (state = initialState, action) => {
   if (action.type === actionTypes.ADD_POST) {
     return Object.assign({}, state, {
-      posts: state.posts.concat(action.payload)
+      posts: state.posts.concat(action.payload),
     });
   }
 
   if (action.type === actionTypes.LOAD_POSTS) {
     return {
       ...state,
-      posts: state.posts.concat(action.payload)
+      posts: state.posts.concat(action.payload),
     };
   }
 
@@ -36,11 +36,11 @@ const toDoReducer = (state = initialState, action) => {
     // }
 
     const newState = Object.assign([], state);
-    const indexOfCatToDelete = state.posts.findIndex(cat => {
+    const indexOfCatToDelete = state.posts.findIndex((cat) => {
       console.log(cat.id);
       console.log(action.payload.id);
-      return cat.id == action.payload.id;
-    })
+      return cat.id === action.payload.id;
+    });
     newState.posts.splice(indexOfCatToDelete, 1);
     console.log(newState);
 
@@ -54,7 +54,7 @@ const toDoReducer = (state = initialState, action) => {
 
     return {
       ...state,
-      posts: newState.posts
+      posts: newState.posts,
     };
 
     // const filtered = state.posts.filter((e, index) => index !== action.payload.id);
@@ -63,20 +63,18 @@ const toDoReducer = (state = initialState, action) => {
     //   posts: filtered
     // });
 
+    //   let _posts = state.posts.filter((data) => {
+    //     //console.log(data);
+    //     return data.id !== action.payload.id;
+    //   });
+    // console.log(_posts);
 
-
-  //   let _posts = state.posts.filter((data) => {
-  //     //console.log(data);
-  //     return data.id !== action.payload.id;
-  //   });
-  // console.log(_posts);
-
-  //   state.posts = [];
-  //   state.posts.concat(_posts);
-  //   return {
-  //     ...state,
-  //     posts: state.posts
-  //   };
+    //   state.posts = [];
+    //   state.posts.concat(_posts);
+    //   return {
+    //     ...state,
+    //     posts: state.posts
+    //   };
 
     // return Object.assign({}, state, {
     //   posts: state.posts.filter((data) => {
@@ -100,7 +98,7 @@ const toDoReducer = (state = initialState, action) => {
 
   if (action.type === actionTypes.DEL_ALL_POSTS) {
     return Object.assign({}, state, {
-      posts: []
+      posts: [],
     });
   }
 
