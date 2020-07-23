@@ -17,6 +17,7 @@ import Cart from "../ShoppingComponent/Cart";
 import Account from "../AccountComponent/Account";
 import News from "../NewsComponent/NewsHome";
 import GithubApi from "../GithubComponent/GithubApi";
+import GithubJobsApi from "../GithubJobsApiComponent/Index";
 import YoutubeApi from "../YoutubeApiComponent/Index";
 
 import Covid19 from "../Covid19Component/Index";
@@ -158,6 +159,12 @@ function Main(props) {
           path="/githubapi"
           component={() => (
             <GithubApi hideLoader={hideLoader} showLoader={showLoader} />
+          )}
+        />
+        <Route
+          path="/githubjobsapi"
+          component={() => (
+            <GithubJobsApi hideLoader={hideLoader} showLoader={showLoader} />
           )}
         />
         <Route

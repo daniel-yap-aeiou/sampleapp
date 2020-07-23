@@ -10,7 +10,8 @@ const menuLeftDropdown1 = [
 
 const menuLeftDropdown2 = [
   { id: 1, to: "/githubapi", text: "Github Api" },
-  { id: 2, to: "/youtubeapi", text: "Youtube Api" },
+  { id: 2, to: "/githubjobsapi", text: "Github Jobs Api" },
+  { id: 3, to: "/youtubeapi", text: "Youtube Api" },
 ];
 
 const menuLeft2 = [{ id: 1, to: "/covid19", text: "Covid 19" }];
