@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import {
@@ -8,7 +8,7 @@ import {
 } from "../actions/cartActions";
 import Recipe from "./Recipe";
 
-function Cart({ items, removeItem, addQuantity, subtractQuantity }) {
+function Cart({ items, removeItem, addQuantity, subtractQuantity, props }) {
   const handleRemove = (id) => {
     removeItem(id);
   };
@@ -20,6 +20,8 @@ function Cart({ items, removeItem, addQuantity, subtractQuantity }) {
   const handleSubtractQuantity = (id) => {
     subtractQuantity(id);
   };
+
+  useEffect(props.hideLoader, []);
 
   let addedItems = items.length ? (
     items.map((item) => {
@@ -87,9 +89,10 @@ function Cart({ items, removeItem, addQuantity, subtractQuantity }) {
   );
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
   return {
     items: state.cartReducer.addedItems,
+    props: ownProps
   };
 };
 const mapDispatchToProps = (dispatch) => {

@@ -48,6 +48,11 @@ function Main(props) {
     </div>
   );
 
+  /* Set the width of the sidebar to 0 and the left margin of the page content to 0 */
+  function closeNav() {
+    document.getElementById("mySidebar").style.width = "0";
+  }
+
   return (
     <main>
       <Title title={title} />
@@ -113,12 +118,46 @@ function Main(props) {
           )}
         />
 
-        <Route path="/shopping" component={ShoppingIndex} />
-        <Route path="/cart" component={Cart} />
-        <Route path="/account" component={Account} />
-        <Route path="/news" component={News} />
-        <Route path="/githubapi" component={GithubApi} />
-        <Route path="/youtubeapi" component={YoutubeApi} />
+        <Route
+          path="/shopping"
+          component={() => (
+            <ShoppingIndex hideLoader={hideLoader} showLoader={showLoader} />
+          )}
+        />
+        <Route
+          path="/cart"
+          component={() => (
+            <Cart hideLoader={hideLoader} showLoader={showLoader} />
+          )}
+        />
+        <Route
+          path="/account"
+          component={() => (
+            <Account
+              hideLoader={hideLoader}
+              showLoader={showLoader}
+              closeNav={closeNav}
+            />
+          )}
+        />
+        <Route
+          path="/news"
+          component={() => (
+            <News hideLoader={hideLoader} showLoader={showLoader} />
+          )}
+        />
+        <Route
+          path="/githubapi"
+          component={() => (
+            <GithubApi hideLoader={hideLoader} showLoader={showLoader} />
+          )}
+        />
+        <Route
+          path="/youtubeapi"
+          component={() => (
+            <YoutubeApi hideLoader={hideLoader} showLoader={showLoader} />
+          )}
+        />
 
         <Route component={Page404} />
       </Switch>

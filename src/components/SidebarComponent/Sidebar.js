@@ -22,6 +22,7 @@ function Sidebar({ itemCount, props }) {
       updateShowLoggedInMenu((prevValue) => (prevValue = "block"));
       updateLoggedInAs((prevValue) => (prevValue = userDetails.email));
     }
+
   }, []);
 
   const signout = () => {
@@ -37,13 +38,17 @@ function Sidebar({ itemCount, props }) {
   /* Set the width of the sidebar to 0 and the left margin of the page content to 0 */
   function closeNav() {
     document.getElementById("mySidebar").style.width = "0";
-    //document.getElementById("main").style.marginLeft = "0";
   }
+
+  const handleMenuOnClick = () => {
+    closeNav();
+    props.showLoader();
+  };
 
   return (
     <div>
       <div id="mySidebar" className="sidebar">
-        <a href="#" className="closebtn" onClick={closeNav}>
+        <a href="##" className="closebtn" onClick={closeNav}>
           &times;
         </a>
         {menus.menuLeft.map((m) => {
@@ -52,7 +57,7 @@ function Sidebar({ itemCount, props }) {
               key={m.id}
               to={m.to}
               style={{ display: showLoggedInMenu }}
-              onClick={() => props.showLoader}
+              onClick={() => handleMenuOnClick()}
             >
               {m.text}
             </Link>
@@ -65,7 +70,7 @@ function Sidebar({ itemCount, props }) {
               key={m.id}
               to={m.to}
               style={{ display: showLoggedInMenu }}
-              onClick={() => props.showLoader}
+              onClick={() => handleMenuOnClick()}
             >
               {m.text}
             </Link>
@@ -78,7 +83,7 @@ function Sidebar({ itemCount, props }) {
               key={m.id}
               to={m.to}
               style={{ display: showLoggedInMenu }}
-              onClick={() => props.showLoader}
+              onClick={() => handleMenuOnClick()}
             >
               {m.text}
             </Link>
@@ -88,19 +93,19 @@ function Sidebar({ itemCount, props }) {
         <Link
           to="/shopping"
           style={{ display: showLoggedInMenu }}
-          onClick={() => props.showLoader}
+          onClick={() => handleMenuOnClick()}
         >
           Shopping
         </Link>
         <Link
           to="/cart"
           style={{ display: showLoggedInMenu }}
-          onClick={() => props.showLoader}
+          onClick={() => handleMenuOnClick()}
         >
           <i className="material-icons">shopping_cart</i> ({itemCount})
         </Link>
 
-        <User showLoggedInMenu={showLoggedInMenu} loggedInAs={loggedInAs} />
+        <User showLoggedInMenu={showLoggedInMenu} loggedInAs={loggedInAs} hideLoader={props.hideLoader} showLoader={props.showLoader} closeNav={closeNav} />
 
         {menus.menuRight.map((m) => {
           return (
@@ -113,7 +118,7 @@ function Sidebar({ itemCount, props }) {
                 if (m.text === "Sign Out") {
                   signout();
                 } else {
-                  props.showLoader();
+                  handleMenuOnClick();
                 }
               }}
             >

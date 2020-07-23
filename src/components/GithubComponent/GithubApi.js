@@ -3,8 +3,9 @@ import axios from "axios";
 import "./GithubApi.css";
 import List from "./List";
 import withListLoading from "./WithListLoading";
+import { withRouter } from "react-router-dom";
 
-function GithubApi() {
+function GithubApi(props) {
   const ListLoading = withListLoading(List);
   const [appState, setAppState] = useState({
     loading: false,
@@ -26,6 +27,8 @@ function GithubApi() {
       });
   }, [setAppState, username]);
 
+  useEffect(props.hideLoader, []);
+
   const handleUsernameChange = (e) => {
     let username = e.target.value;
     setUsername((prevValue) => (prevValue = username));
@@ -35,7 +38,12 @@ function GithubApi() {
     <div>
       <div className="container">
         <h1>My Repositories</h1>
-        <input type="text" value={username} onChange={handleUsernameChange} className="form-control" />
+        <input
+          type="text"
+          value={username}
+          onChange={handleUsernameChange}
+          className="form-control"
+        />
       </div>
       <div className="repo-container">
         <ListLoading isLoading={appState.loading} repos={appState.repos} />
@@ -44,4 +52,4 @@ function GithubApi() {
   );
 }
 
-export default GithubApi;
+export default withRouter(GithubApi);

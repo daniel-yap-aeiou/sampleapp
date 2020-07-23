@@ -15,6 +15,8 @@ function Index(props) {
       }
     }, [props.history]);
   
+    useEffect(props.hideLoader, []);
+
     const Page404 = ({ location }) => (
       <div>
         <h2>

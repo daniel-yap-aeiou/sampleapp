@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SearchBar from "./SearchBar";
 import youtube from "./Api/youtube";
 import VideoList from "./VideoList";
@@ -6,7 +6,7 @@ import VideoDetail from "./VideoDetail";
 import KEY from "./Api/key";
 import { withRouter } from "react-router-dom";
 
-function Index() {
+function Index(props) {
   const [state, setState] = useState({
     videos: [],
     selectedVideo: null,
@@ -37,6 +37,8 @@ function Index() {
       selectedVideo: video,
     }));
   };
+
+  useEffect(props.hideLoader, []);
 
   return (
     <div className="container" style={{ marginTop: "1em" }}>
