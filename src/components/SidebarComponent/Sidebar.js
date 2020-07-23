@@ -22,7 +22,6 @@ function Sidebar({ itemCount, props }) {
       updateShowLoggedInMenu((prevValue) => (prevValue = "block"));
       updateLoggedInAs((prevValue) => (prevValue = userDetails.email));
     }
-
   }, []);
 
   const signout = () => {
@@ -51,7 +50,7 @@ function Sidebar({ itemCount, props }) {
         <a href="##" className="closebtn" onClick={closeNav}>
           &times;
         </a>
-        {menus.menuLeft.map((m) => {
+        {menus.menuLeft1.map((m) => {
           return (
             <Link
               key={m.id}
@@ -105,7 +104,26 @@ function Sidebar({ itemCount, props }) {
           <i className="material-icons">shopping_cart</i> ({itemCount})
         </Link>
 
-        <User showLoggedInMenu={showLoggedInMenu} loggedInAs={loggedInAs} hideLoader={props.hideLoader} showLoader={props.showLoader} closeNav={closeNav} />
+        {menus.menuLeft2.map((m) => {
+          return (
+            <Link
+              key={m.id}
+              to={m.to}
+              style={{ display: showLoggedInMenu }}
+              onClick={() => handleMenuOnClick()}
+            >
+              {m.text}
+            </Link>
+          );
+        })}
+
+        <User
+          showLoggedInMenu={showLoggedInMenu}
+          loggedInAs={loggedInAs}
+          hideLoader={props.hideLoader}
+          showLoader={props.showLoader}
+          closeNav={closeNav}
+        />
 
         {menus.menuRight.map((m) => {
           return (

@@ -19,6 +19,8 @@ import News from "../NewsComponent/NewsHome";
 import GithubApi from "../GithubComponent/GithubApi";
 import YoutubeApi from "../YoutubeApiComponent/Index";
 
+import Covid19 from "../Covid19Component/Index";
+
 import { Switch, Route, withRouter } from "react-router-dom";
 
 // The Main component renders one of the three provided
@@ -115,6 +117,12 @@ function Main(props) {
           path="/paginate"
           component={() => (
             <Paginate hideLoader={hideLoader} showLoader={showLoader} />
+          )}
+        />
+        <Route
+          path="/covid19"
+          component={() => (
+            <Covid19 hideLoader={hideLoader} showLoader={showLoader} />
           )}
         />
 

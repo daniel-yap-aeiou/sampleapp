@@ -92,7 +92,7 @@ function Header({ itemCount, props }) {
               </button>
             </li>
 
-            {menus.menuLeft.map((m) => {
+            {menus.menuLeft1.map((m) => {
               return (
                 <li className="nav-item" key={m.id}>
                   <Link
@@ -187,6 +187,21 @@ function Header({ itemCount, props }) {
                 <i className="material-icons">shopping_cart</i> ({itemCount})
               </Link>
             </li>
+
+            {menus.menuLeft2.map((m) => {
+              return (
+                <li className="nav-item" key={m.id}>
+                  <Link
+                    to={m.to}
+                    className="nav-link"
+                    style={{ display: showLoggedInMenu }}
+                    onClick={() => props.showLoader}
+                  >
+                    {m.text}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
 
           <ul className="nav navbar-nav navbar-right">
