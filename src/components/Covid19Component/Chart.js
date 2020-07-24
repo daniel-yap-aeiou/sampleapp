@@ -40,7 +40,7 @@ const Chart = ({ data: { confirmed, recovered, deaths }, country }) => {
         legend: { display: false },
         title: {
           display: true,
-          text: `Currently Selected Country Is <span></span>${country}`,
+          text: `Currently selected country is ${country}`,
         },
       }}
     />
