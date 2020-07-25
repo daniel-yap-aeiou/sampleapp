@@ -7,7 +7,7 @@ import RegistrationForm from "../RegistrationForm/RegistrationForm";
 import LoginForm from "../LoginForm/LoginForm";
 
 import Home from "../HomeComponent/Home";
-import ToDo from "../ToDoComponent/ToDo";
+import User from "../User1Component/User";
 import Comment from "../CommentComponent/Comment";
 import Chat from "../ChatComponent/Chat";
 import Paginate from "../PaginateComponent/Paginate";
@@ -97,9 +97,9 @@ function Main(props) {
           )}
         />
         <Route
-          path="/todo"
+          path="/user"
           component={() => (
-            <ToDo hideLoader={hideLoader} showLoader={showLoader} />
+            <User hideLoader={hideLoader} showLoader={showLoader} />
           )}
         />
         <Route

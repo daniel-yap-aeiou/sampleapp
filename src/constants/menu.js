@@ -1,7 +1,7 @@
 const menuLeft1 = [{ id: 1, to: "/home", text: "Home" }];
 
 const menuLeftDropdown1 = [
-  { id: 1, to: "/todo", text: "To Do" },
+  { id: 1, to: "/user", text: "User" },
   { id: 2, to: "/comment", text: "Comment" },
   { id: 3, to: "/chat", text: "Chat" },
   { id: 4, to: "/paginate", text: "Paginate" },

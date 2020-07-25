@@ -17,11 +17,16 @@ const commentReducer = (state = initialState, action) => {
   if (action.type === actionTypes.LOAD_COMMENTS) {
     let commentsHistory = [];
 
-    for (var i = counter; i <= counter + 8; i++)
-    {
-      let id = i;
-      commentsHistory.push({ id: id, title: "Test Comment " + id });
-    }
+    let l = counter + 8;
+    let range = Array.from({length: l},(v,k)=>(k+1));
+    range.splice(0, counter - 1);
+
+    range.map((id) => commentsHistory.push({ id: id, title: "Test Comment " + id }));
+    // for (var i = counter; i <= counter + 8; i++)
+    // {
+    //   let id = i;
+    //   commentsHistory.push({ id: id, title: "Test Comment " + id });
+    // }
     counter += 9;
     
     return {

@@ -1,72 +1,137 @@
 import axios from "axios";
 
+const KEY = "$2b$10$9CGSrW4RdtgJxYLjKH9sX.VvBdSrfELBEv7.CjXYR6kVALk1y2ti2";
+const binId = "5f1b8d9ec1edc466175dcc15";
+
 export const getUsers = () => {
   let header = {
-    headers: { "Access-Control-Allow-Origin": "*" },
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "secret-key": KEY,
+    },
     withCredentials: false,
-    credentials: "same-origin"
+    credentials: "same-origin",
   };
 
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     axios
-      .get(
-        "https://cors-anywhere.herokuapp.com/https://rem.tomphill.co.uk/api/users",
-        header
-      )
-      .then(result => {
+      .get(`https://api.jsonbin.io/b/${binId}`, header)
+      .then((result) => {
         return resolve(result);
       })
-      .catch(err => {
+      .catch((err) => {
         throw resolve(err);
       });
   });
 };
 
 export const createUser = ({ firstName, lastName }) => {
-  let header = {
-    headers: { "Access-Control-Allow-Origin": "*" },
+  let header1 = {
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "secret-key": KEY,
+    },
     withCredentials: false,
-    credentials: "same-origin"
+    credentials: "same-origin",
   };
 
-  return new Promise(resolve => {
+  let header2 = {
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "secret-key": KEY,
+      versioning: false,
+    },
+    withCredentials: false,
+    credentials: "same-origin",
+  };
+
+  axios
+    .get(`https://api.jsonbin.io/b/${binId}`, header1)
+    .then((result) => {
+      let temp = result.data.users;
+
+      if (temp) {
+        const nextId = temp.length + 1;
+        temp.push({ userId: nextId, firstName, lastName });
+
+        return new Promise((resolve) => {
+          axios
+            .put(`https://api.jsonbin.io/b/${binId}`, { users: temp }, header2)
+            .then((result) => {
+              return resolve(result);
+            })
+            .catch((err) => {
+              throw resolve(err);
+            });
+        });
+      }
+    })
+    .catch((err) => {
+      throw err;
+    });
+
+  return true;
+};
+
+export const deleteUser = ({ userObject }) => {
+  let header = {
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "secret-key": KEY,
+      versioning: false,
+    },
+    withCredentials: false,
+    credentials: "same-origin",
+  };
+
+  return new Promise((resolve) => {
     axios
-      .post(
-        "https://cors-anywhere.herokuapp.com/https://rem.dbwebb.se/api/users",
-        {
-          firstName,
-          lastName
-        },
-        header
-      )
-      .then(result => {
-        console.log("CreateUser ...");
+      .put(`https://api.jsonbin.io/b/${binId}`, { users: userObject }, header)
+      .then((result) => {
         return resolve(result);
       })
-      .catch(err => {
+      .catch((err) => {
         throw resolve(err);
       });
   });
-
 };
 
-export const deleteUser = userId => {
+export const resetUsers = () => {
   let header = {
-    headers: { "Access-Control-Allow-Origin": "*" },
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "secret-key": KEY,
+      versioning: false,
+    },
     withCredentials: false,
-    credentials: "same-origin"
+    credentials: "same-origin",
   };
 
-  return new Promise(resolve => {
+  let users = [
+    {
+      userId: 1,
+      firstName: "First Test 1",
+      lastName: "Last Test 1",
+    },
+    {
+      userId: 2,
+      firstName: "First Test 2",
+      lastName: "Last Test 2",
+    },
+    {
+      userId: 3,
+      firstName: "First Test 3",
+      lastName: "Last Test 3",
+    },
+  ];
+
+  return new Promise((resolve) => {
     axios
-      .delete(
-        `https://cors-anywhere.herokuapp.com/https://rem.dbwebb.se/api/users/${userId}`,
-        header
-      )
-      .then(result => {
+      .put(`https://api.jsonbin.io/b/${binId}`, { users }, header)
+      .then((result) => {
         return resolve(result);
       })
-      .catch(err => {
+      .catch((err) => {
         throw resolve(err);
       });
   });
