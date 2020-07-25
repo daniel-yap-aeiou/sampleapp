@@ -18,3 +18,21 @@ iframe.video {
     height: 350px;
     width: 650px;
 }
+
+@media only screen and (max-width: 1150px) {
+    iframe.video {
+        width: 550px;
+    }
+}
+
+@media only screen and (max-width: 750px) {
+    iframe.video {
+        width: 450px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    iframe.video {
+        width: 350px;
+    }
+}

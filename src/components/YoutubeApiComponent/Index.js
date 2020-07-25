@@ -45,11 +45,11 @@ function Index(props) {
       <SearchBar handleFormSubmit={handleSubmit} />
       <br />
       <br />
-      <div className="ui row">
-        <div className="col-7">
+      <div className="row">
+        <div className="col-lg-7">
           <VideoDetail video={state.selectedVideo} />
         </div>
-        <div className="col-5">
+        <div className="col-lg-5">
           <VideoList
             handleVideoSelect={handleVideoSelect}
             videos={state.videos}
