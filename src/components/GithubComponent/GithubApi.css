@@ -43,3 +43,30 @@
 .updatedat {
     font-style: italic;
 }
+
+
+/* custom scroll bar */
+
+.repo-container {
+    --scrollbarBG: #CFD8DC;
+    --thumbBG: #90A4AE;
+}
+
+.repo-container::-webkit-scrollbar {
+    width: 20px;
+}
+
+.repo-container {
+    scrollbar-width: thin;
+    scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+}
+
+.repo-container::-webkit-scrollbar-track {
+    background: var(--scrollbarBG);
+}
+
+.repo-container::-webkit-scrollbar-thumb {
+    background-color: var(--thumbBG);
+    border-radius: 6px;
+    border: 3px solid var(--scrollbarBG);
+}

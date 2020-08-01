@@ -9,11 +9,11 @@ function App({ hideLoader, showLoader }) {
   useEffect(hideLoader, []);
 
   return (
-    <div className="">
+    <>
       <Header hideLoader={hideLoader} showLoader={showLoader} />
       <Sidebar hideLoader={hideLoader} showLoader={showLoader} />
       <Main hideLoader={hideLoader} showLoader={showLoader} />
-    </div>
+    </>
   );
 }
 
