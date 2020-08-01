@@ -1,0 +1,83 @@
+/* Ref: https://github.com/ssorallen/react-reddit-client */
+
+.navigation ul {
+    background-color: #37383a;
+    cursor: pointer;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.navigation .header {
+    padding: 15px;
+    background-color: #4e5053;
+}
+
+.navigation li {
+    padding: 15px;
+    color: white;
+}
+
+.navigation .selected {
+    background-color: #9061b2;
+}
+
+.navigation .subreddit {
+    font-size: 15px;
+    cursor: pointer;
+    padding: 15px;
+    margin: 5px;
+}
+
+.navigation .subreddit:hover {
+    color: #ffffff;
+    background-color: #9061b2;
+}
+
+.score {
+    font-size: 36px;
+    margin: 15px;
+    color: #afb3b9;
+}
+
+.count {
+    font-size: 12px;
+    font-style: italic;
+}
+
+.title {
+    font-size: 18px;
+}
+
+.title a {
+    text-decoration: none;
+}
+
+.creator {
+    border-right: 5px solid #4e5053;
+    float: right;
+    font-size: 0.85rem;
+    margin-top: 0;
+    padding-right: 5px;
+    text-align: right;
+    transition: color 250ms, border-right-width 250ms;
+}
+
+.creator:hover,
+.creator:hover a {
+    border-right-width: 8px;
+}
+
+a.reddit-client,
+a.reddit-client:link {
+    text-decoration: underline;
+    transition: color 250ms;
+}
+
+div.reddit-client {
+    background-color: #ffffff;
+    font-family: 'Lato';
+    color: black;
+    font-weight: 300;
+}

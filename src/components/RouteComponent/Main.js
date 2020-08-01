@@ -19,6 +19,7 @@ import News from "../NewsComponent/NewsHome";
 import GithubApi from "../GithubComponent/GithubApi";
 import GithubJobsApi from "../GithubJobsApiComponent/Index";
 import YoutubeApi from "../YoutubeApiComponent/Index";
+import RedditClientApi from "../RedditClientComponent/Index";
 
 import Covid19 from "../Covid19Component/Index";
 
@@ -171,6 +172,12 @@ function Main(props) {
           path="/youtubeapi"
           component={() => (
             <YoutubeApi hideLoader={hideLoader} showLoader={showLoader} />
+          )}
+        />
+        <Route
+          path="/redditclientapi"
+          component={() => (
+            <RedditClientApi hideLoader={hideLoader} showLoader={showLoader} />
           )}
         />
 
