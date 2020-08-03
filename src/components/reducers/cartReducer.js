@@ -11,6 +11,8 @@ import {
   SUB_QUANTITY,
   ADD_QUANTITY,
   ADD_SHIPPING,
+  UP_VOTE,
+  DOWN_VOTE,
 } from "../actions/action-types/cartActions";
 
 const initState = {
@@ -22,6 +24,7 @@ const initState = {
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex.",
       price: 110,
       img: Item1,
+      votes: [],
     },
     {
       id: 2,
@@ -30,6 +33,7 @@ const initState = {
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex.",
       price: 80,
       img: Item2,
+      votes: [],
     },
     {
       id: 3,
@@ -38,6 +42,7 @@ const initState = {
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex.",
       price: 120,
       img: Item3,
+      votes: [],
     },
     {
       id: 4,
@@ -46,6 +51,7 @@ const initState = {
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex.",
       price: 260,
       img: Item4,
+      votes: [],
     },
     {
       id: 5,
@@ -54,6 +60,7 @@ const initState = {
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex.",
       price: 160,
       img: Item5,
+      votes: [],
     },
     {
       id: 6,
@@ -62,6 +69,7 @@ const initState = {
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex.",
       price: 90,
       img: Item6,
+      votes: [],
     },
   ],
   addedItems: [],
@@ -155,9 +163,54 @@ const cartReducer = (state = initState, action) => {
       addedItems: [],
       total: 0,
     };
-  } else {
-    return state;
   }
+
+  if (action.type === UP_VOTE) {
+    let addedItem = state.items.find((item) => item.id === action.id);
+    let existingItems = state.items.filter((item) => item.id !== action.id);
+    let upVoteUser = action.user;
+
+    if (addedItem && upVoteUser) {
+      if (!addedItem.votes.includes(upVoteUser)) {
+        addedItem.votes.push(upVoteUser);
+      }
+
+      let newItems = [...existingItems, addedItem];
+      let sortedItems = newItems.sort(function (a, b) {
+        return a.id - b.id;
+      });
+
+      return {
+        ...state,
+        items: sortedItems,
+      };
+    }
+  }
+
+  if (action.type === DOWN_VOTE) {
+    let addedItem = state.items.find((item) => item.id === action.id);
+    let existingItems = state.items.filter((item) => item.id !== action.id);
+    let downVoteUser = action.user;
+
+    if (addedItem && downVoteUser) {
+      let newVotes = addedItem.votes.filter(
+        (item) => item !== downVoteUser
+      );
+      addedItem.votes = newVotes;
+
+      let newItems = [...existingItems, addedItem];
+      let sortedItems = newItems.sort(function (a, b) {
+        return a.id - b.id;
+      });
+
+      return {
+        ...state,
+        items: sortedItems,
+      };
+    }
+  }
+
+  return state;
 };
 
 export default cartReducer;

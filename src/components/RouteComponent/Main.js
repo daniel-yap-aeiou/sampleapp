@@ -12,7 +12,7 @@ import Comment from "../CommentComponent/Comment";
 import Chat from "../ChatComponent/Chat";
 import Paginate from "../PaginateComponent/Paginate";
 
-import ShoppingIndex from "../ShoppingComponent/Index";
+import ShoppingIndex from "../ShoppingComponent/Home";
 import Cart from "../ShoppingComponent/Cart";
 import Account from "../AccountComponent/Account";
 import News from "../NewsComponent/NewsHome";
@@ -20,6 +20,7 @@ import GithubApi from "../GithubComponent/GithubApi";
 import GithubJobsApi from "../GithubJobsApiComponent/Index";
 import YoutubeApi from "../YoutubeApiComponent/Index";
 import RedditClientApi from "../RedditClientComponent/Index";
+import WeatherApi from "../WeatherComponent/Index";
 
 import Covid19 from "../Covid19Component/Index";
 
@@ -178,6 +179,12 @@ function Main(props) {
           path="/redditclientapi"
           component={() => (
             <RedditClientApi hideLoader={hideLoader} showLoader={showLoader} />
+          )}
+        />
+        <Route
+          path="/weatherapi"
+          component={() => (
+            <WeatherApi hideLoader={hideLoader} showLoader={showLoader} />
           )}
         />
 

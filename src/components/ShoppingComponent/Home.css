@@ -1,0 +1,19 @@
+.vote {
+    display: inline-block;
+    overflow: hidden;
+    width: 40px;
+    height: 25px;
+    cursor: pointer;
+}
+
+.vote.on {
+    color: orangered;
+}
+
+.vote.count {
+    color: gray;
+    font-weight: bold;
+    font-size: 20px;
+    height: 33px;
+    cursor: text;
+}

@@ -4,6 +4,8 @@ import {
   REMOVE_ALL_ITEMS,
   SUB_QUANTITY,
   ADD_QUANTITY,
+  UP_VOTE,
+  DOWN_VOTE,
 } from "./action-types/cartActions";
 
 //add cart action
@@ -37,5 +39,21 @@ export const addQuantity = (id) => {
 export const removeAllItems = () => {
   return {
     type: REMOVE_ALL_ITEMS,
+  };
+};
+
+export const upVote = (id, user) => {
+  return {
+    type: UP_VOTE,
+    id,
+    user,
+  };
+};
+
+export const downVote = (id, user) => {
+  return {
+    type: DOWN_VOTE,
+    id,
+    user,
   };
 };
