@@ -45,6 +45,18 @@ function List(props) {
             ...prevState,
             t: old,
           }));
+        } else {
+          // Get the snackbar DIV
+          var x = document.getElementById("snackbar");
+
+          x.innerHTML = "Nothing found";
+          // Add the "show" class to DIV
+          x.className = "show";
+
+          // After 3 seconds, remove the show class from DIV
+          setTimeout(function () {
+            x.className = x.className.replace("show", "");
+          }, 2000);
         }
       })
       .catch((err) => {
@@ -83,7 +95,8 @@ function List(props) {
               <h5 className="movie-title">{m.title}</h5>
               <p>{m.overview || "..."}</p>
               <p>
-                <span className="movie-genre">Genre:</span> {joinedGenres || "NA"}
+                <span className="movie-genre">Genre:</span>{" "}
+                {joinedGenres || "NA"}
               </p>
               <p>
                 <span className="movie-release-date">Release date:</span>{" "}
