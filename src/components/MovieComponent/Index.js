@@ -143,7 +143,7 @@ function Index(props) {
       }
       
       props.showLoader();
-      const url = `https://api.themoviedb.org/3/search/movie/?api_key=${KEY}&query=${movie}`;
+      const url = `https://api.themoviedb.org/3/search/movie?api_key=${KEY}&query=${movie}`;
 
       axios
         .get(url)
