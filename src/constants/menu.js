@@ -14,6 +14,7 @@ const menuLeftDropdown2 = [
   { id: 3, to: "/youtubeapi", text: "Youtube Api" },
   { id: 4, to: "/redditclientapi", text: "Reddit Client Api" },
   { id: 5, to: "/weatherapi", text: "Weather Client Api" },
+  { id: 6, to: "/movieapi", text: "Movie Db Api" },
 ];
 
 const menuLeft2 = [{ id: 1, to: "/covid19", text: "Covid 19" }];

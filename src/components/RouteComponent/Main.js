@@ -21,6 +21,7 @@ import GithubJobsApi from "../GithubJobsApiComponent/Index";
 import YoutubeApi from "../YoutubeApiComponent/Index";
 import RedditClientApi from "../RedditClientComponent/Index";
 import WeatherApi from "../WeatherComponent/Index";
+import MovieApi from "../MovieComponent/Index";
 
 import Covid19 from "../Covid19Component/Index";
 
@@ -185,6 +186,12 @@ function Main(props) {
           path="/weatherapi"
           component={() => (
             <WeatherApi hideLoader={hideLoader} showLoader={showLoader} />
+          )}
+        />
+        <Route
+          path="/movieapi"
+          component={() => (
+            <MovieApi hideLoader={hideLoader} showLoader={showLoader} />
           )}
         />
 
