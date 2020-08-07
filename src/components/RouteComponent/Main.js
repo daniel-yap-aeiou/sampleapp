@@ -22,6 +22,7 @@ import YoutubeApi from "../YoutubeApiComponent/Index";
 import RedditClientApi from "../RedditClientComponent/Index";
 import WeatherApi from "../WeatherComponent/Index";
 import MovieApi from "../MovieComponent/Index";
+import SportsDbApi from "../SportsDbApiComponent/Index";
 
 import Covid19 from "../Covid19Component/Index";
 
@@ -193,7 +194,13 @@ function Main(props) {
           component={() => (
             <MovieApi hideLoader={hideLoader} showLoader={showLoader} />
           )}
-        />
+        /> 
+        <Route
+        path="/sportsdbapi"
+        component={() => (
+          <SportsDbApi hideLoader={hideLoader} showLoader={showLoader} />
+        )}
+      />
 
         <Route component={Page404} />
       </Switch>
