@@ -1,5 +1,4 @@
 import "../../../util/window";
-
-let temp = "@AIzaSyAKH1ba3mb266gVdfRCrblSs947tTJRJecD";
+const temp = process.env.REACT_APP_YOUTUBE_API_KEY;
 const KEY = window.app.decrypt(temp);
 export default KEY;
