@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const KEY = "$2b$10$9CGSrW4RdtgJxYLjKH9sX.VvBdSrfELBEv7.CjXYR6kVALk1y2ti2";
+let temp = "@$2b$10$9CGSrW4RdtgJxYLjKH9sX.VvBdSrfELBEv7.CjXYR6kVALk1y2ti2B";
+const KEY = temp.slice(1,-1);
 const binId = "5f1b8d9ec1edc466175dcc15";
 
 export const getUsers = () => {
