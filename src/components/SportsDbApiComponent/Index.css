@@ -10,3 +10,20 @@
 .league {
     margin-bottom: 15px;
 }
+
+.player {
+    margin-bottom: 10px;
+}
+
+.img-player {
+    width: 100px;
+    height: 100px;
+}
+
+.league-table {
+    border: 1px solid #dee2e6;
+}
+
+.hide {
+    display: none;
+}
