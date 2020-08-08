@@ -26,11 +26,9 @@ const history = createHashHistory({ handlePageChange });
 history.listen((location) => {
   const user = localStorage.getItem("user");
 
-  if (user) {
+  if (user && window.location.hostname === "localhost") {
     const t = JSON.parse(user);
     window.location.pathname = "/" + t.email;
-  } else {
-    window.location.pathname = "/";
   }
 });
 
