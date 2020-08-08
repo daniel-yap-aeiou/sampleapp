@@ -31,6 +31,7 @@ function Sidebar({ itemCount, props }) {
     updateLoggedInAs((prevValue) => (prevValue = null));
     history.push("/login");
     window.location.reload();
+    window.location.pathname = "/";
     //props.updateTitle("Login");
   };
 

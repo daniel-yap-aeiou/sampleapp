@@ -45,6 +45,7 @@ function Main(props) {
     if (user == null) {
       props.history.push("/login");
     }
+   
   }, [props.history]);
 
   const Page404 = ({ location }) => (

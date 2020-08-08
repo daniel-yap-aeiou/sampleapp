@@ -9,24 +9,41 @@ import "bootstrap/dist/css/bootstrap.css";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
+import { createHashHistory } from "history";
 
-//const { useEffect } = React;
-//const store = createStore(rootReducer);
 window.store = store;
 
 const loader = document.querySelector(".loader-main");
 
 // if you want to show the loader when React loads data again
 const showLoader = () => loader.classList.remove("loader--hide");
-
 const hideLoader = () => loader.classList.add("loader--hide");
+const handlePageChange = () => {};
+
+// Create your browser history
+const history = createHashHistory({ handlePageChange });
+
+history.listen((location) => {
+  const user = localStorage.getItem("user");
+
+  if (user) {
+    const t = JSON.parse(user);
+    window.location.pathname = "/" + t.email;
+  } else {
+    window.location.pathname = "/";
+  }
+});
 
 ReactDOM.render(
   // <React.StrictMode>
   //   <App />
   // </React.StrictMode>,
   <Provider store={store}>
-    <Router basename="sampleapp">
+    <Router
+      basename="sampleapp"
+      //getUserConfirmation={handlePageChange}
+      history={history}
+    >
       <App hideLoader={hideLoader} showLoader={showLoader} />
     </Router>
   </Provider>,
