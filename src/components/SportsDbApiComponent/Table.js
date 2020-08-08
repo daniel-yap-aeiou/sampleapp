@@ -5,7 +5,6 @@ import "./Index.css";
 function Table(props) {
   const [data, updateData] = useState([]);
   const [divClassName, setDivClassName] = useState("row hide");
-  const [content, setContent] = useState("");
 
   useEffect(() => {
     updateData((prevValue) => (prevValue = props.data));
