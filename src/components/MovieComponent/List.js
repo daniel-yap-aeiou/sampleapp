@@ -68,6 +68,7 @@ function List(props) {
     <div className="row">
       {data && data.length > 0 ? (
         data.map((m) => {
+          console.log(m);
           let imgSrc = imagePathPrefixUrl + m.poster_path;
 
           if (m.poster_path === undefined || m.poster_path === null) {
@@ -91,8 +92,18 @@ function List(props) {
 
           return (
             <div className="col-lg-3 col-sm-3 col-md-3 movie" key={m.id}>
-              <img src={imgSrc} alt={m.title} className="movie-img" />
-              <h5 className="movie-title">{m.title}</h5>
+              <div className="flip-box">
+                <div className="flip-box-inner">
+                  <div className="flip-box-front">
+                    <img src={imgSrc} alt={m.title} className="movie-img" />
+                  </div>
+                  <div className="flip-box-back">
+                    <h5 className="movie-title">{m.title}</h5>
+                    <p>Popularity: {m.popularity}</p>
+                    <p>Vote: {m.vote_average}</p>
+                  </div>
+                </div>
+              </div>
               <p>{m.overview || "..."}</p>
               <p>
                 <span className="movie-genre">Genre:</span>{" "}
