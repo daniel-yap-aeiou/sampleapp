@@ -14,7 +14,6 @@ import * as serviceWorker from "./serviceWorker";
 //const store = createStore(rootReducer);
 window.store = store;
 
-
 const loader = document.querySelector(".loader-main");
 
 // if you want to show the loader when React loads data again
