@@ -3,6 +3,7 @@ import { Spinner } from "react-bootstrap";
 import KEY from "./key";
 import { withRouter } from "react-router-dom";
 import "./Index.css";
+import Modal from "./Modal";
 
 let enteredCity = [];
 
@@ -12,10 +13,17 @@ function Index(props) {
   const [spinnerClassName, setSpinnerClassName] = useState("hide");
   const [weatherList, setWeatherList] = useState([]);
   const [cityList, setCityList] = useState([]);
+  const [forecastList, setForecastList] = useState({});
 
   const handleInputChange = (e) => {
     const v = e.target.value;
     setState((pv) => (pv = v));
+  };
+
+  const closeForecastModal = () => {
+    const modal = document.getElementById("forecastModal");
+    modal.style.display = "none";
+    setForecastList((pv) => (pv = {}));
   };
 
   const loadForecast = (e, city) => {
@@ -34,10 +42,25 @@ function Index(props) {
         .then((response) => response.json())
         .then((data) => {
           if (data.daily) {
+            let forecast_1 = [];
+            let count = 0;
+            let newDate = new Date();
+
             data.daily.map((d) => {
               const { temp, weather } = d;
               const icon = `https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/${weather[0]["icon"]}.svg`;
+
+              forecast_1.push({ count, temp, weather, icon, date: newDate });
+              count++;
             });
+
+            setForecastList(
+              (pv) =>
+                (pv = { location: foundItem.location, forecast: forecast_1 })
+            );
+
+            const modal = document.getElementById("forecastModal");
+            modal.style.display = "block";
           }
         })
         .catch(() => {
@@ -89,7 +112,11 @@ function Index(props) {
           cityList.findIndex((s) => s.id === city.toLocaleLowerCase()) === -1
         ) {
           let cl = cityList;
-          cl.push({ id: city.toLocaleLowerCase(), coord });
+          cl.push({
+            id: city.toLocaleLowerCase(),
+            coord,
+            location: name + ", " + sys.country,
+          });
           setCityList((pv) => (pv = cl));
         }
 
@@ -146,6 +173,8 @@ function Index(props) {
 
           <section className="ajax-section">
             <div className="container">
+              <Modal closeModal={closeForecastModal} data={forecastList} />
+
               <div className="cities row">
                 {weatherList
                   ? weatherList.map((wl) => {
@@ -177,7 +206,7 @@ function Index(props) {
                           </figure>
                           <div>
                             <button
-                              className="btn btn-dark" disabled
+                              className="btn btn-dark"
                               onClick={(e) =>
                                 loadForecast(e, wl.city.toLocaleLowerCase())
                               }

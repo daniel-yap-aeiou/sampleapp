@@ -77,3 +77,19 @@ ul.cities {
     width: 100px;
     height: 100px;
 }
+
+@media (max-width: 575.98px) {
+    .ajax-section .city-temp {
+        font-size: 20px;
+    }
+    .ajax-section .city sup {
+        font-size: 15px;
+    }
+    .ajax-section .city {
+        position: relative;
+        padding: 20px;
+    }
+    .ajax-section .city-name {
+        word-break: break-all;
+    }
+}
