@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 function Searchbar(props) {
   const [term, setState] = useState("");
@@ -13,6 +13,13 @@ function Searchbar(props) {
     props.handleFormSubmit(term);
   };
 
+  useEffect(() => {
+    setState((prevState) => (prevState = "ABC"));
+    setTimeout(() => {
+      document.getElementById("searchSubmitButton").click();
+    }, 200);
+  }, []);
+
   return (
     <div className="search-bar ui segment">
       <form className="ui form">
@@ -26,7 +33,7 @@ function Searchbar(props) {
             className="form-control"
           />
           <br />
-          <button className="btn btn-primary" onClick={handleSubmit}>
+          <button id="searchSubmitButton" className="btn btn-primary" onClick={handleSubmit}>
             Submit
           </button>
         </div>

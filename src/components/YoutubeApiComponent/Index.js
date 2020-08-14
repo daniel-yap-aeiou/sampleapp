@@ -17,7 +17,7 @@ function Index(props) {
       .get("/search", {
         params: {
           part: "snippet",
-          maxResults: 5,
+          maxResults: 15,
           key: KEY,
           q: termFromSearchBar,
         },
