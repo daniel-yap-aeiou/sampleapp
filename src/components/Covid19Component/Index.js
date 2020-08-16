@@ -13,19 +13,23 @@ function Covid19(props) {
     country: "",
   });
 
+  const { data, country } = state;
+
   useEffect(props.hideLoader, []);
 
   useEffect(() => {
-    const data = fetchData();
+    fetchData()
+      .then((data) => {
+        setState((prevState) => ({
+          ...prevState,
+          data: data,
+        }));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
-    setState((prevState) => ({
-      ...prevState,
-      data: data,
-    }));
-
-    return () => {
-
-    };
+    return () => {};
   }, []);
 
   const handleCountryChange = async (country) => {
@@ -38,10 +42,8 @@ function Covid19(props) {
     }));
   };
 
-  const { data, country } = state;
-
   return (
-    <div className="container">
+    <div className="container covid-container">
       <div className="row">
         <div className="col-12">
           <Card data={data} />
