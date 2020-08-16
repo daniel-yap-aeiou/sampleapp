@@ -8,7 +8,7 @@ const Cards = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
 
   return (
     <div className="row">
-      <div className="col-sm-4">
+      <div class="card-deck">
         <div className="card">
           <div className="card-body">
             <h5 className="card-title">Infected</h5>
@@ -26,8 +26,7 @@ const Cards = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
             <p className="card-text">Number Of Active Cases Of Covid-19</p>
           </div>
         </div>
-      </div>
-      <div className="col-sm-4">
+
         <div className="card">
           <div className="card-body">
             <h5 className="card-title">Recovered</h5>
@@ -45,8 +44,7 @@ const Cards = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
             <p className="card-text">Number Of Recovered Cases Of Covid-19</p>
           </div>
         </div>
-      </div>
-      <div className="col-sm-4">
+
         <div className="card">
           <div className="card-body">
             <h5 className="card-title">Deaths</h5>

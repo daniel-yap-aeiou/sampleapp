@@ -11,7 +11,7 @@ function Title(props) {
   );
 
   return (
-    <div className="row col-12 d-flex justify-content-center">
+    <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 d-flex justify-content-center">
       <span className="h3">{props.title || title}</span>
     </div>
   );

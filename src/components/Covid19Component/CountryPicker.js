@@ -18,7 +18,7 @@ const Countries = ({ handleCountryChange }) => {
   return (
     <div className="container">
       <div className="row">
-        <div className="col-4">
+        <div className="col-xs-4 col-sm-4 col-md-4 col-lg-4">
           <select
             className="form-control"
             onChange={(e) => handleCountryChange(e.target.value)}

@@ -1,7 +1,7 @@
 import React from "react";
 import VideoItem from "./VideoItem";
 
-const VideoList = ({ videos, handleVideoSelect }) => {
+const VideoList = ({ videos, selectedVideo, handleVideoSelect }) => {
   if (videos === undefined) return "";
 
   const renderedVideos = videos.map((video) => {
@@ -10,10 +10,11 @@ const VideoList = ({ videos, handleVideoSelect }) => {
         key={video.id.videoId || Math.random()}
         video={video}
         handleVideoSelect={handleVideoSelect}
+        selectedVideo={selectedVideo}
       />
     );
   });
 
-  return <div className="ui relaxed divided list">{renderedVideos}</div>;
+  return <div className={selectedVideo == null ? "row": ""}>{renderedVideos}</div>;
 };
 export default VideoList;

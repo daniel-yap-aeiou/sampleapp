@@ -1,3 +1,15 @@
+.category {
+    font-size: 15px;
+    cursor: pointer;
+    padding: 15px;
+    margin: 5px;
+}
+
+.category:hover {
+    color: #ffffff;
+    background-color: #9061b2;
+}
+
 .video-item {
     display: flex !important;
     align-items: center !important;
@@ -19,7 +31,7 @@ iframe.video {
     width: 650px;
 }
 
-@media only screen and (max-width: 1150px) {
+@media only screen and (max-width: 1200px) {
     iframe.video {
         width: 550px;
     }
@@ -34,5 +46,17 @@ iframe.video {
 @media only screen and (max-width: 600px) {
     iframe.video {
         width: 350px;
+    }
+}
+
+@media only screen and (max-width: 390px) {
+    iframe.video {
+        width: 300px;
+    }
+}
+
+@media only screen and (max-width: 350px) {
+    iframe.video {
+        width: 230px;
     }
 }

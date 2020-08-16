@@ -45,7 +45,7 @@ function Covid19(props) {
   return (
     <div className="container covid-container">
       <div className="row">
-        <div className="col-12">
+        <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
           <Card data={data} />
           <CountryPicker handleCountryChange={handleCountryChange} />
           <Chart data={data} country={country} />
