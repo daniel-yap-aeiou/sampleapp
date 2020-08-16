@@ -242,7 +242,7 @@ function Index(props) {
               });
             });
 
-            setCountries((pv) => (pv = countries_1));
+            setCountries((pv) => (pv = countries_1.sort()));
           }
 
           props.hideLoader();
@@ -277,7 +277,8 @@ function Index(props) {
                 });
               }
             });
-
+            
+            allSports_1 = allSports_1.sort( (a,b) => a.strSport > b.strSport );
             setAllSports((pv) => (pv = allSports_1));
           }
 

@@ -13,6 +13,11 @@ function Searchbar(props) {
     props.handleFormSubmit(term);
   };
 
+  const clearSelectedVideo = (event) => {
+    event.preventDefault();
+    props.clearSelectedVideo();
+  };
+
   useEffect(() => {
     setState((prevState) => (prevState = "ABC"));
     setTimeout(() => {
@@ -33,8 +38,15 @@ function Searchbar(props) {
             className="form-control"
           />
           <br />
-          <button id="searchSubmitButton" className="btn btn-primary" onClick={handleSubmit}>
+          <button
+            id="searchSubmitButton"
+            className="btn btn-primary"
+            onClick={handleSubmit}
+          >
             Submit
+          </button>&nbsp;
+          <button type="button" className="btn btn-danger" onClick={clearSelectedVideo}>
+            Clear
           </button>
         </div>
       </form>

@@ -13,6 +13,13 @@ function Index(props) {
     selectedVideo: null,
   });
 
+  const handleClearSelectedVideo = () => {
+    setState((prevState) => ({
+      ...prevState,
+      selectedVideo: null,
+    }));
+  };
+
   const handleSubmit = async (termFromSearchBar) => {
     const response = await youtube
       .get("/search", {
@@ -56,8 +63,6 @@ function Index(props) {
         console.log(err);
       });
 
-    console.log(response.data);
-
     var videos = [];
     if (response.data && response.data.items) {
       response.data.items.map((v) => {
@@ -92,7 +97,7 @@ function Index(props) {
         Trending
       </Badge>
 
-      <SearchBar handleFormSubmit={handleSubmit} />
+      <SearchBar handleFormSubmit={handleSubmit} clearSelectedVideo={handleClearSelectedVideo} />
       <br />
       <br />
       <div className="row">
