@@ -13,6 +13,8 @@ function Index(props) {
     selectedVideo: null,
   });
 
+  const [maxResults, setMaxResults] = useState(15);
+
   const handleClearSelectedVideo = () => {
     setState((prevState) => ({
       ...prevState,
@@ -20,12 +22,12 @@ function Index(props) {
     }));
   };
 
-  const handleSubmit = async (termFromSearchBar) => {
+  const handleSubmit = async (termFromSearchBar, maxResults) => {
     const response = await youtube
       .get("/search", {
         params: {
           part: "snippet",
-          maxResults: 15,
+          maxResults: parseInt(maxResults),
           key: KEY,
           q: termFromSearchBar,
         },
@@ -33,6 +35,8 @@ function Index(props) {
       .catch((err) => {
         console.log(err);
       });
+
+    setMaxResults((prevState) => (prevState = parseInt(maxResults)));
 
     setState((prevState) => ({
       ...prevState,
@@ -54,7 +58,7 @@ function Index(props) {
         params: {
           part: "snippet",
           chart: "mostPopular",
-          maxResults: 15,
+          maxResults: maxResults,
           regionCode: "AU",
           key: KEY,
         },
@@ -97,7 +101,11 @@ function Index(props) {
         Trending
       </Badge>
 
-      <SearchBar handleFormSubmit={handleSubmit} clearSelectedVideo={handleClearSelectedVideo} />
+      <SearchBar
+        handleFormSubmit={handleSubmit}
+        clearSelectedVideo={handleClearSelectedVideo}
+        handleSetMaxResults={setMaxResults}
+      />
       <br />
       <br />
       <div className="row">
