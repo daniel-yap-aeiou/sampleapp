@@ -31,15 +31,53 @@ iframe.video {
     width: 650px;
 }
 
+@media only screen and (max-width: 2000px) {
+    iframe.video {
+        width: 630px;
+    }
+    .video-container {
+        position: fixed;
+        top: 316px;
+    }
+}
+
+@media only screen and (max-width: 1500px) {
+    iframe.video {
+        width: 600px;
+    }
+    .video-container {
+        position: fixed;
+        top: 316px;
+    }
+}
+
 @media only screen and (max-width: 1200px) {
     iframe.video {
-        width: 550px;
+        width: 530px;
+    }
+    .video-container {
+        position: fixed;
+        top: 316px;
+    }
+}
+
+@media only screen and (max-width: 995px) {
+    iframe.video {
+        width: 400px;
+    }
+    .video-container {
+        position: initial;
+        top: 0;
     }
 }
 
 @media only screen and (max-width: 750px) {
     iframe.video {
-        width: 450px;
+        width: 280px;
+    }
+    .video-container {
+        position: initial;
+        top: 0;
     }
 }
 
@@ -47,16 +85,28 @@ iframe.video {
     iframe.video {
         width: 350px;
     }
+    .video-container {
+        position: initial;
+        top: 0;
+    }
 }
 
 @media only screen and (max-width: 390px) {
     iframe.video {
         width: 300px;
     }
+    .video-container {
+        position: initial;
+        top: 0;
+    }
 }
 
 @media only screen and (max-width: 350px) {
     iframe.video {
         width: 230px;
+    }
+    .video-container {
+        position: initial;
+        top: 0;
     }
 }

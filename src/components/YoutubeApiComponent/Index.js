@@ -113,10 +113,10 @@ function Index(props) {
           </>
         ) : (
           <>
-            <div className="col-lg-7">
+            <div className="col-sm-7 col-md-7 col-lg-7">
               <VideoDetail video={state.selectedVideo} />
             </div>
-            <div className="col-lg-5">
+            <div className="col-sm-5 col-md-5 col-lg-5">
               <VideoList
                 handleVideoSelect={handleVideoSelect}
                 videos={state.videos}

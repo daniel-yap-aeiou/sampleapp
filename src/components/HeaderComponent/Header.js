@@ -43,9 +43,9 @@ function Header({ itemCount, props }) {
 
   const toggleNavBarMode = () => {
     if (navBarClassName.includes("light")) {
-      setNarBarClassName((prevValue) => (prevValue = "navbar-dark bg-dark"));
+      setNarBarClassName((prevValue) => (prevValue = "navbar-dark bg-dark fixed-top"));
     } else {
-      setNarBarClassName((prevValue) => (prevValue = "navbar-light bg-light"));
+      setNarBarClassName((prevValue) => (prevValue = "navbar-light bg-light fixed-top"));
     }
   };
 
@@ -61,7 +61,7 @@ function Header({ itemCount, props }) {
 
   return (
     <header>
-      <nav className={navBarClassName + " navbar navbar-expand-lg"}>
+      <nav className={navBarClassName + " navbar navbar-expand-lg fixed-top" }>
         <Link to="/" className="navbar-brand">
           <img src={Logo} className="App-logo" alt="App" /> &nbsp;
         </Link>
