@@ -23,20 +23,26 @@ const initialState = {
   storyItems: [],
 };
 
-function reducer(state: State, action): State {
+const actionTypes = {
+  SET_NAV_ITEMS: "set-nagivation-items",
+  SET_SELECTED_SUBREDDIT: "set-selected-subreddit",
+  SET_STORY_ITEMS: "set-story-items",
+};
+
+const reducer = (state: State, action): State => {
   switch (action.type) {
-    case "set-navigation-items":
+    case actionTypes.SET_NAV_ITEMS:
       return {
         ...state,
         navigationItems: action.payload,
       };
-    case "set-selected-subreddit":
+    case actionTypes.SET_SELECTED_SUBREDDIT:
       return {
         ...state,
         selectedSubreddit: action.payload,
         storyItems: [],
       };
-    case "set-story-items":
+    case actionTypes.SET_STORY_ITEMS:
       return {
         ...state,
         storyItems: action.payload,
@@ -44,7 +50,7 @@ function reducer(state: State, action): State {
     default:
       throw new Error();
   }
-}
+};
 
 let storiesCallbackName = null;
 
@@ -66,7 +72,7 @@ function Index() {
     window[cbname] = (jsonData: ResponseSubreddits) => {
       dispatch({
         payload: jsonData.data.children,
-        type: "set-navigation-items",
+        type: actionTypes.SET_NAV_ITEMS,
       });
       delete window[cbname];
       documentHead.removeChild(script);
@@ -87,7 +93,7 @@ function Index() {
     const cbname = (storiesCallbackName = `fn${Date.now()}`);
     const script = document.createElement("script");
     script.src = `https://www.reddit.com${item.data.url}.json?sort=top&t=month&jsonp=${cbname}`;
-    
+
     window[cbname] = (jsonData: ResponseStories) => {
       // Use the response only if this is still the latest script to run. If the user clicked
       // another Subreddit in the meantime, the `cbname` will be different and this response should
@@ -99,7 +105,7 @@ function Index() {
       if (cbname === storiesCallbackName) {
         dispatch({
           payload: jsonData.data.children,
-          type: "set-story-items",
+          type: actionTypes.SET_STORY_ITEMS,
         });
       }
 
@@ -113,7 +119,7 @@ function Index() {
 
     dispatch({
       payload: item,
-      type: "set-selected-subreddit",
+      type: actionTypes.SET_SELECTED_SUBREDDIT,
     });
   };
 
@@ -126,7 +132,7 @@ function Index() {
               ? "Please select a sub"
               : state.selectedSubreddit.data.display_name}
             <span>
-                &nbsp;
+              &nbsp;
               <Spinner animation="grow" className={loaderClass} />
             </span>
           </h1>
