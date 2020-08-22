@@ -5,6 +5,11 @@ import Logo from "../../logo.svg";
 
 import { menus } from "../../constants/menu";
 import { User } from "../UserComponent/User";
+import {
+  IsUserLoggedIn,
+  GetUserEmailAddress,
+  SignOut,
+} from "../../contexts/UserContext";
 
 function Header({ itemCount, props }) {
   let history = useHistory();
@@ -19,26 +24,22 @@ function Header({ itemCount, props }) {
   }
 
   useEffect(() => {
-    let user = localStorage.getItem("user");
-    let userDetails = JSON.parse(user);
-
-    if (user == null) {
+    if (!IsUserLoggedIn()) {
       updateShowLoggedInMenu((prevValue) => (prevValue = "none"));
     } else {
       updateShowLoggedInMenu((prevValue) => (prevValue = "block"));
-      updateLoggedInAs((prevValue) => (prevValue = userDetails.email));
+      updateLoggedInAs((prevValue) => (prevValue = GetUserEmailAddress()));
     }
   }, []);
 
   const signout = () => {
     props.showLoader();
-    localStorage.removeItem("user");
+    SignOut();
     updateShowLoggedInMenu((prevValue) => (prevValue = "none"));
     updateLoggedInAs((prevValue) => (prevValue = null));
     history.push("/login");
     window.location.reload();
     window.location.pathname = "/";
-    //props.updateTitle("Login");
   };
 
   const toggleNavBarMode = () => {

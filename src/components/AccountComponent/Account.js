@@ -3,15 +3,17 @@ import { withRouter } from "react-router-dom";
 import "./Account.css";
 import Logo from "../../logo.svg";
 
+import {
+  IsUserLoggedIn,
+  GetUserEmailAddress,
+} from "../../contexts/UserContext";
+
 function Account(props) {
   let [loggedInAs, updateLoggedInAs] = useState(null);
-  useEffect(() => {
-    let user = localStorage.getItem("user");
-    let userDetails = JSON.parse(user);
 
-    if (user == null) {
-    } else {
-      updateLoggedInAs(userDetails.email);
+  useEffect(() => {
+    if (IsUserLoggedIn()) {
+      updateLoggedInAs(GetUserEmailAddress());
     }
   }, []);
 

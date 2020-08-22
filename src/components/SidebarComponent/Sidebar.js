@@ -7,26 +7,25 @@ import { menus } from "../../constants/menu";
 import { User } from "../UserComponent/User";
 import "./Sidebar.css";
 
+import { IsUserLoggedIn, GetUserEmailAddress, SignOut } from  "../../contexts/UserContext";
+
 function Sidebar({ itemCount, props }) {
   let history = useHistory();
   let [showLoggedInMenu, updateShowLoggedInMenu] = useState("none");
   let [loggedInAs, updateLoggedInAs] = useState(null);
-
+  //const userContext = React.useContext(UserContext);
   useEffect(() => {
-    let user = localStorage.getItem("user");
-    let userDetails = JSON.parse(user);
-
-    if (user == null) {
+    if (IsUserLoggedIn() == null) {
       updateShowLoggedInMenu((prevValue) => (prevValue = "none"));
     } else {
       updateShowLoggedInMenu((prevValue) => (prevValue = "block"));
-      updateLoggedInAs((prevValue) => (prevValue = userDetails.email));
+      updateLoggedInAs((prevValue) => (prevValue = GetUserEmailAddress()));
     }
   }, []);
 
   const signout = () => {
     props.showLoader();
-    localStorage.removeItem("user");
+    SignOut();
     updateShowLoggedInMenu((prevValue) => (prevValue = "none"));
     updateLoggedInAs((prevValue) => (prevValue = null));
     history.push("/login");

@@ -4,6 +4,8 @@ import "./RegistrationForm.css";
 //import { API_BASE_URL } from "../../constants/apiContants";
 import { withRouter } from "react-router-dom";
 
+import { IsUserLoggedIn, SignIn } from "../../contexts/UserContext";
+
 function RegistrationForm(props) {
   const [state, setState] = useState({
     email: "",
@@ -25,17 +27,16 @@ function RegistrationForm(props) {
         email: state.email,
         password: state.password,
       };
-  
+
       setState((prevState) => ({
         ...prevState,
-        successMessage:
-          "Registration successful. Redirecting to home page..",
+        successMessage: "Registration successful. Redirecting to home page..",
       }));
 
-      localStorage.setItem("user", JSON.stringify(payload));
+      SignIn(payload);
       props.showError(null);
       props.showLoader();
-      
+
       setTimeout(() => {
         redirectToHome();
       }, 2000);
@@ -81,10 +82,8 @@ function RegistrationForm(props) {
   };
 
   useEffect(() => {
-    const user = localStorage.getItem("user");
-
-    if (user != null) {
-        redirectToHome();
+    if (IsUserLoggedIn()) {
+      redirectToHome();
     }
   });
 

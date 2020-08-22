@@ -28,6 +28,8 @@ import Covid19 from "../Covid19Component/Index";
 
 import { Switch, Route, withRouter } from "react-router-dom";
 
+import { IsUserLoggedIn } from  "../../contexts/UserContext";
+
 // The Main component renders one of the three provided
 // Routes (provided that one matches). Both the /roster
 // and /schedule routes will match any pathname that starts
@@ -40,9 +42,7 @@ function Main(props) {
   const [errorMessage, updateErrorMessage] = useState(null);
 
   useEffect(() => {
-    const user = localStorage.getItem("user");
-
-    if (user == null) {
+    if (!IsUserLoggedIn()) {
       props.history.push("/login");
     }
    

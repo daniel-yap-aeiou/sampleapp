@@ -8,7 +8,7 @@ const Cards = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
 
   return (
     <div className="row">
-      <div class="card-deck">
+      <div className="card-deck">
         <div className="card">
           <div className="card-body">
             <h5 className="card-title">Infected</h5>

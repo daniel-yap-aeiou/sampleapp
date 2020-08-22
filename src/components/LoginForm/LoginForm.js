@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import "./LoginForm.css";
 //import { API_BASE_URL } from "../../constants/apiContants";
 import { withRouter } from "react-router-dom";
+import { SignIn } from "../../contexts/UserContext";
 
 function LoginForm(props) {
   const [state, setState] = useState({
@@ -30,7 +31,7 @@ function LoginForm(props) {
       props.showError("Password is required");
       return false;
     }
-    
+
     props.showError(null);
 
     const payload = {
@@ -43,7 +44,7 @@ function LoginForm(props) {
       successMessage: "Login successful. Redirecting to home page..",
     }));
 
-    localStorage.setItem("user", JSON.stringify(payload));
+    SignIn(payload);
     props.showLoader();
 
     setTimeout(() => {

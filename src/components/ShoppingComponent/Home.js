@@ -2,6 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 import { addToCart, upVote, downVote } from "../actions/cartActions";
 import "./Home.css";
+import { GetUserEmailAddress } from  "../../contexts/UserContext";
+
 
 function Home({ items, email, addToCart, upVote, downVote }) {
   if (!items || items.length < 1) {
@@ -105,12 +107,9 @@ function Home({ items, email, addToCart, upVote, downVote }) {
 }
 
 const mapStateToProps = (state) => {
-  const user = localStorage.getItem("user");
-  const userJson = JSON.parse(user);
-
   return {
     items: state.cartReducer.items,
-    email: userJson.email,
+    email: GetUserEmailAddress(),
   };
 };
 const mapDispatchToProps = (dispatch) => {

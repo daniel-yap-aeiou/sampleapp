@@ -15,8 +15,8 @@
     /* Black*/
     overflow-x: hidden;
     /* Disable horizontal scroll */
-    padding-top: 60px;
-    /* Place content 60px from the top */
+    padding-top: 80px;
+    /* Place content 80px from the top */
     transition: 0.5s;
     /* 0.5 second transition effect to slide in the sidebar */
 }
@@ -45,7 +45,7 @@
 
 .sidebar .closebtn {
     position: absolute;
-    top: 0;
+    top: 60px;
     right: 25px;
     font-size: 36px;
     margin-left: 50px;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import ReactDOM from "react-dom";
 
 import { HashRouter as Router } from "react-router-dom";
@@ -10,6 +10,8 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { createHashHistory } from "history";
+
+import { UserProvider, GetUserEmailAddress, IsUserLoggedIn } from "./contexts/UserContext";
 
 window.store = store;
 
@@ -24,11 +26,8 @@ const handlePageChange = () => {};
 const history = createHashHistory({ handlePageChange });
 
 history.listen((location) => {
-  const user = localStorage.getItem("user");
-
-  if (user && window.location.hostname === "localhost") {
-    const t = JSON.parse(user);
-    window.location.pathname = "/" + t.email;
+  if (IsUserLoggedIn() && window.location.hostname === "localhost") {
+    window.location.pathname = "/" + GetUserEmailAddress();
   }
 });
 
@@ -36,13 +35,16 @@ ReactDOM.render(
   // <React.StrictMode>
   //   <App />
   // </React.StrictMode>,
+
   <Provider store={store}>
     <Router
       basename="sampleapp"
       //getUserConfirmation={handlePageChange}
       history={history}
     >
-      <App hideLoader={hideLoader} showLoader={showLoader} />
+      <UserProvider>
+        <App hideLoader={hideLoader} showLoader={showLoader} />
+      </UserProvider>
     </Router>
   </Provider>,
   document.getElementById("root")
