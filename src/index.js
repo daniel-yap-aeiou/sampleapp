@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import ReactDOM from "react-dom";
 
 import { HashRouter as Router } from "react-router-dom";
@@ -11,15 +11,15 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { createHashHistory } from "history";
 
-import { UserProvider, GetUserEmailAddress, IsUserLoggedIn } from "./contexts/UserContext";
+import {
+  UserProvider,
+  GetUserEmailAddress,
+  IsUserLoggedIn,
+} from "./contexts/UserContext";
+import { LoaderProvider } from "./contexts/LoaderContext";
 
 window.store = store;
 
-const loader = document.querySelector(".loader-main");
-
-// if you want to show the loader when React loads data again
-const showLoader = () => loader.classList.remove("loader--hide");
-const hideLoader = () => loader.classList.add("loader--hide");
 const handlePageChange = () => {};
 
 // Create your browser history
@@ -43,7 +43,9 @@ ReactDOM.render(
       history={history}
     >
       <UserProvider>
-        <App hideLoader={hideLoader} showLoader={showLoader} />
+        <LoaderProvider>
+          <App />
+        </LoaderProvider>
       </UserProvider>
     </Router>
   </Provider>,

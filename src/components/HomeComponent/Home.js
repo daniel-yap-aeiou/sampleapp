@@ -3,6 +3,7 @@ import "./Home.css";
 import axios from "axios";
 import URLS from "../../util/constants";
 import { withRouter } from "react-router-dom";
+import { showLoader, hideLoader } from "../../contexts/LoaderContext";
 
 function Home(props) {
   // Declare a new state variable, which we'll call "count"
@@ -41,7 +42,7 @@ function Home(props) {
           console.log(response.data);
           setImageURL(response.data.message);
           setIsLoadingImage(false);
-          props.hideLoader();
+          hideLoader();
         }
       })
       .catch((error) => {
@@ -49,7 +50,7 @@ function Home(props) {
       });
 
     return () => {
-      props.hideLoader();
+      hideLoader();
       console.log("cleaned up");
       isSubscribed = false;
     };

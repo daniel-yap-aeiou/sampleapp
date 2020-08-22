@@ -6,6 +6,7 @@ import VideoDetail from "./VideoDetail";
 import KEY from "./Api/key";
 import { withRouter } from "react-router-dom";
 import { Badge } from "react-bootstrap";
+import { hideLoader } from "../../contexts/LoaderContext";
 
 function Index(props) {
   const [state, setState] = useState({
@@ -50,7 +51,7 @@ function Index(props) {
     }));
   };
 
-  useEffect(props.hideLoader, []);
+  useEffect(hideLoader, []);
 
   const trending = async () => {
     const response = await youtube

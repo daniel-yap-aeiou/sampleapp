@@ -5,6 +5,7 @@ import Job from "./Job";
 import JobsPagination from "./JobsPagination";
 import SearchForm from "./SearchForm";
 import { withRouter } from "react-router-dom";
+import { hideLoader } from "../../contexts/LoaderContext";
 
 function Index(props) {
   const [params, setParams] = useState({});
@@ -20,7 +21,7 @@ function Index(props) {
     });
   }
 
-  useEffect(props.hideLoader, []);
+  useEffect(hideLoader, []);
 
   return (
     <Container className="my-12">

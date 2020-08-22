@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import Article from "./Article";
 
+import { hideLoader } from "../../contexts/LoaderContext";
+
 function NewsHome({ items, props }) {
+  useEffect(hideLoader, []);
   let views = "<div>Loading...</div>";
 
   if (items && items.length > 1) {

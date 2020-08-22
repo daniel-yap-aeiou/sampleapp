@@ -5,6 +5,7 @@ import "./RegistrationForm.css";
 import { withRouter } from "react-router-dom";
 
 import { IsUserLoggedIn, SignIn } from "../../contexts/UserContext";
+import { showLoader, hideLoader } from "../../contexts/LoaderContext";
 
 function RegistrationForm(props) {
   const [state, setState] = useState({
@@ -35,7 +36,7 @@ function RegistrationForm(props) {
 
       SignIn(payload);
       props.showError(null);
-      props.showLoader();
+      showLoader();
 
       setTimeout(() => {
         redirectToHome();
@@ -85,6 +86,7 @@ function RegistrationForm(props) {
     if (IsUserLoggedIn()) {
       redirectToHome();
     }
+    hideLoader();
   });
 
   return (

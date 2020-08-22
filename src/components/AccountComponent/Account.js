@@ -8,6 +8,8 @@ import {
   GetUserEmailAddress,
 } from "../../contexts/UserContext";
 
+import { hideLoader } from "../../contexts/LoaderContext";
+
 function Account(props) {
   let [loggedInAs, updateLoggedInAs] = useState(null);
 
@@ -17,7 +19,7 @@ function Account(props) {
     }
   }, []);
 
-  useEffect(props.hideLoader, []);
+  useEffect(hideLoader, []);
 
   useEffect(props.closeNav, []);
 

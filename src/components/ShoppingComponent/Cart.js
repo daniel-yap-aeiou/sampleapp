@@ -7,6 +7,7 @@ import {
   subtractQuantity,
 } from "../actions/cartActions";
 import Recipe from "./Recipe";
+import { hideLoader } from "../../contexts/LoaderContext";
 
 function Cart({ items, removeItem, addQuantity, subtractQuantity, props }) {
   const handleRemove = (id) => {
@@ -21,7 +22,7 @@ function Cart({ items, removeItem, addQuantity, subtractQuantity, props }) {
     subtractQuantity(id);
   };
 
-  useEffect(props.hideLoader, []);
+  useEffect(hideLoader, []);
 
   let addedItems = items.length ? (
     items.map((item) => {

@@ -10,6 +10,8 @@ import {
   GetUserEmailAddress,
   SignOut,
 } from "../../contexts/UserContext";
+import { showLoader } from "../../contexts/LoaderContext";
+
 
 function Header({ itemCount, props }) {
   let history = useHistory();
@@ -33,7 +35,7 @@ function Header({ itemCount, props }) {
   }, []);
 
   const signout = () => {
-    props.showLoader();
+    showLoader();
     SignOut();
     updateShowLoggedInMenu((prevValue) => (prevValue = "none"));
     updateLoggedInAs((prevValue) => (prevValue = null));
@@ -101,7 +103,7 @@ function Header({ itemCount, props }) {
                     to={m.to}
                     className="nav-link"
                     style={{ display: showLoggedInMenu }}
-                    onClick={() => props.showLoader}
+                    onClick={() => showLoader}
                   >
                     {m.text}
                   </Link>
@@ -130,7 +132,7 @@ function Header({ itemCount, props }) {
                       to={m.to}
                       className="dropdown-item"
                       style={{ display: showLoggedInMenu }}
-                      onClick={() => props.showLoader}
+                      onClick={() => showLoader}
                     >
                       {m.text}
                     </Link>
@@ -160,7 +162,7 @@ function Header({ itemCount, props }) {
                       to={m.to}
                       className="dropdown-item"
                       style={{ display: showLoggedInMenu }}
-                      onClick={() => props.showLoader}
+                      onClick={() => showLoader}
                     >
                       {m.text}
                     </Link>
@@ -174,7 +176,7 @@ function Header({ itemCount, props }) {
                 to="/shopping"
                 className="nav-link"
                 style={{ display: showLoggedInMenu }}
-                onClick={() => props.showLoader}
+                onClick={() => showLoader}
               >
                 Shopping
               </Link>
@@ -184,7 +186,7 @@ function Header({ itemCount, props }) {
                 to="/cart"
                 className="nav-link"
                 style={{ display: showLoggedInMenu }}
-                onClick={() => props.showLoader}
+                onClick={() => showLoader}
               >
                 <i className="material-icons">shopping_cart</i> ({itemCount})
               </Link>
@@ -197,7 +199,7 @@ function Header({ itemCount, props }) {
                     to={m.to}
                     className="nav-link"
                     style={{ display: showLoggedInMenu }}
-                    onClick={() => props.showLoader}
+                    onClick={() => showLoader}
                   >
                     {m.text}
                   </Link>
@@ -210,8 +212,6 @@ function Header({ itemCount, props }) {
             <User
               showLoggedInMenu={showLoggedInMenu}
               loggedInAs={loggedInAs}
-              hideLoader={props.hideLoader}
-              showLoader={props.showLoader}
               closeNav={closeNav}
             />
 
@@ -226,7 +226,7 @@ function Header({ itemCount, props }) {
                       if (m.text === "Sign Out") {
                         signout();
                       } else {
-                        props.showLoader();
+                        showLoader();
                       }
                     }}
                   >
@@ -255,7 +255,7 @@ const mapStateToProps = (state, ownProps) => {
   var itemCount = 0;
   if (state.cartReducer && state.cartReducer.addedItems) {
     state.cartReducer.addedItems.map((s) => {
-      itemCount += s.quantity;
+      return itemCount += s.quantity;
     });
   }
 

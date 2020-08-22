@@ -6,6 +6,7 @@ import Card from "./Card";
 import CountryPicker from "./CountryPicker";
 import Chart from "./Chart";
 import { fetchData } from "./api/index";
+import { hideLoader } from "../../contexts/LoaderContext";
 
 function Covid19(props) {
   const [state, setState] = useState({
@@ -15,7 +16,7 @@ function Covid19(props) {
 
   const { data, country } = state;
 
-  useEffect(props.hideLoader, []);
+  useEffect(hideLoader, []);
 
   useEffect(() => {
     fetchData()

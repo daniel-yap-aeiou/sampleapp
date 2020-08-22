@@ -4,6 +4,7 @@ import URLS from "../../util/constants";
 import actionTypes from "../../util/actionTypes";
 import { withRouter } from "react-router-dom";
 import "./Comment.css";
+import { showLoader, hideLoader } from "../../contexts/LoaderContext";
 
 function Comment({ comments, dispatch, props }) {
   let [comment, setComment] = useState("");
@@ -11,11 +12,11 @@ function Comment({ comments, dispatch, props }) {
 
   useEffect(() => {
     setTimeout(() => {
-      props.hideLoader();
+      hideLoader();
     }, 1000);
 
     return () => {
-      props.hideLoader();
+      hideLoader();
       console.log("cleaned up");
     };
   });

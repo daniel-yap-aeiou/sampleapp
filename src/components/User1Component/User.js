@@ -11,6 +11,8 @@ import { withRouter } from "react-router-dom";
 import { Spinner } from "react-bootstrap";
 import "./User.css";
 
+import { hideLoader } from "../../contexts/LoaderContext";
+
 const ToDo = (props) => {
   let {
     users,
@@ -37,11 +39,11 @@ const ToDo = (props) => {
     }
 
     setTimeout(() => {
-      props.hideLoader();
+      hideLoader();
     }, 1000);
 
     return () => {
-      props.hideLoader();
+      hideLoader();
       console.log("cleaned up");
     };
   }, []);

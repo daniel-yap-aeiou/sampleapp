@@ -68,7 +68,6 @@ function List(props) {
     <div className="row">
       {data && data.length > 0 ? (
         data.map((m) => {
-          console.log(m);
           let imgSrc = imagePathPrefixUrl + m.poster_path;
 
           if (m.poster_path === undefined || m.poster_path === null) {

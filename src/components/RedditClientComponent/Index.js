@@ -4,6 +4,7 @@ import Navigation from "./Navigation";
 import StoryList from "./StoryList";
 import { Spinner } from "react-bootstrap";
 import "./Index.css";
+import { hideLoader } from "../../contexts/LoaderContext";
 
 type State = {
   // List of possible Subreddits for the user to choose in the right navigation.
@@ -81,6 +82,8 @@ function Index() {
     // Start the JSONP request by injecting the `script` into the document.
     documentHead.appendChild(script);
     setLoaderClass((prevValue) => (prevValue = "hide"));
+
+    hideLoader();
   }, []);
 
   const setSelectedItem = (item: Subreddit) => {

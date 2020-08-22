@@ -8,10 +8,10 @@ import axios from "axios";
 import List from "./List";
 import "./Index.css";
 import Category from "./Category";
+import { showLoader, hideLoader } from "../../contexts/LoaderContext";
 
 function Index(props) {
   const [movie, setMovie] = useState("");
-  const [msg, setMsg] = useState("");
   const [spinnerClassName, setSpinnerClassName] = useState("hide");
   const [term, setTerm] = useState("");
 
@@ -106,7 +106,7 @@ function Index(props) {
         return false;
       }
 
-      props.showLoader();
+      showLoader();
       const url = `https://api.themoviedb.org/3/movie/${term}?api_key=${KEY}&language=en-US&page=${state.currentPage}`;
 
       axios
@@ -119,19 +119,19 @@ function Index(props) {
             pageCount: data.total_pages,
             data: data.results,
           }));
-          props.hideLoader();
+          hideLoader();
         })
         .catch((err) => {
           console.log(err);
-          props.hideLoader();
+          hideLoader();
         });
     };
 
-    props.hideLoader();
+    hideLoader();
     receivedData();
 
     return () => {
-      props.hideLoader();
+      hideLoader();
       console.log("cleaned up");
     };
   }, [props, state.currentPage, state.offset, state.perPage, term]);
@@ -142,7 +142,7 @@ function Index(props) {
         return false;
       }
       
-      props.showLoader();
+      showLoader();
       const url = `https://api.themoviedb.org/3/search/movie?api_key=${KEY}&query=${movie}`;
 
       axios
@@ -155,27 +155,27 @@ function Index(props) {
             pageCount: data.total_pages,
             data: data.results,
           }));
-          props.hideLoader();
+          hideLoader();
         })
         .catch((err) => {
           console.log(err);
-          props.hideLoader();
+          hideLoader();
         });
     };
 
-    props.hideLoader();
+    hideLoader();
     receivedData();
 
     return () => {
-      props.hideLoader();
+      hideLoader();
       console.log("cleaned up");
     };
   }, [movie, props]);
 
-  useEffect(props.hideLoader, []);
+  useEffect(hideLoader, []);
 
   useEffect(() => {
-    props.showLoader();
+    showLoader();
     const url = `https://api.themoviedb.org/3/genre/movie/list?api_key=${KEY}&language=en-US}`;
 
     axios
@@ -184,11 +184,11 @@ function Index(props) {
         const data = res.data;
 
         setGenres((prevState) => (prevState = data.genres));
-        props.hideLoader();
+        hideLoader();
       })
       .catch((err) => {
         console.log(err);
-        props.hideLoader();
+        hideLoader();
       });
   }, []);
 
@@ -214,7 +214,6 @@ function Index(props) {
               Submit
             </button>
             <Spinner animation="border" className={spinnerClassName} />
-            &nbsp;<span className="msg">{msg}</span>
           </form>
 
           <br />

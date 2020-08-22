@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 //import axios from "axios";
 import "./LoginForm.css";
 //import { API_BASE_URL } from "../../constants/apiContants";
 import { withRouter } from "react-router-dom";
 import { SignIn } from "../../contexts/UserContext";
+import { showLoader, hideLoader } from "../../contexts/LoaderContext";
+
 
 function LoginForm(props) {
   const [state, setState] = useState({
@@ -45,7 +47,7 @@ function LoginForm(props) {
     }));
 
     SignIn(payload);
-    props.showLoader();
+    showLoader();
 
     setTimeout(() => {
       redirectToHome();
@@ -80,6 +82,8 @@ function LoginForm(props) {
     props.history.push("/register");
     props.updateTitle("Register");
   };
+  useEffect(hideLoader,[]);
+
   return (
     <div className="card col-12 col-lg-4 login-card mt-2 hv-center">
       <form>

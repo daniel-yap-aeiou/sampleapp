@@ -28,7 +28,7 @@ import Covid19 from "../Covid19Component/Index";
 
 import { Switch, Route, withRouter } from "react-router-dom";
 
-import { IsUserLoggedIn } from  "../../contexts/UserContext";
+import { IsUserLoggedIn } from "../../contexts/UserContext";
 
 // The Main component renders one of the three provided
 // Routes (provided that one matches). Both the /roster
@@ -36,8 +36,6 @@ import { IsUserLoggedIn } from  "../../contexts/UserContext";
 // with /roster or /schedule. The / route will only match
 // when the pathname is exactly the string "/"
 function Main(props) {
-  let { hideLoader, showLoader } = props;
-
   const [title, updateTitle] = useState(null);
   const [errorMessage, updateErrorMessage] = useState(null);
 
@@ -45,7 +43,6 @@ function Main(props) {
     if (!IsUserLoggedIn()) {
       props.history.push("/login");
     }
-   
   }, [props.history]);
 
   const Page404 = ({ location }) => (
@@ -74,134 +71,39 @@ function Main(props) {
           <RegistrationForm
             showError={updateErrorMessage}
             updateTitle={updateTitle}
-            hideLoader={hideLoader}
-            showLoader={showLoader}
           />
         </Route>
         <Route path="/register">
           <RegistrationForm
             showError={updateErrorMessage}
             updateTitle={updateTitle}
-            hideLoader={hideLoader}
-            showLoader={showLoader}
           />
         </Route>
         <Route path="/login">
-          <LoginForm
-            showError={updateErrorMessage}
-            updateTitle={updateTitle}
-            hideLoader={hideLoader}
-            showLoader={showLoader}
-          />
+          <LoginForm showError={updateErrorMessage} updateTitle={updateTitle} />
         </Route>
 
-        <Route
-          path="/home"
-          component={() => (
-            <Home hideLoader={hideLoader} showLoader={showLoader} />
-          )}
-        />
-        <Route
-          path="/user"
-          component={() => (
-            <User hideLoader={hideLoader} showLoader={showLoader} />
-          )}
-        />
-        <Route
-          path="/comment"
-          component={() => (
-            <Comment hideLoader={hideLoader} showLoader={showLoader} />
-          )}
-        />
-        <Route
-          path="/chat"
-          component={() => (
-            <Chat hideLoader={hideLoader} showLoader={showLoader} />
-          )}
-        />
-        <Route
-          path="/paginate"
-          component={() => (
-            <Paginate hideLoader={hideLoader} showLoader={showLoader} />
-          )}
-        />
-        <Route
-          path="/covid19"
-          component={() => (
-            <Covid19 hideLoader={hideLoader} showLoader={showLoader} />
-          )}
-        />
+        <Route path="/home" component={() => <Home />} />
+        <Route path="/user" component={() => <User />} />
+        <Route path="/comment" component={() => <Comment />} />
+        <Route path="/chat" component={() => <Chat />} />
+        <Route path="/paginate" component={() => <Paginate />} />
+        <Route path="/covid19" component={() => <Covid19 />} />
 
-        <Route
-          path="/shopping"
-          component={() => (
-            <ShoppingIndex hideLoader={hideLoader} showLoader={showLoader} />
-          )}
-        />
-        <Route
-          path="/cart"
-          component={() => (
-            <Cart hideLoader={hideLoader} showLoader={showLoader} />
-          )}
-        />
+        <Route path="/shopping" component={() => <ShoppingIndex />} />
+        <Route path="/cart" component={() => <Cart />} />
         <Route
           path="/account"
-          component={() => (
-            <Account
-              hideLoader={hideLoader}
-              showLoader={showLoader}
-              closeNav={closeNav}
-            />
-          )}
+          component={() => <Account closeNav={closeNav} />}
         />
-        <Route
-          path="/news"
-          component={() => (
-            <News hideLoader={hideLoader} showLoader={showLoader} />
-          )}
-        />
-        <Route
-          path="/githubapi"
-          component={() => (
-            <GithubApi hideLoader={hideLoader} showLoader={showLoader} />
-          )}
-        />
-        <Route
-          path="/githubjobsapi"
-          component={() => (
-            <GithubJobsApi hideLoader={hideLoader} showLoader={showLoader} />
-          )}
-        />
-        <Route
-          path="/youtubeapi"
-          component={() => (
-            <YoutubeApi hideLoader={hideLoader} showLoader={showLoader} />
-          )}
-        />
-        <Route
-          path="/redditclientapi"
-          component={() => (
-            <RedditClientApi hideLoader={hideLoader} showLoader={showLoader} />
-          )}
-        />
-        <Route
-          path="/weatherapi"
-          component={() => (
-            <WeatherApi hideLoader={hideLoader} showLoader={showLoader} />
-          )}
-        />
-        <Route
-          path="/movieapi"
-          component={() => (
-            <MovieApi hideLoader={hideLoader} showLoader={showLoader} />
-          )}
-        /> 
-        <Route
-        path="/sportsdbapi"
-        component={() => (
-          <SportsDbApi hideLoader={hideLoader} showLoader={showLoader} />
-        )}
-      />
+        <Route path="/news" component={() => <News />} />
+        <Route path="/githubapi" component={() => <GithubApi />} />
+        <Route path="/githubjobsapi" component={() => <GithubJobsApi />} />
+        <Route path="/youtubeapi" component={() => <YoutubeApi />} />
+        <Route path="/redditclientapi" component={() => <RedditClientApi />} />
+        <Route path="/weatherapi" component={() => <WeatherApi />} />
+        <Route path="/movieapi" component={() => <MovieApi />} />
+        <Route path="/sportsdbapi" component={() => <SportsDbApi />} />
 
         <Route component={Page404} />
       </Switch>

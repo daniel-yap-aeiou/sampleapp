@@ -8,8 +8,9 @@ import "./Index.css";
 import PastMatch from "./PastMatch";
 import Player from "./Player";
 import Table from "./Table";
+import { showLoader, hideLoader } from "../../contexts/LoaderContext";
 
-function Index(props) {
+function Index() {
   const [allSports, setAllSports] = useState([]);
   const [sports, setSports] = useState("");
   const [countries, setCountries] = useState([]);
@@ -34,7 +35,7 @@ function Index(props) {
   const handleClose = () => setShow((pv) => (pv = false));
   const handleShow = () => setShow((pv) => (pv = true));
 
-  useEffect(props.hideLoader, []);
+  useEffect(hideLoader, []);
 
   const showLeagueTable = () => {
     if (leagueId.length <= 0) return false;
@@ -83,12 +84,12 @@ function Index(props) {
           setTableData((pv) => (pv = table_1));
         }
 
-        props.hideLoader();
+        hideLoader();
         setSpinnerClassName((pv) => (pv = "hide"));
       })
       .catch((err) => {
         console.log(err);
-        props.hideLoader();
+        hideLoader();
       });
   };
 
@@ -96,7 +97,7 @@ function Index(props) {
     const lea = e.target.value;
 
     if (lea === "") return false;
-    props.showLoader();
+    showLoader();
 
     // Set leagueId to retrieve league table
     if (leagues) {
@@ -155,11 +156,11 @@ function Index(props) {
           setData((pv) => (pv = []));
         }
 
-        props.hideLoader();
+        hideLoader();
       })
       .catch((err) => {
         console.log(err);
-        props.hideLoader();
+        hideLoader();
       });
   };
 
@@ -185,12 +186,10 @@ function Index(props) {
   };
 
   useEffect(() => {
-    //props.showLoader();
-
     const searchAllLeagues = () => {
       if (country === "" || sports === "") return false;
 
-      props.showLoader();
+      showLoader();
       setData((pv) => (pv = []));
       const url = `${APIURL}${KEY}/search_all_leagues.php?c=${country}&s=${sports}`;
       axios
@@ -214,18 +213,18 @@ function Index(props) {
             setLeagues((pv) => (pv = []));
           }
 
-          props.hideLoader();
+          hideLoader();
         })
         .catch((err) => {
           console.log(err);
-          props.hideLoader();
+          hideLoader();
         });
     };
 
     const loadCountries = () => {
       if (countries && countries.length > 0) return false;
 
-      props.showLoader();
+      showLoader();
       const url = `${APIURL}${KEY}/all_countries.php`;
       axios
         .get(url)
@@ -245,18 +244,18 @@ function Index(props) {
             setCountries((pv) => (pv = countries_1.sort()));
           }
 
-          props.hideLoader();
+          hideLoader();
         })
         .catch((err) => {
           console.log(err);
-          props.hideLoader();
+          hideLoader();
         });
     };
 
     const loadAllSports = () => {
       if (allSports && allSports.length > 0) return false;
 
-      props.showLoader();
+      showLoader();
       const url = `${APIURL}${KEY}/all_sports.php`;
 
       axios
@@ -282,11 +281,11 @@ function Index(props) {
             setAllSports((pv) => (pv = allSports_1));
           }
 
-          props.hideLoader();
+          hideLoader();
         })
         .catch((err) => {
           console.log(err);
-          props.hideLoader();
+          hideLoader();
         });
     };
 
@@ -301,7 +300,7 @@ function Index(props) {
   };
 
   const showNextMatchAction = (teamId) => {
-    props.showLoader();
+    showLoader();
     const url = `${APIURL}${KEY}/eventsnext.php?id=${teamId}`;
 
     axios
@@ -326,17 +325,17 @@ function Index(props) {
           );
         }
 
-        props.hideLoader();
+        hideLoader();
         handleShowNextMatch();
       })
       .catch((err) => {
         console.log(err);
-        props.hideLoader();
+        hideLoader();
       });
   };
 
   const showLastMatches = (teamId) => {
-    props.showLoader();
+    showLoader();
     const url = `${APIURL}${KEY}/eventslast.php?id=${teamId}`;
 
     axios
@@ -379,11 +378,11 @@ function Index(props) {
           }));
         }
 
-        props.hideLoader();
+        hideLoader();
       })
       .catch((err) => {
         console.log(err);
-        props.hideLoader();
+        hideLoader();
       });
   };
 
@@ -639,10 +638,7 @@ function Index(props) {
             </Tab>
             <Tab eventKey="player" title="Player">
               <br />
-              <Player
-                hideLoader={props.hideLoader}
-                showLoader={props.showLoader}
-              />
+              <Player />
             </Tab>
           </Tabs>
         </div>

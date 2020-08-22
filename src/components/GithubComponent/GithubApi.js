@@ -4,6 +4,7 @@ import "./GithubApi.css";
 import List from "./List";
 import withListLoading from "./WithListLoading";
 import { withRouter } from "react-router-dom";
+import { hideLoader } from "../../contexts/LoaderContext";
 
 function GithubApi(props) {
   const ListLoading = withListLoading(List);
@@ -27,7 +28,7 @@ function GithubApi(props) {
       });
   }, [setAppState, username]);
 
-  useEffect(props.hideLoader, []);
+  useEffect(hideLoader, []);
 
   const handleUsernameChange = (e) => {
     let username = e.target.value;

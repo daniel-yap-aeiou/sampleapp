@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { addToCart, upVote, downVote } from "../actions/cartActions";
 import "./Home.css";
-import { GetUserEmailAddress } from  "../../contexts/UserContext";
-
+import { GetUserEmailAddress } from "../../contexts/UserContext";
+import { hideLoader } from "../../contexts/LoaderContext";
 
 function Home({ items, email, addToCart, upVote, downVote }) {
+  useEffect(hideLoader, []);
+
   if (!items || items.length < 1) {
     return (
       <div className="container">

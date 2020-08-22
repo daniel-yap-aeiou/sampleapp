@@ -13,6 +13,8 @@ import "react-chat-widget/lib/styles.css";
 import "./Chat.css";
 import logo from "../../logo.svg";
 
+import { hideLoader } from "../../contexts/LoaderContext";
+
 function Chat(props) {
   const [messageToServer, updateMessageToServer] = useState("");
 
@@ -26,10 +28,10 @@ function Chat(props) {
 
     toggleWidget();
 
-    props.hideLoader();
+    hideLoader();
 
     return () => {
-      props.hideLoader();
+      hideLoader();
       toggleWidget();
       dropMessages();
       console.log("cleaned up");
@@ -45,7 +47,7 @@ function Chat(props) {
   const handleMessageToServerChange = (e) => {
     toggleMsgLoader();
     const { id, value } = e.target;
-    console.log(value);
+
     updateMessageToServer((prevValue) => (prevValue = value));
     setTimeout(() => {
       toggleMsgLoader();

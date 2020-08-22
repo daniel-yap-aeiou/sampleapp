@@ -4,6 +4,7 @@ import ReactPaginate from "react-paginate";
 import axios from "axios";
 import "./Paginate.css";
 import Data from "./Data";
+import { showLoader, hideLoader } from "../../contexts/LoaderContext";
 
 function Paginate(props) {
   const [state, setState] = useState({
@@ -28,7 +29,7 @@ function Paginate(props) {
 
   useEffect(() => {
     const receivedData = () => {
-      props.showLoader();
+      showLoader();
       axios.get(`https://jsonplaceholder.typicode.com/photos`).then((res) => {
         const data = res.data;
         const slice = data.slice(state.offset, state.offset + state.perPage);
@@ -39,15 +40,15 @@ function Paginate(props) {
           pageCount: Math.ceil(data.length / state.perPage),
           data: postData,
         }));
-        props.hideLoader();
+        hideLoader();
       });
     };
 
-    props.hideLoader();
+    hideLoader();
     receivedData();
 
     return () => {
-      props.hideLoader();
+      hideLoader();
       console.log("cleaned up");
     };
   }, [props, state.currentPage, state.offset, state.perPage]);

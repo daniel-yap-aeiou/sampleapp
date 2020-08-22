@@ -7,8 +7,9 @@ import { withRouter } from "react-router-dom";
 import axios from "axios";
 import "./Index.css";
 import Logo from "../../logo.svg";
+import { showLoader, hideLoader } from "../../contexts/LoaderContext";
 
-function Player(props) {
+function Player() {
   const [player, setPlayer] = useState("");
   const [spinnerClassName, setSpinnerClassName] = useState("hide");
   const [players, setPlayers] = useState([]);
@@ -18,7 +19,7 @@ function Player(props) {
   const handleClose = () => setShow((pv) => (pv = false));
   const handleShow = () => setShow((pv) => (pv = true));
 
-  useEffect(props.hideLoader, []);
+  useEffect(hideLoader, []);
 
   const handleInputChange = (e) => {
     setSpinnerClassName((pv) => (pv = ""));
@@ -45,7 +46,7 @@ function Player(props) {
         return false;
       }
 
-      props.showLoader();
+      showLoader();
       const url = `${APIURL}${KEY}/searchplayers.php?p=${player}`;
 
       axios
@@ -87,18 +88,18 @@ function Player(props) {
             setPlayers((pv) => (pv = players_1));
           }
 
-          props.hideLoader();
+          hideLoader();
         })
         .catch((err) => {
           console.log(err);
-          props.hideLoader();
+          hideLoader();
         });
     };
 
     receivedData();
 
     return () => {
-      props.hideLoader();
+      hideLoader();
       console.log("cleaned up");
     };
   }, [player]);

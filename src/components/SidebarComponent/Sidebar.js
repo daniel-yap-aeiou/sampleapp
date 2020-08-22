@@ -8,12 +8,13 @@ import { User } from "../UserComponent/User";
 import "./Sidebar.css";
 
 import { IsUserLoggedIn, GetUserEmailAddress, SignOut } from  "../../contexts/UserContext";
+import { showLoader } from "../../contexts/LoaderContext";
 
-function Sidebar({ itemCount, props }) {
+function Sidebar({ itemCount }) {
   let history = useHistory();
   let [showLoggedInMenu, updateShowLoggedInMenu] = useState("none");
   let [loggedInAs, updateLoggedInAs] = useState(null);
-  //const userContext = React.useContext(UserContext);
+  
   useEffect(() => {
     if (IsUserLoggedIn() == null) {
       updateShowLoggedInMenu((prevValue) => (prevValue = "none"));
@@ -24,14 +25,13 @@ function Sidebar({ itemCount, props }) {
   }, []);
 
   const signout = () => {
-    props.showLoader();
+    showLoader();
     SignOut();
     updateShowLoggedInMenu((prevValue) => (prevValue = "none"));
     updateLoggedInAs((prevValue) => (prevValue = null));
     history.push("/login");
     window.location.reload();
     window.location.pathname = "/";
-    //props.updateTitle("Login");
   };
 
   /* Set the width of the sidebar to 0 and the left margin of the page content to 0 */
@@ -41,7 +41,7 @@ function Sidebar({ itemCount, props }) {
 
   const handleMenuOnClick = () => {
     closeNav();
-    props.showLoader();
+    showLoader();
   };
 
   return (
@@ -120,8 +120,6 @@ function Sidebar({ itemCount, props }) {
         <User
           showLoggedInMenu={showLoggedInMenu}
           loggedInAs={loggedInAs}
-          hideLoader={props.hideLoader}
-          showLoader={props.showLoader}
           closeNav={closeNav}
         />
 

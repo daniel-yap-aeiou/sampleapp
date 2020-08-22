@@ -4,7 +4,7 @@ import KEY from "./key";
 import { withRouter } from "react-router-dom";
 import "./Index.css";
 import Modal from "./Modal";
-
+import { hideLoader } from "../../contexts/LoaderContext";
 let enteredCity = [];
 
 const initialState = {
@@ -178,7 +178,7 @@ function Index(props) {
     setState((prevValue) => (prevValue = ""));
   };
 
-  useEffect(props.hideLoader, []);
+  useEffect(hideLoader, []);
 
   useEffect(() => {
     setState((prevValue) => (prevValue = "melbourne,au"));
