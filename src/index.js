@@ -14,6 +14,7 @@ import { createHashHistory } from "history";
 import { UserProvider } from "./contexts/UserContext";
 import { UtilProvider } from "./contexts/UtilContext";
 import { TitleProvider } from "./contexts/TitleContext";
+import { AlertProvider } from "./contexts/AlertContext";
 
 window.store = store;
 
@@ -28,25 +29,25 @@ history.listen((location) => {
 });
 
 ReactDOM.render(
-  // <React.StrictMode>
-  //   <App />
-  // </React.StrictMode>,
-
-  <Provider store={store}>
-    <Router
-      basename="sampleapp"
-      //getUserConfirmation={handlePageChange}
-      history={history}
-    >
-      <UserProvider>
-        <TitleProvider>
-          <UtilProvider>
-            <App />
-          </UtilProvider>
-        </TitleProvider>
-      </UserProvider>
-    </Router>
-  </Provider>,
+  <React.StrictMode>
+    <Provider store={store}>
+      <Router
+        basename="sampleapp"
+        //getUserConfirmation={handlePageChange}
+        history={history}
+      >
+        <AlertProvider>
+          <UserProvider>
+            <TitleProvider>
+              <UtilProvider>
+                <App />
+              </UtilProvider>
+            </TitleProvider>
+          </UserProvider>
+        </AlertProvider>
+      </Router>
+    </Provider>
+  </React.StrictMode>,
   document.getElementById("root")
 );
 

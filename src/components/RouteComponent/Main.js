@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 
 import Title from "../HeaderComponent/Title";
 
@@ -27,7 +27,6 @@ import SportsDbApi from "../SportsDbApiComponent/Index";
 import Covid19 from "../Covid19Component/Index";
 
 import { Switch, Route, withRouter, useHistory } from "react-router-dom";
-
 import { useUserContext } from "../../contexts/UserContext";
 
 // The Main component renders one of the three provided
@@ -38,7 +37,6 @@ import { useUserContext } from "../../contexts/UserContext";
 function Main() {
   const userContext = useUserContext();
   const history = useHistory();
-  const [errorMessage, updateErrorMessage] = useState(null);
 
   useEffect(() => {
     if (!userContext.IsUserLoggedIn()) {
@@ -57,20 +55,17 @@ function Main() {
   return (
     <main>
       <Title />
-      <AlertComponent
-        errorMessage={errorMessage}
-        hideError={updateErrorMessage}
-      />
+      <AlertComponent />
 
       <Switch>
         <Route path="/" exact={true}>
-          <RegistrationForm showError={updateErrorMessage} />
+          <RegistrationForm />
         </Route>
         <Route path="/register">
-          <RegistrationForm showError={updateErrorMessage} />
+          <RegistrationForm />
         </Route>
         <Route path="/login">
-          <LoginForm showError={updateErrorMessage} />
+          <LoginForm />
         </Route>
 
         <Route path="/home" component={() => <Home />} />

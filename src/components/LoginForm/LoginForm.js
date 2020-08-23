@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import "./LoginForm.css";
-import { withRouter } from "react-router-dom";
+import { withRouter, useHistory } from "react-router-dom";
 import { useUserContext } from "../../contexts/UserContext";
 import { useUtilContext } from "../../contexts/UtilContext";
+import { useAlertContext } from "../../contexts/AlertContext";
 
-
-function LoginForm(props) {
+function LoginForm() {
   const userContext = useUserContext();
   const utilContext = useUtilContext();
+  const alertContext = useAlertContext();
+  const history = useHistory();
   const [state, setState] = useState({
     email: "",
     password: "",
@@ -25,16 +27,16 @@ function LoginForm(props) {
     e.preventDefault();
 
     if (state.email === "") {
-      props.showError("Email is required");
+      alertContext.setAlert("Email is required");
       return false;
     }
 
     if (state.password === "") {
-      props.showError("Password is required");
+      alertContext.setAlert("Password is required");
       return false;
     }
 
-    props.showError(null);
+    alertContext.setAlert(null);
     utilContext.showLoader();
 
     const payload = {
@@ -55,11 +57,11 @@ function LoginForm(props) {
   };
 
   const redirectToHome = () => {
-    props.history.push("/home");
+    history.push("/home");
   };
   
   const redirectToRegister = () => {
-    props.history.push("/register");
+    history.push("/register");
   };
 
   useEffect(utilContext.hideLoader,[]);

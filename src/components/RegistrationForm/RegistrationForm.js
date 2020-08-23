@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from "react";
 import "./RegistrationForm.css";
-import { withRouter } from "react-router-dom";
+import { withRouter, useHistory } from "react-router-dom";
 
 import { useUserContext } from "../../contexts/UserContext";
 import { useUtilContext } from "../../contexts/UtilContext";
+import { useAlertContext } from "../../contexts/AlertContext";
 
-function RegistrationForm(props) {
+function RegistrationForm() {
   const userContext = useUserContext();
   const utilContext = useUtilContext();
+  const alertContext = useAlertContext();
+  const history = useHistory();
+
   const [state, setState] = useState({
     email: "",
     password: "",
@@ -24,7 +28,7 @@ function RegistrationForm(props) {
   const sendDetailsToServer = () => {
     if (state.email.length && state.password.length) {
       utilContext.showLoader();
-      props.showError(null);
+      alertContext.setAlert(null);
 
       const payload = {
         email: state.email,
@@ -42,18 +46,18 @@ function RegistrationForm(props) {
       }, 2000);
 
     } else {
-      props.showError("Please enter valid username and password");
+      alertContext.setAlert("Please enter valid username and password");
     }
   };
 
   const redirectToHome = () => {
     utilContext.showLoader();
-    props.history.push("/home");
+    history.push("/home");
   };
 
   const redirectToLogin = () => {
     utilContext.showLoader();
-    props.history.push("/login");
+    history.push("/login");
   };
 
   const handleSubmitClick = (e) => {
@@ -67,7 +71,7 @@ function RegistrationForm(props) {
         successMessage: "",
       }));
 
-      props.showError("Passwords do not match");
+      alertContext.setAlert("Passwords do not match");
     }
   };
 
