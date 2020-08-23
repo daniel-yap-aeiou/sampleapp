@@ -7,9 +7,11 @@ import {
   subtractQuantity,
 } from "../actions/cartActions";
 import Recipe from "./Recipe";
-import { hideLoader } from "../../contexts/LoaderContext";
+import { useUtilContext } from "../../contexts/UtilContext";
 
 function Cart({ items, removeItem, addQuantity, subtractQuantity, props }) {
+  const utilContext = useUtilContext();
+
   const handleRemove = (id) => {
     removeItem(id);
   };
@@ -22,7 +24,7 @@ function Cart({ items, removeItem, addQuantity, subtractQuantity, props }) {
     subtractQuantity(id);
   };
 
-  useEffect(hideLoader, []);
+  useEffect(utilContext.hideLoader, []);
 
   let addedItems = items.length ? (
     items.map((item) => {

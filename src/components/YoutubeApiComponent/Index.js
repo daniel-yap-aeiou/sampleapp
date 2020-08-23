@@ -6,9 +6,11 @@ import VideoDetail from "./VideoDetail";
 import KEY from "./Api/key";
 import { withRouter } from "react-router-dom";
 import { Badge } from "react-bootstrap";
-import { hideLoader } from "../../contexts/LoaderContext";
+import { useUtilContext } from "../../contexts/UtilContext";
 
 function Index(props) {
+  const utilContext = useUtilContext();
+
   const [state, setState] = useState({
     videos: [],
     selectedVideo: null,
@@ -51,7 +53,7 @@ function Index(props) {
     }));
   };
 
-  useEffect(hideLoader, []);
+  useEffect(utilContext.hideLoader, []);
 
   const trending = async () => {
     const response = await youtube

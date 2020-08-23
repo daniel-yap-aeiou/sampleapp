@@ -4,7 +4,7 @@ import KEY from "./key";
 import { withRouter } from "react-router-dom";
 import "./Index.css";
 import Modal from "./Modal";
-import { hideLoader } from "../../contexts/LoaderContext";
+import { useUtilContext } from "../../contexts/UtilContext";
 let enteredCity = [];
 
 const initialState = {
@@ -42,6 +42,8 @@ const reducer = (state, action) => {
 };
 
 function Index(props) {
+  const utilContext = useUtilContext();
+
   const [city, setState] = useState("");
   const [msg, setMsg] = useState("");
   const [spinnerClassName, setSpinnerClassName] = useState("hide");
@@ -178,7 +180,7 @@ function Index(props) {
     setState((prevValue) => (prevValue = ""));
   };
 
-  useEffect(hideLoader, []);
+  useEffect(utilContext.hideLoader, []);
 
   useEffect(() => {
     setState((prevValue) => (prevValue = "melbourne,au"));

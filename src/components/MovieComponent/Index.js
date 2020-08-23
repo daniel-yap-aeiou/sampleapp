@@ -8,9 +8,10 @@ import axios from "axios";
 import List from "./List";
 import "./Index.css";
 import Category from "./Category";
-import { showLoader, hideLoader } from "../../contexts/LoaderContext";
+import { useUtilContext } from "../../contexts/UtilContext";
 
 function Index(props) {
+  const utilContext = useUtilContext();
   const [movie, setMovie] = useState("");
   const [spinnerClassName, setSpinnerClassName] = useState("hide");
   const [term, setTerm] = useState("");
@@ -106,7 +107,7 @@ function Index(props) {
         return false;
       }
 
-      showLoader();
+      utilContext.showLoader();
       const url = `https://api.themoviedb.org/3/movie/${term}?api_key=${KEY}&language=en-US&page=${state.currentPage}`;
 
       axios
@@ -119,19 +120,19 @@ function Index(props) {
             pageCount: data.total_pages,
             data: data.results,
           }));
-          hideLoader();
+          utilContext.hideLoader();
         })
         .catch((err) => {
           console.log(err);
-          hideLoader();
+          utilContext.hideLoader();
         });
     };
 
-    hideLoader();
+    utilContext.hideLoader();
     receivedData();
 
     return () => {
-      hideLoader();
+      utilContext.hideLoader();
       console.log("cleaned up");
     };
   }, [props, state.currentPage, state.offset, state.perPage, term]);
@@ -142,7 +143,7 @@ function Index(props) {
         return false;
       }
       
-      showLoader();
+      utilContext.showLoader();
       const url = `https://api.themoviedb.org/3/search/movie?api_key=${KEY}&query=${movie}`;
 
       axios
@@ -155,27 +156,27 @@ function Index(props) {
             pageCount: data.total_pages,
             data: data.results,
           }));
-          hideLoader();
+          utilContext.hideLoader();
         })
         .catch((err) => {
           console.log(err);
-          hideLoader();
+          utilContext.hideLoader();
         });
     };
 
-    hideLoader();
+    utilContext.hideLoader();
     receivedData();
 
     return () => {
-      hideLoader();
+      utilContext.hideLoader();
       console.log("cleaned up");
     };
   }, [movie, props]);
 
-  useEffect(hideLoader, []);
+  useEffect(utilContext.hideLoader, []);
 
   useEffect(() => {
-    showLoader();
+    utilContext.showLoader();
     const url = `https://api.themoviedb.org/3/genre/movie/list?api_key=${KEY}&language=en-US}`;
 
     axios
@@ -184,11 +185,11 @@ function Index(props) {
         const data = res.data;
 
         setGenres((prevState) => (prevState = data.genres));
-        hideLoader();
+        utilContext.hideLoader();
       })
       .catch((err) => {
         console.log(err);
-        hideLoader();
+        utilContext.hideLoader();
       });
   }, []);
 

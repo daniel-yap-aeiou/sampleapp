@@ -13,9 +13,10 @@ import "react-chat-widget/lib/styles.css";
 import "./Chat.css";
 import logo from "../../logo.svg";
 
-import { hideLoader } from "../../contexts/LoaderContext";
+import { useUtilContext } from "../../contexts/UtilContext";
 
 function Chat(props) {
+  const utilContext = useUtilContext();
   const [messageToServer, updateMessageToServer] = useState("");
 
   useEffect(() => {
@@ -28,10 +29,10 @@ function Chat(props) {
 
     toggleWidget();
 
-    hideLoader();
+    utilContext.hideLoader();
 
     return () => {
-      hideLoader();
+      utilContext.hideLoader();
       toggleWidget();
       dropMessages();
       console.log("cleaned up");

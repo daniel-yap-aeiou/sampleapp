@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
-//import axios from "axios";
 import "./LoginForm.css";
-//import { API_BASE_URL } from "../../constants/apiContants";
 import { withRouter } from "react-router-dom";
-import { SignIn } from "../../contexts/UserContext";
-import { showLoader, hideLoader } from "../../contexts/LoaderContext";
+import { useUserContext } from "../../contexts/UserContext";
+import { useUtilContext } from "../../contexts/UtilContext";
 
 
 function LoginForm(props) {
+  const userContext = useUserContext();
+  const utilContext = useUtilContext();
   const [state, setState] = useState({
     email: "",
     password: "",
@@ -35,6 +35,7 @@ function LoginForm(props) {
     }
 
     props.showError(null);
+    utilContext.showLoader();
 
     const payload = {
       email: state.email,
@@ -46,43 +47,22 @@ function LoginForm(props) {
       successMessage: "Login successful. Redirecting to home page..",
     }));
 
-    SignIn(payload);
-    showLoader();
-
     setTimeout(() => {
+      userContext.SignIn(payload);
       redirectToHome();
     }, 2000);
 
-    // axios
-    //   .post(API_BASE_URL + "login", payload)
-    //   .then(function (response) {
-    //     if (response.data.code === 200) {
-    //       setState((prevState) => ({
-    //         ...prevState,
-    //         successMessage: "Login successful. Redirecting to home page..",
-    //       }));
-    //       redirectToHome();
-    //       props.showError(null);
-    //     } else if (response.data.code === 204) {
-    //       props.showError("Username and password do not match");
-    //     } else {
-    //       props.showError("Username does not exists");
-    //     }
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    //   });
   };
+
   const redirectToHome = () => {
-    props.updateTitle("Home");
     props.history.push("/home");
-    window.location.reload();
   };
+  
   const redirectToRegister = () => {
     props.history.push("/register");
-    props.updateTitle("Register");
   };
-  useEffect(hideLoader,[]);
+
+  useEffect(utilContext.hideLoader,[]);
 
   return (
     <div className="card col-12 col-lg-4 login-card mt-2 hv-center">

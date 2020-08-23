@@ -4,9 +4,10 @@ import "./GithubApi.css";
 import List from "./List";
 import withListLoading from "./WithListLoading";
 import { withRouter } from "react-router-dom";
-import { hideLoader } from "../../contexts/LoaderContext";
+import { useUtilContext } from "../../contexts/UtilContext";
 
 function GithubApi(props) {
+  const utilContext = useUtilContext();
   const ListLoading = withListLoading(List);
   const [appState, setAppState] = useState({
     loading: false,
@@ -28,7 +29,7 @@ function GithubApi(props) {
       });
   }, [setAppState, username]);
 
-  useEffect(hideLoader, []);
+  useEffect(utilContext.hideLoader, []);
 
   const handleUsernameChange = (e) => {
     let username = e.target.value;

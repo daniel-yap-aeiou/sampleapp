@@ -5,9 +5,10 @@ import Job from "./Job";
 import JobsPagination from "./JobsPagination";
 import SearchForm from "./SearchForm";
 import { withRouter } from "react-router-dom";
-import { hideLoader } from "../../contexts/LoaderContext";
+import { useUtilContext } from "../../contexts/UtilContext";
 
 function Index(props) {
+  const utilContext = useUtilContext();
   const [params, setParams] = useState({});
   const [page, setPage] = useState(1);
   const { jobs, loading, error, hasNextPage } = useFetchJobs(params, page);
@@ -21,7 +22,7 @@ function Index(props) {
     });
   }
 
-  useEffect(hideLoader, []);
+  useEffect(utilContext.hideLoader, []);
 
   return (
     <Container className="my-12">

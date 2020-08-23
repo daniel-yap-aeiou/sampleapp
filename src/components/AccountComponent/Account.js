@@ -3,25 +3,24 @@ import { withRouter } from "react-router-dom";
 import "./Account.css";
 import Logo from "../../logo.svg";
 
-import {
-  IsUserLoggedIn,
-  GetUserEmailAddress,
-} from "../../contexts/UserContext";
+import { useUserContext } from "../../contexts/UserContext";
+import { useUtilContext } from "../../contexts/UtilContext";
 
-import { hideLoader } from "../../contexts/LoaderContext";
-
-function Account(props) {
-  let [loggedInAs, updateLoggedInAs] = useState(null);
+function Account() {
+  const userContext = useUserContext();
+  const utilContext = useUtilContext();
+  const [loggedInAs, updateLoggedInAs] = useState(null);
 
   useEffect(() => {
-    if (IsUserLoggedIn()) {
-      updateLoggedInAs(GetUserEmailAddress());
+    if (userContext.IsUserLoggedIn()) {
+      updateLoggedInAs(userContext.GetUserEmailAddress());
     }
+  }, [userContext]);
+
+  useEffect(() => {
+    utilContext.hideLoader();
+    utilContext.closeNav();
   }, []);
-
-  useEffect(hideLoader, []);
-
-  useEffect(props.closeNav, []);
 
   return (
     <div className="card">

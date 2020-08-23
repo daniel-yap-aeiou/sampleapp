@@ -7,9 +7,11 @@ import { withRouter } from "react-router-dom";
 import axios from "axios";
 import "./Index.css";
 import Logo from "../../logo.svg";
-import { showLoader, hideLoader } from "../../contexts/LoaderContext";
+import { useUtilContext } from "../../contexts/UtilContext";
 
 function Player() {
+  const utilContext = useUtilContext();
+
   const [player, setPlayer] = useState("");
   const [spinnerClassName, setSpinnerClassName] = useState("hide");
   const [players, setPlayers] = useState([]);
@@ -19,7 +21,7 @@ function Player() {
   const handleClose = () => setShow((pv) => (pv = false));
   const handleShow = () => setShow((pv) => (pv = true));
 
-  useEffect(hideLoader, []);
+  useEffect(utilContext.hideLoader, []);
 
   const handleInputChange = (e) => {
     setSpinnerClassName((pv) => (pv = ""));
@@ -46,7 +48,7 @@ function Player() {
         return false;
       }
 
-      showLoader();
+      utilContext.showLoader();
       const url = `${APIURL}${KEY}/searchplayers.php?p=${player}`;
 
       axios
@@ -88,18 +90,18 @@ function Player() {
             setPlayers((pv) => (pv = players_1));
           }
 
-          hideLoader();
+          utilContext.hideLoader();
         })
         .catch((err) => {
           console.log(err);
-          hideLoader();
+          utilContext.hideLoader();
         });
     };
 
     receivedData();
 
     return () => {
-      hideLoader();
+      utilContext.hideLoader();
       console.log("cleaned up");
     };
   }, [player]);

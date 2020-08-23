@@ -8,9 +8,11 @@ import "./Index.css";
 import PastMatch from "./PastMatch";
 import Player from "./Player";
 import Table from "./Table";
-import { showLoader, hideLoader } from "../../contexts/LoaderContext";
+import { useUtilContext } from "../../contexts/UtilContext";
 
 function Index() {
+  const utilContext = useUtilContext();
+
   const [allSports, setAllSports] = useState([]);
   const [sports, setSports] = useState("");
   const [countries, setCountries] = useState([]);
@@ -35,7 +37,7 @@ function Index() {
   const handleClose = () => setShow((pv) => (pv = false));
   const handleShow = () => setShow((pv) => (pv = true));
 
-  useEffect(hideLoader, []);
+  useEffect(utilContext.hideLoader, []);
 
   const showLeagueTable = () => {
     if (leagueId.length <= 0) return false;
@@ -84,12 +86,12 @@ function Index() {
           setTableData((pv) => (pv = table_1));
         }
 
-        hideLoader();
+        utilContext.hideLoader();
         setSpinnerClassName((pv) => (pv = "hide"));
       })
       .catch((err) => {
         console.log(err);
-        hideLoader();
+        utilContext.hideLoader();
       });
   };
 
@@ -97,7 +99,7 @@ function Index() {
     const lea = e.target.value;
 
     if (lea === "") return false;
-    showLoader();
+    utilContext.showLoader();
 
     // Set leagueId to retrieve league table
     if (leagues) {
@@ -156,11 +158,11 @@ function Index() {
           setData((pv) => (pv = []));
         }
 
-        hideLoader();
+        utilContext.hideLoader();
       })
       .catch((err) => {
         console.log(err);
-        hideLoader();
+        utilContext.hideLoader();
       });
   };
 
@@ -189,7 +191,7 @@ function Index() {
     const searchAllLeagues = () => {
       if (country === "" || sports === "") return false;
 
-      showLoader();
+      utilContext.showLoader();
       setData((pv) => (pv = []));
       const url = `${APIURL}${KEY}/search_all_leagues.php?c=${country}&s=${sports}`;
       axios
@@ -213,18 +215,18 @@ function Index() {
             setLeagues((pv) => (pv = []));
           }
 
-          hideLoader();
+          utilContext.hideLoader();
         })
         .catch((err) => {
           console.log(err);
-          hideLoader();
+          utilContext.hideLoader();
         });
     };
 
     const loadCountries = () => {
       if (countries && countries.length > 0) return false;
 
-      showLoader();
+      utilContext.showLoader();
       const url = `${APIURL}${KEY}/all_countries.php`;
       axios
         .get(url)
@@ -244,18 +246,18 @@ function Index() {
             setCountries((pv) => (pv = countries_1.sort()));
           }
 
-          hideLoader();
+          utilContext.hideLoader();
         })
         .catch((err) => {
           console.log(err);
-          hideLoader();
+          utilContext.hideLoader();
         });
     };
 
     const loadAllSports = () => {
       if (allSports && allSports.length > 0) return false;
 
-      showLoader();
+      utilContext.showLoader();
       const url = `${APIURL}${KEY}/all_sports.php`;
 
       axios
@@ -281,11 +283,11 @@ function Index() {
             setAllSports((pv) => (pv = allSports_1));
           }
 
-          hideLoader();
+          utilContext.hideLoader();
         })
         .catch((err) => {
           console.log(err);
-          hideLoader();
+          utilContext.hideLoader();
         });
     };
 
@@ -300,7 +302,7 @@ function Index() {
   };
 
   const showNextMatchAction = (teamId) => {
-    showLoader();
+    utilContext.showLoader();
     const url = `${APIURL}${KEY}/eventsnext.php?id=${teamId}`;
 
     axios
@@ -325,17 +327,17 @@ function Index() {
           );
         }
 
-        hideLoader();
+        utilContext.hideLoader();
         handleShowNextMatch();
       })
       .catch((err) => {
         console.log(err);
-        hideLoader();
+        utilContext.hideLoader();
       });
   };
 
   const showLastMatches = (teamId) => {
-    showLoader();
+    utilContext.showLoader();
     const url = `${APIURL}${KEY}/eventslast.php?id=${teamId}`;
 
     axios
@@ -378,11 +380,11 @@ function Index() {
           }));
         }
 
-        hideLoader();
+        utilContext.hideLoader();
       })
       .catch((err) => {
         console.log(err);
-        hideLoader();
+        utilContext.hideLoader();
       });
   };
 

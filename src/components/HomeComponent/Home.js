@@ -3,9 +3,10 @@ import "./Home.css";
 import axios from "axios";
 import URLS from "../../util/constants";
 import { withRouter } from "react-router-dom";
-import { showLoader, hideLoader } from "../../contexts/LoaderContext";
+import { useUtilContext } from "../../contexts/UtilContext";
 
 function Home(props) {
+  const utilContext = useUtilContext();
   // Declare a new state variable, which we'll call "count"
   let [count, setCount] = useState(0);
   let [text, setText] = useState(
@@ -42,7 +43,7 @@ function Home(props) {
           console.log(response.data);
           setImageURL(response.data.message);
           setIsLoadingImage(false);
-          hideLoader();
+          utilContext.hideLoader();
         }
       })
       .catch((error) => {
@@ -50,7 +51,7 @@ function Home(props) {
       });
 
     return () => {
-      hideLoader();
+      utilContext.hideLoader();
       console.log("cleaned up");
       isSubscribed = false;
     };

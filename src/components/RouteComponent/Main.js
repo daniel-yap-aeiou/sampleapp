@@ -26,24 +26,25 @@ import SportsDbApi from "../SportsDbApiComponent/Index";
 
 import Covid19 from "../Covid19Component/Index";
 
-import { Switch, Route, withRouter } from "react-router-dom";
+import { Switch, Route, withRouter, useHistory } from "react-router-dom";
 
-import { IsUserLoggedIn } from "../../contexts/UserContext";
+import { useUserContext } from "../../contexts/UserContext";
 
 // The Main component renders one of the three provided
 // Routes (provided that one matches). Both the /roster
 // and /schedule routes will match any pathname that starts
 // with /roster or /schedule. The / route will only match
 // when the pathname is exactly the string "/"
-function Main(props) {
-  const [title, updateTitle] = useState(null);
+function Main() {
+  const userContext = useUserContext();
+  const history = useHistory();
   const [errorMessage, updateErrorMessage] = useState(null);
 
   useEffect(() => {
-    if (!IsUserLoggedIn()) {
-      props.history.push("/login");
+    if (!userContext.IsUserLoggedIn()) {
+      history.push("/login");
     }
-  }, [props.history]);
+  }, [history, userContext]);
 
   const Page404 = ({ location }) => (
     <div>
@@ -53,14 +54,9 @@ function Main(props) {
     </div>
   );
 
-  /* Set the width of the sidebar to 0 and the left margin of the page content to 0 */
-  function closeNav() {
-    document.getElementById("mySidebar").style.width = "0";
-  }
-
   return (
     <main>
-      <Title title={title} />
+      <Title />
       <AlertComponent
         errorMessage={errorMessage}
         hideError={updateErrorMessage}
@@ -68,19 +64,13 @@ function Main(props) {
 
       <Switch>
         <Route path="/" exact={true}>
-          <RegistrationForm
-            showError={updateErrorMessage}
-            updateTitle={updateTitle}
-          />
+          <RegistrationForm showError={updateErrorMessage} />
         </Route>
         <Route path="/register">
-          <RegistrationForm
-            showError={updateErrorMessage}
-            updateTitle={updateTitle}
-          />
+          <RegistrationForm showError={updateErrorMessage} />
         </Route>
         <Route path="/login">
-          <LoginForm showError={updateErrorMessage} updateTitle={updateTitle} />
+          <LoginForm showError={updateErrorMessage} />
         </Route>
 
         <Route path="/home" component={() => <Home />} />
@@ -92,10 +82,7 @@ function Main(props) {
 
         <Route path="/shopping" component={() => <ShoppingIndex />} />
         <Route path="/cart" component={() => <Cart />} />
-        <Route
-          path="/account"
-          component={() => <Account closeNav={closeNav} />}
-        />
+        <Route path="/account" component={() => <Account />} />
         <Route path="/news" component={() => <News />} />
         <Route path="/githubapi" component={() => <GithubApi />} />
         <Route path="/githubjobsapi" component={() => <GithubJobsApi />} />

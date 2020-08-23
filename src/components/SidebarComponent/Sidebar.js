@@ -7,47 +7,47 @@ import { menus } from "../../constants/menu";
 import { User } from "../UserComponent/User";
 import "./Sidebar.css";
 
-import { IsUserLoggedIn, GetUserEmailAddress, SignOut } from  "../../contexts/UserContext";
-import { showLoader } from "../../contexts/LoaderContext";
+import { useUserContext } from "../../contexts/UserContext";
+import { useUtilContext } from "../../contexts/UtilContext";
 
 function Sidebar({ itemCount }) {
-  let history = useHistory();
-  let [showLoggedInMenu, updateShowLoggedInMenu] = useState("none");
-  let [loggedInAs, updateLoggedInAs] = useState(null);
-  
+  const userContext = useUserContext();
+  const utilContext = useUtilContext();
+  const history = useHistory();
+  const [showLoggedInMenu, updateShowLoggedInMenu] = useState("none");
+  const [loggedInAs, updateLoggedInAs] = useState(null);
+
   useEffect(() => {
-    if (IsUserLoggedIn() == null) {
+    if (userContext.IsUserLoggedIn() == null) {
       updateShowLoggedInMenu((prevValue) => (prevValue = "none"));
     } else {
       updateShowLoggedInMenu((prevValue) => (prevValue = "block"));
-      updateLoggedInAs((prevValue) => (prevValue = GetUserEmailAddress()));
+      updateLoggedInAs(
+        (prevValue) => (prevValue = userContext.GetUserEmailAddress())
+      );
     }
-  }, []);
+  }, [userContext.IsUserLoggedIn()]);
 
   const signout = () => {
-    showLoader();
-    SignOut();
+    utilContext.showLoader();
+    userContext.SignOut();
     updateShowLoggedInMenu((prevValue) => (prevValue = "none"));
     updateLoggedInAs((prevValue) => (prevValue = null));
     history.push("/login");
-    window.location.reload();
-    window.location.pathname = "/";
+    utilContext.closeNav();
   };
-
-  /* Set the width of the sidebar to 0 and the left margin of the page content to 0 */
-  function closeNav() {
-    document.getElementById("mySidebar").style.width = "0";
-  }
 
   const handleMenuOnClick = () => {
-    closeNav();
-    showLoader();
+    utilContext.closeNav();
+    utilContext.showLoader();
   };
 
-  return (
+  return !userContext.IsUserLoggedIn() ? (
+    ""
+  ) : (
     <div>
       <div id="mySidebar" className="sidebar">
-        <a href="##" className="closebtn" onClick={closeNav}>
+        <a href="##" className="closebtn" onClick={utilContext.closeNav}>
           &times;
         </a>
         {menus.menuLeft1.map((m) => {
@@ -120,7 +120,6 @@ function Sidebar({ itemCount }) {
         <User
           showLoggedInMenu={showLoggedInMenu}
           loggedInAs={loggedInAs}
-          closeNav={closeNav}
         />
 
         {menus.menuRight.map((m) => {
@@ -151,7 +150,7 @@ const mapStateToProps = (state, ownProps) => {
   var itemCount = 0;
   if (state.cartReducer && state.cartReducer.addedItems) {
     state.cartReducer.addedItems.map((s) => {
-      itemCount += s.quantity;
+      return (itemCount += s.quantity);
     });
   }
 

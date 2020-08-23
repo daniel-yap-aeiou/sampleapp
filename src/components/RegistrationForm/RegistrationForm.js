@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
-//import axios from "axios";
 import "./RegistrationForm.css";
-//import { API_BASE_URL } from "../../constants/apiContants";
 import { withRouter } from "react-router-dom";
 
-import { IsUserLoggedIn, SignIn } from "../../contexts/UserContext";
-import { showLoader, hideLoader } from "../../contexts/LoaderContext";
+import { useUserContext } from "../../contexts/UserContext";
+import { useUtilContext } from "../../contexts/UtilContext";
 
 function RegistrationForm(props) {
+  const userContext = useUserContext();
+  const utilContext = useUtilContext();
   const [state, setState] = useState({
     email: "",
     password: "",
@@ -23,7 +23,9 @@ function RegistrationForm(props) {
   };
   const sendDetailsToServer = () => {
     if (state.email.length && state.password.length) {
+      utilContext.showLoader();
       props.showError(null);
+
       const payload = {
         email: state.email,
         password: state.password,
@@ -34,59 +36,46 @@ function RegistrationForm(props) {
         successMessage: "Registration successful. Redirecting to home page..",
       }));
 
-      SignIn(payload);
-      props.showError(null);
-      showLoader();
-
       setTimeout(() => {
+        userContext.SignIn(payload);
         redirectToHome();
       }, 2000);
 
-      // axios
-      //   .post(API_BASE_URL + "register", payload)
-      //   .then(function (response) {
-      //     if (response.data.code === 200) {
-      //       setState((prevState) => ({
-      //         ...prevState,
-      //         successMessage:
-      //           "Registration successful. Redirecting to home page..",
-      //       }));
-      //       redirectToHome();
-      //       props.showError(null);
-      //     } else {
-      //       props.showError("Some error ocurred");
-      //     }
-      //   })
-      //   .catch(function (error) {
-      //     console.log(error);
-      //   });
     } else {
       props.showError("Please enter valid username and password");
     }
   };
+
   const redirectToHome = () => {
-    props.updateTitle("Home");
+    utilContext.showLoader();
     props.history.push("/home");
-    window.location.reload();
   };
+
   const redirectToLogin = () => {
-    props.updateTitle("Login");
+    utilContext.showLoader();
     props.history.push("/login");
   };
+
   const handleSubmitClick = (e) => {
     e.preventDefault();
     if (state.password === state.confirmPassword) {
       sendDetailsToServer();
     } else {
+
+      setState((prevState) => ({
+        ...prevState,
+        successMessage: "",
+      }));
+
       props.showError("Passwords do not match");
     }
   };
 
   useEffect(() => {
-    if (IsUserLoggedIn()) {
+    if (userContext.IsUserLoggedIn()) {
       redirectToHome();
     }
-    hideLoader();
+    utilContext.hideLoader();
   });
 
   return (

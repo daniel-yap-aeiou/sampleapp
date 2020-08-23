@@ -4,7 +4,7 @@ import Navigation from "./Navigation";
 import StoryList from "./StoryList";
 import { Spinner } from "react-bootstrap";
 import "./Index.css";
-import { hideLoader } from "../../contexts/LoaderContext";
+import { useUtilContext } from "../../contexts/UtilContext";
 
 type State = {
   // List of possible Subreddits for the user to choose in the right navigation.
@@ -56,6 +56,7 @@ const reducer = (state: State, action): State => {
 let storiesCallbackName = null;
 
 function Index() {
+  const utilContext = useUtilContext();
   const [state, dispatch] = useReducer(reducer, initialState);
   const [loaderClass, setLoaderClass] = useState("");
 
@@ -83,7 +84,7 @@ function Index() {
     documentHead.appendChild(script);
     setLoaderClass((prevValue) => (prevValue = "hide"));
 
-    hideLoader();
+    utilContext.hideLoader();
   }, []);
 
   const setSelectedItem = (item: Subreddit) => {

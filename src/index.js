@@ -11,24 +11,20 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { createHashHistory } from "history";
 
-import {
-  UserProvider,
-  GetUserEmailAddress,
-  IsUserLoggedIn,
-} from "./contexts/UserContext";
-import { LoaderProvider } from "./contexts/LoaderContext";
+import { UserProvider } from "./contexts/UserContext";
+import { UtilProvider } from "./contexts/UtilContext";
+import { TitleProvider } from "./contexts/TitleContext";
 
 window.store = store;
 
-const handlePageChange = () => {};
-
 // Create your browser history
-const history = createHashHistory({ handlePageChange });
+const history = createHashHistory();
 
 history.listen((location) => {
-  if (IsUserLoggedIn() && window.location.hostname === "localhost") {
-    window.location.pathname = "/" + GetUserEmailAddress();
-  }
+  // const userContext = useUserContext();
+  // if (userContext.IsUserLoggedIn() && window.location.hostname === "localhost") {
+  //   window.location.pathname = "/" + userContext.GetUserEmailAddress();
+  // }
 });
 
 ReactDOM.render(
@@ -43,9 +39,11 @@ ReactDOM.render(
       history={history}
     >
       <UserProvider>
-        <LoaderProvider>
-          <App />
-        </LoaderProvider>
+        <TitleProvider>
+          <UtilProvider>
+            <App />
+          </UtilProvider>
+        </TitleProvider>
       </UserProvider>
     </Router>
   </Provider>,

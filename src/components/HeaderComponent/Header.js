@@ -5,43 +5,41 @@ import Logo from "../../logo.svg";
 
 import { menus } from "../../constants/menu";
 import { User } from "../UserComponent/User";
-import {
-  IsUserLoggedIn,
-  GetUserEmailAddress,
-  SignOut,
-} from "../../contexts/UserContext";
-import { showLoader } from "../../contexts/LoaderContext";
+import { useUserContext } from "../../contexts/UserContext";
+import { useUtilContext } from "../../contexts/UtilContext";
 
 
-function Header({ itemCount, props }) {
-  let history = useHistory();
+function Header({ itemCount }) {
+  const history = useHistory();
 
-  let [navCollapsed, setNavCollapsed] = useState(true);
-  let [showLoggedInMenu, updateShowLoggedInMenu] = useState("none");
-  let [loggedInAs, updateLoggedInAs] = useState(null);
-  let [navBarClassName, setNarBarClassName] = useState("navbar-light bg-light");
+  const userContext = useUserContext();
+  const utilContext = useUtilContext();
+
+  const [navCollapsed, setNavCollapsed] = useState(true);
+  const [showLoggedInMenu, updateShowLoggedInMenu] = useState("none");
+  const [loggedInAs, updateLoggedInAs] = useState(null);
+  const [navBarClassName, setNarBarClassName] = useState("navbar-light bg-light");
 
   function _onToggleNav() {
     setNavCollapsed((prevValue) => (prevValue = !prevValue));
   }
 
   useEffect(() => {
-    if (!IsUserLoggedIn()) {
+    if (!userContext.IsUserLoggedIn()) {
       updateShowLoggedInMenu((prevValue) => (prevValue = "none"));
     } else {
       updateShowLoggedInMenu((prevValue) => (prevValue = "block"));
-      updateLoggedInAs((prevValue) => (prevValue = GetUserEmailAddress()));
+      updateLoggedInAs((prevValue) => (prevValue = userContext.GetUserEmailAddress()));
     }
-  }, []);
+  }, [userContext.IsUserLoggedIn()]);
 
   const signout = () => {
-    showLoader();
-    SignOut();
+    utilContext.showLoader();
+    userContext.SignOut();
     updateShowLoggedInMenu((prevValue) => (prevValue = "none"));
     updateLoggedInAs((prevValue) => (prevValue = null));
     history.push("/login");
-    window.location.reload();
-    window.location.pathname = "/";
+    utilContext.closeNav();
   };
 
   const toggleNavBarMode = () => {
@@ -52,15 +50,10 @@ function Header({ itemCount, props }) {
     }
   };
 
-  /* Set the width of the sidebar to 250px and the left margin of the page content to 250px */
-  function openNav() {
-    document.getElementById("mySidebar").style.width = "250px";
-  }
-
-  /* Set the width of the sidebar to 0 and the left margin of the page content to 0 */
-  function closeNav() {
-    document.getElementById("mySidebar").style.width = "0";
-  }
+  const handleMenuOnClick = () => {
+    utilContext.closeNav();
+    utilContext.showLoader();
+  };
 
   return (
     <header>
@@ -89,7 +82,7 @@ function Header({ itemCount, props }) {
             <li className="nav-item" title="sidebar">
               <button
                 className="btn btn-sm"
-                onClick={openNav}
+                onClick={utilContext.openNav}
                 style={{ display: showLoggedInMenu }}
               >
                 <i className="fa fa-bars fa-2x" aria-hidden="true"></i>
@@ -103,7 +96,7 @@ function Header({ itemCount, props }) {
                     to={m.to}
                     className="nav-link"
                     style={{ display: showLoggedInMenu }}
-                    onClick={() => showLoader}
+                    onClick={() => handleMenuOnClick()}
                   >
                     {m.text}
                   </Link>
@@ -132,7 +125,7 @@ function Header({ itemCount, props }) {
                       to={m.to}
                       className="dropdown-item"
                       style={{ display: showLoggedInMenu }}
-                      onClick={() => showLoader}
+                      onClick={() => handleMenuOnClick()}
                     >
                       {m.text}
                     </Link>
@@ -162,7 +155,7 @@ function Header({ itemCount, props }) {
                       to={m.to}
                       className="dropdown-item"
                       style={{ display: showLoggedInMenu }}
-                      onClick={() => showLoader}
+                      onClick={() => handleMenuOnClick()}
                     >
                       {m.text}
                     </Link>
@@ -176,7 +169,7 @@ function Header({ itemCount, props }) {
                 to="/shopping"
                 className="nav-link"
                 style={{ display: showLoggedInMenu }}
-                onClick={() => showLoader}
+                onClick={() => handleMenuOnClick()}
               >
                 Shopping
               </Link>
@@ -186,7 +179,7 @@ function Header({ itemCount, props }) {
                 to="/cart"
                 className="nav-link"
                 style={{ display: showLoggedInMenu }}
-                onClick={() => showLoader}
+                onClick={() => handleMenuOnClick()}
               >
                 <i className="material-icons">shopping_cart</i> ({itemCount})
               </Link>
@@ -199,7 +192,7 @@ function Header({ itemCount, props }) {
                     to={m.to}
                     className="nav-link"
                     style={{ display: showLoggedInMenu }}
-                    onClick={() => showLoader}
+                    onClick={() => handleMenuOnClick()}
                   >
                     {m.text}
                   </Link>
@@ -212,7 +205,6 @@ function Header({ itemCount, props }) {
             <User
               showLoggedInMenu={showLoggedInMenu}
               loggedInAs={loggedInAs}
-              closeNav={closeNav}
             />
 
             {menus.menuRight.map((m) => {
@@ -226,7 +218,7 @@ function Header({ itemCount, props }) {
                       if (m.text === "Sign Out") {
                         signout();
                       } else {
-                        showLoader();
+                        utilContext.showLoader();
                       }
                     }}
                   >

@@ -4,19 +4,20 @@ import URLS from "../../util/constants";
 import actionTypes from "../../util/actionTypes";
 import { withRouter } from "react-router-dom";
 import "./Comment.css";
-import { showLoader, hideLoader } from "../../contexts/LoaderContext";
+import { useUtilContext } from "../../contexts/UtilContext";
 
 function Comment({ comments, dispatch, props }) {
+  const utilContext = useUtilContext();
   let [comment, setComment] = useState("");
   //let [commentsCount, setCommentsCount] = useState(comments.length);
 
   useEffect(() => {
     setTimeout(() => {
-      hideLoader();
+      utilContext.hideLoader();
     }, 1000);
 
     return () => {
-      hideLoader();
+      utilContext.hideLoader();
       console.log("cleaned up");
     };
   });

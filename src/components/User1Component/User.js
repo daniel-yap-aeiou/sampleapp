@@ -11,9 +11,11 @@ import { withRouter } from "react-router-dom";
 import { Spinner } from "react-bootstrap";
 import "./User.css";
 
-import { hideLoader } from "../../contexts/LoaderContext";
+import { useUtilContext } from "../../contexts/UtilContext";
 
 const ToDo = (props) => {
+  const utilContext = useUtilContext();
+
   let {
     users,
     //dispatch,
@@ -39,11 +41,11 @@ const ToDo = (props) => {
     }
 
     setTimeout(() => {
-      hideLoader();
+      utilContext.hideLoader();
     }, 1000);
 
     return () => {
-      hideLoader();
+      utilContext.hideLoader();
       console.log("cleaned up");
     };
   }, []);

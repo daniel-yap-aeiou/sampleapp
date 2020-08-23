@@ -2,11 +2,14 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { addToCart, upVote, downVote } from "../actions/cartActions";
 import "./Home.css";
-import { GetUserEmailAddress } from "../../contexts/UserContext";
-import { hideLoader } from "../../contexts/LoaderContext";
+import { useUserContext } from "../../contexts/UserContext";
+import { useUtilContext } from "../../contexts/UtilContext";
 
-function Home({ items, email, addToCart, upVote, downVote }) {
-  useEffect(hideLoader, []);
+function Home({ items, addToCart, upVote, downVote }) {
+  const userContext = useUserContext();
+  const utilContext = useUtilContext();
+  const email = userContext.GetUserEmailAddress();
+  useEffect(utilContext.hideLoader, []);
 
   if (!items || items.length < 1) {
     return (
@@ -111,7 +114,6 @@ function Home({ items, email, addToCart, upVote, downVote }) {
 const mapStateToProps = (state) => {
   return {
     items: state.cartReducer.items,
-    email: GetUserEmailAddress(),
   };
 };
 const mapDispatchToProps = (dispatch) => {

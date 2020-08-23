@@ -46,7 +46,7 @@ div.title {
     }
 }
 
-.loader-main {
+#loader-main {
     position: absolute;
     top: calc(50% - 4em);
     left: calc(50% - 4em);
@@ -61,6 +61,7 @@ div.title {
 
 .loader--hide {
     opacity: 0;
+    z-index: -999;
 }
 
 @keyframes load8 {
