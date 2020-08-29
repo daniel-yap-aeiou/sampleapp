@@ -5,6 +5,7 @@ import actionTypes from "../../util/actionTypes";
 import { withRouter } from "react-router-dom";
 import "./Comment.css";
 import { useUtilContext } from "../../contexts/UtilContext";
+import { TD } from "../../Theme/styles";
 
 function Comment({ comments, dispatch, props }) {
   const utilContext = useUtilContext();
@@ -101,16 +102,16 @@ function Comment({ comments, dispatch, props }) {
               <tbody>
                 {comments.map((comment) => (
                   <tr key={comment.id} onClick={handleCheck}>
-                    <td className=""></td>
-                    <td>{comment.title}</td>
-                    <td>
+                    <TD className=""></TD>
+                    <TD>{comment.title}</TD>
+                    <TD>
                       <button
                         className="btn btn-danger"
                         onClick={() => handleDelete(comment.id)}
                       >
                         X
                       </button>
-                    </td>
+                    </TD>
                   </tr>
                 ))}
               </tbody>

@@ -4,6 +4,7 @@ import { addToCart, upVote, downVote } from "../actions/cartActions";
 import "./Home.css";
 import { useUserContext } from "../../contexts/UserContext";
 import { useUtilContext } from "../../contexts/UtilContext";
+import { Card } from "../../Theme/styles";
 
 function Home({ items, addToCart, upVote, downVote }) {
   const userContext = useUserContext();
@@ -58,7 +59,7 @@ function Home({ items, addToCart, upVote, downVote }) {
     }
 
     return (
-      <div className="card" key={item.id}>
+      <Card className="card" key={item.id}>
         <div className="card-img-top">
           <img src={item.img} alt={item.title} style={{ width: "295px" }} />
           <div className="card-body">
@@ -96,7 +97,7 @@ function Home({ items, addToCart, upVote, downVote }) {
             </button>
           </p>
         </div>
-      </div>
+      </Card>
     );
   });
 

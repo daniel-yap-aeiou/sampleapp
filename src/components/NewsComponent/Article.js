@@ -1,5 +1,7 @@
 import React from "react";
 
+import { DIV, P, H6, A } from "../../Theme/styles";
+
 const Article = (props) => {
   const { details } = props;
   return (
@@ -7,21 +9,21 @@ const Article = (props) => {
       className="col-lg-4 col-md-6 col-sm-6 col-xs-12"
       style={{ display: "inline-block" }}
     >
-      <div className="card">
+      <DIV className="card">
         <img
           className="card-img-top"
           src={details.urlToImage}
           alt="NewsImage"
         />
-        <div className="card-block">
-          <h6 className="card-title">
-            <a href={details.url} target="_blank" rel="noopener noreferrer">
+        <DIV className="card-block">
+          <H6 className="card-title">
+            <A href={details.url} target="_blank" rel="noopener noreferrer">
               {details.title}
-            </a>
-          </h6>
-          <p className="card-text">{details.description}</p>
-        </div>
-      </div>
+            </A>
+          </H6>
+          <P className="card-text">{details.description}</P>
+        </DIV>
+      </DIV>
     </div>
   );
 };

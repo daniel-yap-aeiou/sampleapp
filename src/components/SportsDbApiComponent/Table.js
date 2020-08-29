@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import "./Index.css";
+import { TH, TD } from "../../Theme/styles";
 
 function Table(props) {
   const [data, updateData] = useState([]);
@@ -27,30 +28,30 @@ function Table(props) {
           <table className="table table-hover table-bordered">
             <thead>
               <tr>
-                <th>Club</th>
-                <th>Played</th>
-                <th>Win</th>
-                <th>Draw</th>
-                <th>Loss</th>
-                <th>GF</th>
-                <th>GA</th>
-                <th>GD</th>
-                <th>Total</th>
+                <TH>Club</TH>
+                <TH>Played</TH>
+                <TH>Win</TH>
+                <TH>Draw</TH>
+                <TH>Loss</TH>
+                <TH>GF</TH>
+                <TH>GA</TH>
+                <TH>GD</TH>
+                <TH>Total</TH>
               </tr>
             </thead>
             <tbody>
               {data.map((d) => {
                 return (
                   <tr key={d.teamid}>
-                    <td>{d.name}</td>
-                    <td>{d.played}</td>
-                    <td>{d.win}</td>
-                    <td>{d.draw}</td>
-                    <td>{d.loss}</td>
-                    <td>{d.goalsfor}</td>
-                    <td>{d.goalsagainst}</td>
-                    <td>{d.goalsdifference}</td>
-                    <td>{d.total}</td>
+                    <TD>{d.name}</TD>
+                    <TD>{d.played}</TD>
+                    <TD>{d.win}</TD>
+                    <TD>{d.draw}</TD>
+                    <TD>{d.loss}</TD>
+                    <TD>{d.goalsfor}</TD>
+                    <TD>{d.goalsagainst}</TD>
+                    <TD>{d.goalsdifference}</TD>
+                    <TD>{d.total}</TD>
                   </tr>
                 );
               })}

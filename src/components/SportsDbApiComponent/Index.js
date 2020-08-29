@@ -10,6 +10,8 @@ import Player from "./Player";
 import Table from "./Table";
 import { useUtilContext } from "../../contexts/UtilContext";
 
+import { P1 } from "../../Theme/styles";
+
 function Index() {
   const utilContext = useUtilContext();
 
@@ -297,7 +299,7 @@ function Index() {
   }, [country, sports]);
 
   const showDesc = (text) => {
-    setModalBody((pv) => (pv = text));
+    setModalBody((pv) => (pv = { __html:`<p style='color: black;'>${text}</p>` }));
     handleShow();
   };
 
@@ -314,16 +316,16 @@ function Index() {
           const event = data.events[0];
           let { strEvent, strLeague, dateEvent, strTimeLocal } = event;
           let content = `
-            <p>${strEvent}</p>
-            <p>Competition: ${strLeague}</p>
-            <p>${dateEvent} ${strTimeLocal}</p>
+            <p style='color: black;'>${strEvent}</p>
+            <p style='color: black;'>Competition: ${strLeague}</p>
+            <p style='color: black;'>${dateEvent} ${strTimeLocal}</p>
           `;
 
           // https://reactjs.org/docs/dom-elements.html#dangerouslysetinnerhtml
           setModalBodyNextMatch((pv) => (pv = { __html: content }));
         } else {
           setModalBodyNextMatch(
-            (pv) => (pv = { __html: "No up coming match" })
+            (pv) => (pv = { __html: "<p style='color: black;'>No up coming match</p>" })
           );
         }
 
@@ -607,9 +609,9 @@ function Index() {
 
                 <Modal show={show} onHide={handleClose}>
                   <Modal.Header closeButton>
-                    <Modal.Title>Description</Modal.Title>
+                    <Modal.Title><P1>Description</P1></Modal.Title>
                   </Modal.Header>
-                  <Modal.Body>{modalBody}</Modal.Body>
+                  <Modal.Body dangerouslySetInnerHTML={modalBody}></Modal.Body>
                   <Modal.Footer>
                     <button
                       className="btn btn-dark"
@@ -622,7 +624,7 @@ function Index() {
 
                 <Modal show={showNextMatch} onHide={handleCloseNextMatch}>
                   <Modal.Header closeButton>
-                    <Modal.Title>Next Match</Modal.Title>
+                    <Modal.Title><P1>Next Match</P1></Modal.Title>
                   </Modal.Header>
                   <Modal.Body
                     dangerouslySetInnerHTML={modalBodyNextMatch}

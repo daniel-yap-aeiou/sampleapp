@@ -12,6 +12,8 @@ import { Spinner } from "react-bootstrap";
 import "./User.css";
 
 import { useUtilContext } from "../../contexts/UtilContext";
+import { TD } from "../../Theme/styles";
+
 
 const ToDo = (props) => {
   const utilContext = useUtilContext();
@@ -132,9 +134,9 @@ const ToDo = (props) => {
                 {users.items.map((s) => {
                   return (
                     <tr key={s.userId}>
-                      <td>{s.firstName}</td>
-                      <td>{s.lastName}</td>
-                      <td>
+                      <TD>{s.firstName}</TD>
+                      <TD>{s.lastName}</TD>
+                      <TD>
                         <button
                           className="btn btn-sm btn-danger"
                           onClick={handleDelete}
@@ -142,7 +144,7 @@ const ToDo = (props) => {
                         >
                           Delete
                         </button>
-                      </td>
+                      </TD>
                     </tr>
                   );
                 })}

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
+import { TD } from "../../Theme/styles";
 
 function Data(props) {
   const [data, updateData] = useState([]);
@@ -18,9 +19,9 @@ function Data(props) {
         {data.map((pd) => {
           return (
             <tr key={pd.id}>
-              <td>
+              <TD>
                 <img src={pd.thumbnailUrl} alt="" /> {pd.title}
-              </td>
+              </TD>
             </tr>
           );
         })}

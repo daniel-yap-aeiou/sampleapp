@@ -8,6 +8,7 @@ import axios from "axios";
 import "./Index.css";
 import Logo from "../../logo.svg";
 import { useUtilContext } from "../../contexts/UtilContext";
+import { P1 } from "../../Theme/styles";
 
 function Player() {
   const utilContext = useUtilContext();
@@ -38,7 +39,7 @@ function Player() {
   };
 
   const showDesc = (text) => {
-    setModalBody((pv) => (pv = text));
+    setModalBody((pv) => (pv = { __html: `<p style="color: black;">${text}</p>` }));
     handleShow();
   };
 
@@ -184,9 +185,9 @@ function Player() {
 
           <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
-              <Modal.Title>Description</Modal.Title>
+              <Modal.Title><P1>Description</P1></Modal.Title>
             </Modal.Header>
-            <Modal.Body>{modalBody}</Modal.Body>
+            <Modal.Body dangerouslySetInnerHTML={modalBody}></Modal.Body>
             <Modal.Footer>
               <button className="btn btn-dark" onClick={() => handleClose()}>
                 Close

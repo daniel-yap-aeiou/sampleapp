@@ -8,8 +8,10 @@ import Chart from "./Chart";
 import { fetchData } from "./api/index";
 import { useUtilContext } from "../../contexts/UtilContext";
 
+
 function Covid19(props) {
   const utilContext = useUtilContext();
+
   const [state, setState] = useState({
     data: {},
     country: "",

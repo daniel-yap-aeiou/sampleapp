@@ -27,6 +27,7 @@ import SportsDbApi from "../SportsDbApiComponent/Index";
 import Covid19 from "../Covid19Component/Index";
 
 import { Switch, Route, withRouter, useHistory } from "react-router-dom";
+
 import { useUserContext } from "../../contexts/UserContext";
 
 // The Main component renders one of the three provided

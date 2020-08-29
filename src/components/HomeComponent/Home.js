@@ -5,6 +5,8 @@ import URLS from "../../util/constants";
 import { withRouter } from "react-router-dom";
 import { useUtilContext } from "../../contexts/UtilContext";
 
+import { DIV, A } from "../../Theme/styles";
+
 function Home(props) {
   const utilContext = useUtilContext();
   // Declare a new state variable, which we'll call "count"
@@ -55,7 +57,7 @@ function Home(props) {
       console.log("cleaned up");
       isSubscribed = false;
     };
-  }, [count, props]);
+  }, [count, props, utilContext]);
 
   return (
     <div className="container">
@@ -80,38 +82,38 @@ function Home(props) {
 
       <div className="row">
         <div className="col-lg-3">
-          <div id="list-example" className="list-group">
-            <a
+          <DIV id="list-example" className="list-group">
+            <A
               className="list-group-item list-group-item-action"
               href="#list-item-1"
             >
               Item 1
-            </a>
-            <a
+            </A>
+            <A
               className="list-group-item list-group-item-action"
               href="#list-item-2"
             >
               Item 2
-            </a>
-            <a
+            </A>
+            <A
               className="list-group-item list-group-item-action"
               href="#list-item-3"
             >
               Item 3
-            </a>
-            <a
+            </A>
+            <A
               className="list-group-item list-group-item-action"
               href="#list-item-4"
             >
               Item 4
-            </a>
-            <a
+            </A>
+            <A
               className="list-group-item list-group-item-action"
               href="#list-item-5"
             >
               Item 5
-            </a>
-          </div>
+            </A>
+          </DIV>
         </div>
 
         <div className="col-lg-9">

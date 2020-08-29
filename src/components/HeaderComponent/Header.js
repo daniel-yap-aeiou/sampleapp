@@ -7,18 +7,21 @@ import { menus } from "../../constants/menu";
 import { User } from "../UserComponent/User";
 import { useUserContext } from "../../contexts/UserContext";
 import { useUtilContext } from "../../contexts/UtilContext";
+import { useThemeContext } from "../../contexts/ThemeContext";
 
+import { Nav } from "../../Theme/styles";
 
 function Header({ itemCount }) {
   const history = useHistory();
 
   const userContext = useUserContext();
   const utilContext = useUtilContext();
+  const themeContext = useThemeContext();
 
   const [navCollapsed, setNavCollapsed] = useState(true);
   const [showLoggedInMenu, updateShowLoggedInMenu] = useState("none");
   const [loggedInAs, updateLoggedInAs] = useState(null);
-  const [navBarClassName, setNarBarClassName] = useState("navbar-light bg-light");
+  const [navBarClassName, setNarBarClassName] = useState("");
 
   function _onToggleNav() {
     setNavCollapsed((prevValue) => (prevValue = !prevValue));
@@ -29,7 +32,21 @@ function Header({ itemCount }) {
       updateShowLoggedInMenu((prevValue) => (prevValue = "none"));
     } else {
       updateShowLoggedInMenu((prevValue) => (prevValue = "block"));
-      updateLoggedInAs((prevValue) => (prevValue = userContext.GetUserEmailAddress()));
+      updateLoggedInAs(
+        (prevValue) => (prevValue = userContext.GetUserEmailAddress())
+      );
+    }
+
+    const theme = themeContext.getTheme();
+
+    if (theme === "dark") {
+      setNarBarClassName(
+        (prevValue) => (prevValue = "navbar-dark bg-dark fixed-top")
+      );
+    } else {
+      setNarBarClassName(
+        (prevValue) => (prevValue = "navbar-light bg-light fixed-top")
+      );
     }
   }, [userContext.IsUserLoggedIn()]);
 
@@ -43,10 +60,18 @@ function Header({ itemCount }) {
   };
 
   const toggleNavBarMode = () => {
-    if (navBarClassName.includes("light")) {
-      setNarBarClassName((prevValue) => (prevValue = "navbar-dark bg-dark fixed-top"));
+    const theme = themeContext.getTheme();
+
+    if (theme === "light") {
+      setNarBarClassName(
+        (prevValue) => (prevValue = "navbar-dark bg-dark fixed-top")
+      );
+      themeContext.toggleTheme("dark");
     } else {
-      setNarBarClassName((prevValue) => (prevValue = "navbar-light bg-light fixed-top"));
+      setNarBarClassName(
+        (prevValue) => (prevValue = "navbar-light bg-light fixed-top")
+      );
+      themeContext.toggleTheme("light");
     }
   };
 
@@ -57,7 +82,7 @@ function Header({ itemCount }) {
 
   return (
     <header>
-      <nav className={navBarClassName + " navbar navbar-expand-lg fixed-top" }>
+      <Nav className={navBarClassName + " navbar navbar-expand-lg fixed-top"}>
         <Link to="/" className="navbar-brand">
           <img src={Logo} className="App-logo" alt="App" /> &nbsp;
         </Link>
@@ -202,10 +227,7 @@ function Header({ itemCount }) {
           </ul>
 
           <ul className="nav navbar-nav navbar-right">
-            <User
-              showLoggedInMenu={showLoggedInMenu}
-              loggedInAs={loggedInAs}
-            />
+            <User showLoggedInMenu={showLoggedInMenu} loggedInAs={loggedInAs} />
 
             {menus.menuRight.map((m) => {
               return (
@@ -238,7 +260,7 @@ function Header({ itemCount }) {
             </li>
           </ul>
         </div>
-      </nav>
+      </Nav>
       <br />
     </header>
   );
@@ -247,7 +269,7 @@ const mapStateToProps = (state, ownProps) => {
   var itemCount = 0;
   if (state.cartReducer && state.cartReducer.addedItems) {
     state.cartReducer.addedItems.map((s) => {
-      return itemCount += s.quantity;
+      return (itemCount += s.quantity);
     });
   }
 

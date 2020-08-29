@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Badge } from "react-bootstrap";
 
+import { A } from "../../Theme/styles";
+
 const List = (props) => {
   const { repos } = props;
   let [repoList, setState] = useState({
@@ -78,13 +80,13 @@ const List = (props) => {
             return (
               <li key={repo.id} className="list">
                 <span className="repo-text">
-                  <a
+                  <A
                     href={repo.html_url}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     {repo.name}
-                  </a>{" "}
+                  </A>{" "}
                 </span>
                 <br />
                 <span className="repo-description">

@@ -15,6 +15,7 @@ import { UserProvider } from "./contexts/UserContext";
 import { UtilProvider } from "./contexts/UtilContext";
 import { TitleProvider } from "./contexts/TitleContext";
 import { AlertProvider } from "./contexts/AlertContext";
+import { AppThemeProvider } from "./contexts/ThemeContext";
 
 window.store = store;
 
@@ -36,15 +37,17 @@ ReactDOM.render(
         //getUserConfirmation={handlePageChange}
         history={history}
       >
-        <AlertProvider>
-          <UserProvider>
-            <TitleProvider>
-              <UtilProvider>
-                <App />
-              </UtilProvider>
-            </TitleProvider>
-          </UserProvider>
-        </AlertProvider>
+        <AppThemeProvider>
+          <AlertProvider>
+            <UserProvider>
+              <TitleProvider>
+                <UtilProvider>
+                  <App />
+                </UtilProvider>
+              </TitleProvider>
+            </UserProvider>
+          </AlertProvider>
+        </AppThemeProvider>
       </Router>
     </Provider>
   </React.StrictMode>,

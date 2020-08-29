@@ -1,5 +1,6 @@
 import React from "react";
 import CountUp from "react-countup";
+import { Card } from "../../Theme/styles";
 
 const Cards = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
   if (!confirmed) {
@@ -9,7 +10,7 @@ const Cards = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
   return (
     <div className="row">
       <div className="card-deck">
-        <div className="card">
+        <Card className="card">
           <div className="card-body">
             <h5 className="card-title">Infected</h5>
 
@@ -25,9 +26,9 @@ const Cards = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
             <p className="card-text">{new Date(lastUpdate).toDateString()}</p>
             <p className="card-text">Number Of Active Cases Of Covid-19</p>
           </div>
-        </div>
+        </Card>
 
-        <div className="card">
+        <Card className="card">
           <div className="card-body">
             <h5 className="card-title">Recovered</h5>
 
@@ -43,9 +44,9 @@ const Cards = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
             <p className="card-text">{new Date(lastUpdate).toDateString()}</p>
             <p className="card-text">Number Of Recovered Cases Of Covid-19</p>
           </div>
-        </div>
+        </Card>
 
-        <div className="card">
+        <Card className="card">
           <div className="card-body">
             <h5 className="card-title">Deaths</h5>
 
@@ -61,7 +62,7 @@ const Cards = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
             <p className="card-text">{new Date(lastUpdate).toDateString()}</p>
             <p className="card-text">Number Of Death caused by Covid-19</p>
           </div>
-        </div>
+        </Card>
       </div>
 
       <div className="col-12">

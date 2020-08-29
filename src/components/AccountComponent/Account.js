@@ -5,6 +5,7 @@ import Logo from "../../logo.svg";
 
 import { useUserContext } from "../../contexts/UserContext";
 import { useUtilContext } from "../../contexts/UtilContext";
+import { Card, H5 } from "../../Theme/styles";
 
 function Account() {
   const userContext = useUserContext();
@@ -23,9 +24,9 @@ function Account() {
   }, []);
 
   return (
-    <div className="card">
+    <Card className="card">
       <img src={Logo} alt="John" />
-      <h5>{loggedInAs}</h5>
+      <H5>{loggedInAs}</H5>
       <p className="title">CEO & Founder, Example</p>
       <p>RMIT University</p>
       <div>
@@ -45,7 +46,7 @@ function Account() {
       <p className="contact-btn-container">
         <button className="account">Contact</button>
       </p>
-    </div>
+    </Card>
   );
 }
 

@@ -5,18 +5,19 @@ import { withRouter } from "react-router-dom";
 import "./Index.css";
 import Modal from "./Modal";
 import { useUtilContext } from "../../contexts/UtilContext";
-let enteredCity = [];
 
 const initialState = {
   weatherList: [],
   forecastList: {},
   cityList: [],
+  enteredCity: []
 };
 
 const actionTypes = {
   SET_WEATHER: "set-weather-items",
   SET_FORECAST: "set-forecast-items",
   SET_CITY: "set-city-items",
+  SET_ENTERED_CITY: "set-entered-city-items"
 };
 
 const reducer = (state, action) => {
@@ -35,6 +36,11 @@ const reducer = (state, action) => {
       return {
         ...state,
         cityList: action.payload,
+      };
+    case actionTypes.SET_ENTERED_CITY:
+      return {
+        ...state,
+        enteredCity: action.payload,
       };
     default:
       throw new Error();
@@ -115,11 +121,12 @@ function Index(props) {
   const handleOnSubmitViaClick = () => {
     if (city === undefined || city === "") return false;
 
-    if (enteredCity && enteredCity.includes(city.toLocaleLowerCase())) {
+    if (state.enteredCity && state.enteredCity.includes(city.toLocaleLowerCase())) {
       setMsg(
         (prevValue) => (prevValue = "You already know the weather for " + city)
       );
       setSpinnerClassName((pv) => (pv = "hide"));
+      setState((pv) => pv = "");
       return false;
     }
 
@@ -150,7 +157,14 @@ function Index(props) {
         });
 
         setSpinnerClassName((pv) => (pv = "hide"));
-        enteredCity.push(city.toLocaleLowerCase());
+
+        let enteredCity = state.enteredCity;
+        enteredCity.push(city.toLocaleLowerCase())
+
+        dispatch({
+          payload: enteredCity,
+          type: actionTypes.SET_ENTERED_CITY,
+        });
 
         if (
           state.cityList.findIndex((s) => s.id === city.toLocaleLowerCase()) ===
@@ -189,7 +203,7 @@ function Index(props) {
     }, 200);
 
     return () => {
-      enteredCity = [];
+      
     };
   }, []);
 

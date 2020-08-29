@@ -5,6 +5,7 @@ import StoryList from "./StoryList";
 import { Spinner } from "react-bootstrap";
 import "./Index.css";
 import { useUtilContext } from "../../contexts/UtilContext";
+import { DIV} from "../../Theme/styles";
 
 type State = {
   // List of possible Subreddits for the user to choose in the right navigation.
@@ -130,7 +131,7 @@ function Index() {
   return (
     <div className="container">
       <div className="reddit-client row">
-        <div className="col-lg-12">
+        <DIV className="col-lg-12">
           <h1>
             {state.selectedSubreddit == null
               ? "Please select a sub"
@@ -151,7 +152,7 @@ function Index() {
             itemSelected={setSelectedItem}
           />
           <StoryList items={state.storyItems} />
-        </div>
+        </DIV>
       </div>
     </div>
   );

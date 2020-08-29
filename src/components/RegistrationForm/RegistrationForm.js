@@ -5,6 +5,7 @@ import { withRouter, useHistory } from "react-router-dom";
 import { useUserContext } from "../../contexts/UserContext";
 import { useUtilContext } from "../../contexts/UtilContext";
 import { useAlertContext } from "../../contexts/AlertContext";
+import { Card, Small } from "../../Theme/styles";
 
 function RegistrationForm() {
   const userContext = useUserContext();
@@ -51,12 +52,14 @@ function RegistrationForm() {
   };
 
   const redirectToHome = () => {
+    alertContext.setAlert(null);
     utilContext.showLoader();
     history.push("/home");
   };
 
   const redirectToLogin = () => {
     utilContext.showLoader();
+    alertContext.setAlert(null);
     history.push("/login");
   };
 
@@ -83,7 +86,7 @@ function RegistrationForm() {
   });
 
   return (
-    <div className="card col-12 col-lg-4 login-card mt-2 hv-center">
+    <Card className="card col-12 col-lg-4 login-card mt-2 hv-center">
       <form>
         <div className="form-group text-left">
           <label htmlFor="exampleInputEmail1">Email address</label>
@@ -96,9 +99,9 @@ function RegistrationForm() {
             value={state.email}
             onChange={handleChange}
           />
-          <small id="emailHelp" className="form-text text-muted">
+          <Small id="emailHelp" className="form-text text-muted">
             We'll never share your email with anyone else.
-          </small>
+          </Small>
         </div>
         <div className="form-group text-left">
           <label htmlFor="exampleInputPassword1">Password</label>
@@ -143,7 +146,7 @@ function RegistrationForm() {
           Login here
         </span>
       </div>
-    </div>
+    </Card>
   );
 }
 

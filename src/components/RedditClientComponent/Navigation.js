@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
 import NavigationItem from "./NavigationItem";
 import { Subreddit } from "./types";
+import { DIV } from "../../Theme/styles";
 
 type Props = {
   activeUrl: ?string,
@@ -20,7 +21,7 @@ export default function Navigation(props: Props) {
   );
 
   return (
-    <div className="navigation">
+    <DIV className="navigation">
         {sortedItems.map((item) => (
           <NavigationItem
             item={item}
@@ -29,6 +30,6 @@ export default function Navigation(props: Props) {
             selected={item.data.url === props.activeUrl}
           />
         ))}
-    </div>
+    </DIV>
   );
 }
