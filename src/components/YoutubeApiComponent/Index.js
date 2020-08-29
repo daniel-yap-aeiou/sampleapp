@@ -8,7 +8,7 @@ import { withRouter } from "react-router-dom";
 import { Badge } from "react-bootstrap";
 import { useUtilContext } from "../../contexts/UtilContext";
 
-function Index(props) {
+function Index() {
   const utilContext = useUtilContext();
 
   const [state, setState] = useState({
@@ -26,6 +26,11 @@ function Index(props) {
   };
 
   const handleSubmit = async (termFromSearchBar, maxResults) => {
+    setState((prevState) => ({
+      ...prevState,
+      videos: [],
+    }));
+
     const response = await youtube
       .get("/search", {
         params: {
@@ -41,10 +46,12 @@ function Index(props) {
 
     setMaxResults((prevState) => (prevState = parseInt(maxResults)));
 
-    setState((prevState) => ({
-      ...prevState,
-      videos: response.data.items,
-    }));
+    if (response && response.data) {
+      setState((prevState) => ({
+        ...prevState,
+        videos: response.data.items,
+      }));
+    }
   };
   const handleVideoSelect = (video) => {
     setState((prevState) => ({
@@ -56,6 +63,11 @@ function Index(props) {
   useEffect(utilContext.hideLoader, []);
 
   const trending = async () => {
+    setState((prevState) => ({
+      ...prevState,
+      videos: [],
+    }));
+
     const response = await youtube
       .get("/videos", {
         params: {
@@ -71,7 +83,7 @@ function Index(props) {
       });
 
     var videos = [];
-    if (response.data && response.data.items) {
+    if (response && response.data && response.data.items) {
       response.data.items.map((v) => {
         let snippet = {
           title: v.snippet.title,
@@ -115,11 +127,15 @@ function Index(props) {
         {state.selectedVideo == null ? (
           <>
             <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-              <VideoList
-                handleVideoSelect={handleVideoSelect}
-                videos={state.videos}
-                selectedVideo={state.selectedVideo}
-              />
+              {state.videos && state.videos.length > 0 ? (
+                <VideoList
+                  handleVideoSelect={handleVideoSelect}
+                  videos={state.videos}
+                  selectedVideo={state.selectedVideo}
+                />
+              ) : (
+                ""
+              )}
             </div>
           </>
         ) : (
@@ -128,11 +144,15 @@ function Index(props) {
               <VideoDetail video={state.selectedVideo} />
             </div>
             <div className="col-sm-5 col-md-5 col-lg-5">
-              <VideoList
-                handleVideoSelect={handleVideoSelect}
-                videos={state.videos}
-                selectedVideo={state.selectedVideo}
-              />
+              {state.videos && state.videos.length > 0 ? (
+                <VideoList
+                  handleVideoSelect={handleVideoSelect}
+                  videos={state.videos}
+                  selectedVideo={state.selectedVideo}
+                />
+              ) : (
+                ""
+              )}
             </div>
           </>
         )}

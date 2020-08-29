@@ -58,7 +58,7 @@ function LoginForm() {
 
   const redirectToHome = () => {
     alertContext.setAlert(null);
-    history.push("/home");
+    history.push(userContext.HomePage());
   };
 
   const redirectToRegister = () => {

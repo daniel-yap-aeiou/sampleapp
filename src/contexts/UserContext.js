@@ -33,11 +33,16 @@ export function UserProvider({ children }) {
     }
   };
 
+  const HomePage = () => {
+    return "/youtubeapi";
+  }
+
   const context = {
     IsUserLoggedIn,
     GetUserEmailAddress,
     SignOut,
     SignIn,
+    HomePage,
   };
 
   return (
