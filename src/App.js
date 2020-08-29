@@ -5,17 +5,33 @@ import Main from "./components/RouteComponent/Main";
 import "./App.css";
 import { withRouter } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
-import { lightTheme, darkTheme } from "./theme";
+import { lightTheme, darkTheme, pinkTheme } from "./theme";
 import { GlobalStyles } from "./global";
 
 import { useThemeContext } from "./contexts/ThemeContext";
 
-function App({}) {
+function App() {
   const themeContext = useThemeContext();
+
+  const resolveTheme = () => {
+    const theme = themeContext.getTheme();
+    if (theme === "light") {
+      return lightTheme;
+    }
+    else if (theme === "dark") {
+      return darkTheme;
+    }
+    else if (theme === "pink") {
+      return pinkTheme;
+    }
+    else {
+      return lightTheme;
+    }
+  };
 
   return (
     <ThemeProvider
-      theme={themeContext.getTheme() === "light" ? lightTheme : darkTheme}
+      theme={resolveTheme}
     >
       <>
         <GlobalStyles />

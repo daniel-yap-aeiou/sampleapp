@@ -22,6 +22,7 @@ function Header({ itemCount }) {
   const [showLoggedInMenu, updateShowLoggedInMenu] = useState("none");
   const [loggedInAs, updateLoggedInAs] = useState(null);
   const [navBarClassName, setNarBarClassName] = useState("");
+  const [currentTheme, setCurrentTheme] = useState("");
 
   function _onToggleNav() {
     setNavCollapsed((prevValue) => (prevValue = !prevValue));
@@ -38,40 +39,32 @@ function Header({ itemCount }) {
     }
 
     const theme = themeContext.getTheme();
-
-    if (theme === "dark") {
-      setNarBarClassName(
-        (prevValue) => (prevValue = "navbar-dark bg-dark fixed-top")
-      );
-    } else {
-      setNarBarClassName(
-        (prevValue) => (prevValue = "navbar-light bg-light fixed-top")
-      );
-    }
+    setCurrentTheme((pv) => (pv = theme));
+    setNavBarClassName(theme);
   }, [userContext.IsUserLoggedIn()]);
 
   const signout = () => {
     utilContext.showLoader();
     userContext.SignOut();
-    updateShowLoggedInMenu((prevValue) => (prevValue = "none"));
-    updateLoggedInAs((prevValue) => (prevValue = null));
+    updateShowLoggedInMenu((pv) => (pv = "none"));
+    updateLoggedInAs((pv) => (pv = null));
     history.push("/login");
     utilContext.closeNav();
   };
 
-  const toggleNavBarMode = () => {
-    const theme = themeContext.getTheme();
+  const toggleNavBarMode = (e) => {
+    const selectedTheme = e.target.value;
 
-    if (theme === "light") {
-      setNarBarClassName(
-        (prevValue) => (prevValue = "navbar-dark bg-dark fixed-top")
-      );
-      themeContext.toggleTheme("dark");
+    themeContext.toggleTheme(selectedTheme);
+    setCurrentTheme((pv) => (pv = selectedTheme));
+    setNavBarClassName(selectedTheme);
+  };
+
+  const setNavBarClassName = (theme) => {
+    if (theme === "dark" || theme === "pink") {
+      setNarBarClassName((pv) => (pv = "navbar-dark bg-dark fixed-top"));
     } else {
-      setNarBarClassName(
-        (prevValue) => (prevValue = "navbar-light bg-light fixed-top")
-      );
-      themeContext.toggleTheme("light");
+      setNarBarClassName((pv) => (pv = "navbar-light bg-light fixed-top"));
     }
   };
 
@@ -227,6 +220,19 @@ function Header({ itemCount }) {
           </ul>
 
           <ul className="nav navbar-nav navbar-right">
+            <li className="nav-item">
+              <select
+                className="form-control"
+                value={currentTheme}
+                onChange={toggleNavBarMode}
+                style={{marginTop: 8}}
+              >
+                <option value="light">Light</option>
+                <option value="dark">Dark</option>
+                <option value="pink">Pink</option>
+              </select>
+            </li>
+
             <User showLoggedInMenu={showLoggedInMenu} loggedInAs={loggedInAs} />
 
             {menus.menuRight.map((m) => {
@@ -249,15 +255,6 @@ function Header({ itemCount }) {
                 </li>
               );
             })}
-
-            <li className="nav-item">
-              <button
-                className="btn btn-warning btn-sm"
-                onClick={toggleNavBarMode}
-              >
-                Toggle
-              </button>
-            </li>
           </ul>
         </div>
       </Nav>

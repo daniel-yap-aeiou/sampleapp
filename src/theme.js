@@ -13,3 +13,11 @@ export const darkTheme = {
   gradient: 'linear-gradient(#091236, #1E215D)',
   a: '#ffc107'
 }
+
+export const pinkTheme = {
+  body: '#FFC0CB',
+  text: 'gray !important',
+  toggleBorder: '#6B8096',
+  gradient: 'linear-gradient(#091236, #1E215D)',
+  a: 'gray'
+}

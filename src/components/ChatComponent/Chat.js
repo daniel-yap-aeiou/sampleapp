@@ -37,7 +37,7 @@ function Chat(props) {
       dropMessages();
       console.log("cleaned up");
     };
-  });
+  }, []);
 
   const handleNewUserMessage = (newMessage) => {
     console.log(`New message incoming! ${newMessage}`);
