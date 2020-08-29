@@ -20,6 +20,7 @@ export function AppThemeProvider({ children }) {
     if (themeJson !== null) {
       return themeJson;
     }
+    return theme;
   };
 
   const context = {

@@ -222,7 +222,7 @@ function Header({ itemCount }) {
           <ul className="nav navbar-nav navbar-right">
             <li className="nav-item">
               <select
-                className="form-control"
+                className="select-css"
                 value={currentTheme}
                 onChange={toggleNavBarMode}
                 style={{marginTop: 8}}

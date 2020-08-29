@@ -6,13 +6,19 @@ const Chart = ({ data: { confirmed, recovered, deaths }, country }) => {
   const [dailyData, setDailyData] = useState({});
 
   useEffect(() => {
-    const fetchMyAPI = async () => {
-      const initialDailyData = await fetchDailyData();
+    let mounted = true;
+    if (mounted) {
+      const fetchMyAPI = async () => {
+        const initialDailyData = await fetchDailyData();
 
-      setDailyData((prevValue) => (prevValue = initialDailyData));
+        setDailyData((prevValue) => (prevValue = initialDailyData));
+      };
+
+      fetchMyAPI();
+    }
+    return () => {
+      mounted = false;
     };
-
-    fetchMyAPI();
   }, []);
 
   const barChart = confirmed ? (

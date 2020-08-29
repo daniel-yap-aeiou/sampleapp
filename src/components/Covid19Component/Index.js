@@ -8,7 +8,6 @@ import Chart from "./Chart";
 import { fetchData } from "./api/index";
 import { useUtilContext } from "../../contexts/UtilContext";
 
-
 function Covid19(props) {
   const utilContext = useUtilContext();
 
@@ -22,22 +21,30 @@ function Covid19(props) {
   useEffect(utilContext.hideLoader, []);
 
   useEffect(() => {
-    fetchData()
-      .then((data) => {
-        setState((prevState) => ({
-          ...prevState,
-          data: data,
-        }));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    let mounted = true;
+    let cancelToken1 = null;
+    if (mounted) {
+      fetchData()
+        .then((data) => {
+          cancelToken1 = data.cancelToken1;
+          setState((prevState) => ({
+            ...prevState,
+            data: data,
+          }));
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
 
-    return () => {};
+    return () => {
+      cancelToken1 && cancelToken1.cancel();
+      mounted = false;
+    };
   }, []);
 
   const handleCountryChange = async (country) => {
-    const data = await fetchData(country);
+    const data =  await fetchData(country);
 
     setState((prevState) => ({
       ...prevState,

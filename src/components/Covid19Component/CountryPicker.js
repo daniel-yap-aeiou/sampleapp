@@ -6,14 +6,23 @@ const Countries = ({ handleCountryChange }) => {
   const [countries, setCountries] = useState([]);
 
   useEffect(() => {
-    const fetchAPI = async () => {
-      setCountries(await fetchCountries());
-    };
+    let mounted = true;
+    if (mounted) {
+      
+      const fetchAPI = async () => {
+        const data = await fetchCountries();
+        setCountries(data.countries);
+      };
 
-    if (countries.length === 0) {
-      fetchAPI();
+      if (countries.length === 0) {
+        fetchAPI();
+      }
     }
-  });
+    
+    return () => {
+      mounted = false;
+    };
+  }, []);
 
   return (
     <div className="container">
