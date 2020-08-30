@@ -16,7 +16,7 @@ const VideoList = ({ videos, selectedVideo, handleVideoSelect }) => {
     })
   }, []);
 
-  if (videos === undefined) return "API has reached daily limits";
+  if (videos === undefined || videos === null || videos.length === 0) return "API has reached daily limits";
 
   const renderedVideos = videos.map((video) => {
     return (

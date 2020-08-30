@@ -19,5 +19,13 @@ export const pinkTheme = {
   text: 'gray !important',
   toggleBorder: '#6B8096',
   gradient: 'linear-gradient(#091236, #1E215D)',
-  a: 'gray'
+  a: '#696868'
+}
+
+export const purpleTheme = {
+  body: '#c4ade6',
+  text: '#585858 !important',
+  toggleBorder: '#6B8096',
+  gradient: 'linear-gradient(#091236, #1E215D)',
+  a: '#484848'
 }

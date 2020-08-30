@@ -1,6 +1,23 @@
 import styled from "styled-components";
+import { Nav } from "react-bootstrap";
 
-export const Nav = styled.nav`
+export const NavNew1 = styled(Nav)`
+  .nav-link.active {
+    color: #fff !important;
+    background-color: #585858 !important;
+  }
+
+  a {
+    color: ${({ theme }) => theme.a} !important;
+  }
+
+  .nav-link {
+    color: ${({ theme }) => theme.text} !important;
+    background-color: ${({ theme }) => theme.body} !important;
+  }
+`;
+
+export const NavNew = styled.nav`
   background-color: ${({ theme }) => theme.body};
   color: ${({ theme }) => theme.text};
 `;
@@ -24,8 +41,8 @@ export const A = styled.a`
 `;
 
 export const DIV = styled.div`
-color: ${({ theme }) => theme.text};
-background-color: ${({ theme }) => theme.body};
+  color: ${({ theme }) => theme.text};
+  background-color: ${({ theme }) => theme.body};
 `;
 
 export const Label = styled.label`

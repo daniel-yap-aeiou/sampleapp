@@ -9,7 +9,7 @@ import { useUserContext } from "../../contexts/UserContext";
 import { useUtilContext } from "../../contexts/UtilContext";
 import { useThemeContext } from "../../contexts/ThemeContext";
 
-import { Nav } from "../../Theme/styles";
+import { NavNew } from "../../Theme/styles";
 
 function Header({ itemCount }) {
   const history = useHistory();
@@ -61,7 +61,7 @@ function Header({ itemCount }) {
   };
 
   const setNavBarClassName = (theme) => {
-    if (theme === "dark" || theme === "pink") {
+    if (theme === "dark" || theme === "pink" || theme === "purple") {
       setNarBarClassName((pv) => (pv = "navbar-dark bg-dark fixed-top"));
     } else {
       setNarBarClassName((pv) => (pv = "navbar-light bg-light fixed-top"));
@@ -75,7 +75,7 @@ function Header({ itemCount }) {
 
   return (
     <header>
-      <Nav className={navBarClassName + " navbar navbar-expand-lg fixed-top"}>
+      <NavNew className={navBarClassName + " navbar navbar-expand-lg fixed-top"}>
         <Link to="/" className="navbar-brand">
           <img src={Logo} className="App-logo" alt="App" /> &nbsp;
         </Link>
@@ -230,6 +230,7 @@ function Header({ itemCount }) {
                 <option value="light">Light</option>
                 <option value="dark">Dark</option>
                 <option value="pink">Pink</option>
+                <option value="purple">Purple</option>
               </select>
             </li>
 
@@ -257,7 +258,7 @@ function Header({ itemCount }) {
             })}
           </ul>
         </div>
-      </Nav>
+      </NavNew>
       <br />
     </header>
   );

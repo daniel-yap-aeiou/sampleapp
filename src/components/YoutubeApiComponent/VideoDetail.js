@@ -11,12 +11,12 @@ const VideoDetail = ({ video }) => {
     <div className="video-container">
       <div className="row">
         <div className="col-sm-7 col-md-7 col-lg-6">
-          <iframe
-            src={videoSrc}
-            allowFullScreen
-            title="Video player"
-            className="video"
-          />
+            <iframe
+              src={videoSrc}
+              allowFullScreen
+              title="Video player"
+              className="video"
+            />
         </div>
       </div>
       <div className="row">

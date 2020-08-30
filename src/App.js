@@ -5,7 +5,7 @@ import Main from "./components/RouteComponent/Main";
 import "./App.css";
 import { withRouter } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
-import { lightTheme, darkTheme, pinkTheme } from "./theme";
+import { lightTheme, darkTheme, pinkTheme, purpleTheme } from "./theme";
 import { GlobalStyles } from "./global";
 
 import { useThemeContext } from "./contexts/ThemeContext";
@@ -23,6 +23,9 @@ function App() {
     }
     else if (theme === "pink") {
       return pinkTheme;
+    }
+    else if (theme === "purple") {
+      return purpleTheme;
     }
     else {
       return lightTheme;

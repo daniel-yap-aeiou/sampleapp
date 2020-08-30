@@ -4,8 +4,8 @@ import axios from "axios";
 import URLS from "../../util/constants";
 import { withRouter } from "react-router-dom";
 import { useUtilContext } from "../../contexts/UtilContext";
-
-import { DIV, A } from "../../Theme/styles";
+import { Tab, Nav } from "react-bootstrap";
+import { NavNew1 } from "../../Theme/styles";
 
 function Home(props) {
   const utilContext = useUtilContext();
@@ -81,60 +81,51 @@ function Home(props) {
       </div>
 
       <div className="row">
-        <div className="col-lg-3">
-          <DIV id="list-example" className="list-group">
-            <A
-              className="list-group-item list-group-item-action"
-              href="#list-item-1"
-            >
-              Item 1
-            </A>
-            <A
-              className="list-group-item list-group-item-action"
-              href="#list-item-2"
-            >
-              Item 2
-            </A>
-            <A
-              className="list-group-item list-group-item-action"
-              href="#list-item-3"
-            >
-              Item 3
-            </A>
-            <A
-              className="list-group-item list-group-item-action"
-              href="#list-item-4"
-            >
-              Item 4
-            </A>
-            <A
-              className="list-group-item list-group-item-action"
-              href="#list-item-5"
-            >
-              Item 5
-            </A>
-          </DIV>
-        </div>
-
-        <div className="col-lg-9">
-          <div
-            data-spy="scroll"
-            data-target="#list-example"
-            data-offset="0"
-            className="scrollspy-example"
-          >
-            <h4 id="list-item-1">Item 1</h4>
-            <p>{text}</p>
-            <h4 id="list-item-2">Item 2</h4>
-            <p>{text}</p>
-            <h4 id="list-item-3">Item 3</h4>
-            <p>{text}</p>
-            <h4 id="list-item-4">Item 4</h4>
-            <p>{text}</p>
-            <h4 id="list-item-5">Item 5</h4>
-            <p>{text}</p>
+        <Tab.Container id="left-tabs-example" defaultActiveKey="first">
+          <div className="col-lg-3">
+            <NavNew1 variant="pills" className="flex-column">
+              <NavNew1.Item>
+                <Nav.Link eventKey="first">Tab 1</Nav.Link>
+              </NavNew1.Item>
+              <NavNew1.Item>
+                <Nav.Link eventKey="second">Tab 2</Nav.Link>
+              </NavNew1.Item>
+              <NavNew1.Item>
+                <Nav.Link eventKey="third">Tab 3</Nav.Link>
+              </NavNew1.Item>
+              <NavNew1.Item>
+                <Nav.Link eventKey="fourth">Tab 4</Nav.Link>
+              </NavNew1.Item>
+              <NavNew1.Item>
+                <Nav.Link eventKey="fifth">Tab 5</Nav.Link>
+              </NavNew1.Item>
+            </NavNew1>
           </div>
-        </div>
+          <div className="col-lg-9">
+            <Tab.Content>
+              <Tab.Pane eventKey="first">
+                <h4>Tab 1</h4>
+                <p>{text}</p>
+              </Tab.Pane>
+              <Tab.Pane eventKey="second">
+                <h4>Tab 2</h4>
+                <p>{text}</p>
+              </Tab.Pane>
+              <Tab.Pane eventKey="third">
+                <h4>Tab 3</h4>
+                <p>{text}</p>
+              </Tab.Pane>
+              <Tab.Pane eventKey="fourth">
+                <h4>Tab 4</h4>
+                <p>{text}</p>
+              </Tab.Pane>
+              <Tab.Pane eventKey="fifth">
+                <h4>Tab 5</h4>
+                <p>{text}</p>
+              </Tab.Pane>
+            </Tab.Content>
+          </div>
+        </Tab.Container>
       </div>
     </div>
   );

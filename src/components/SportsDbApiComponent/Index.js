@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Spinner, Modal, Tabs, Tab } from "react-bootstrap";
+import { Spinner, Modal, Tab, Nav } from "react-bootstrap";
 import KEY from "./key";
 import APIURL from "./api";
 import { withRouter } from "react-router-dom";
@@ -10,7 +10,7 @@ import Player from "./Player";
 import Table from "./Table";
 import { useUtilContext } from "../../contexts/UtilContext";
 
-import { P1 } from "../../Theme/styles";
+import { P1, NavNew1 } from "../../Theme/styles";
 
 function Index() {
   const utilContext = useUtilContext();
@@ -84,7 +84,7 @@ function Index() {
               total,
             });
           });
-          
+
           setTableData((pv) => (pv = table_1));
         }
 
@@ -280,8 +280,8 @@ function Index() {
                 });
               }
             });
-            
-            allSports_1 = allSports_1.sort( (a,b) => a.strSport > b.strSport );
+
+            allSports_1 = allSports_1.sort((a, b) => a.strSport > b.strSport);
             setAllSports((pv) => (pv = allSports_1));
           }
 
@@ -299,7 +299,9 @@ function Index() {
   }, [country, sports]);
 
   const showDesc = (text) => {
-    setModalBody((pv) => (pv = { __html:`<p style='color: black;'>${text}</p>` }));
+    setModalBody(
+      (pv) => (pv = { __html: `<p style='color: black;'>${text}</p>` })
+    );
     handleShow();
   };
 
@@ -325,7 +327,10 @@ function Index() {
           setModalBodyNextMatch((pv) => (pv = { __html: content }));
         } else {
           setModalBodyNextMatch(
-            (pv) => (pv = { __html: "<p style='color: black;'>No up coming match</p>" })
+            (pv) =>
+              (pv = {
+                __html: "<p style='color: black;'>No up coming match</p>",
+              })
           );
         }
 
@@ -394,257 +399,281 @@ function Index() {
     <div className="container">
       <div className="row">
         <div className="col-lg-12">
-          <Tabs defaultActiveKey="home" id="uncontrolled-tab-example">
-            <Tab eventKey="home" title="Home">
-              <br />
-              <div className="row">
-                {allSports ? (
-                  <div className="col-lg-4 col-sm-4 col-md-4 league">
-                    <label>Sport</label>
-                    <select
-                      defaultValue={""}
-                      onChange={(e) => sportsChange(e)}
-                      className="form-control"
-                    >
-                      <option value="">Please select a sport</option>
-                      {allSports.map((c) => {
-                        return (
-                          <option key={c.idSport} value={c.strSport}>
-                            {c.strSport}
-                          </option>
-                        );
-                      })}
-                    </select>
-                  </div>
-                ) : (
-                  <div className="col-lg-12">
-                    Server error or Api key not working
-                  </div>
-                )}
-              </div>
-
-              <div className="row">
-                {countries && sports !== "" ? (
-                  <div className="col-lg-4 col-sm-4 col-md-4 league">
-                    <label>Country</label>
-                    <select
-                      defaultValue={""}
-                      onChange={(e) => countryChange(e)}
-                      className="form-control"
-                    >
-                      <option value="">Please select a country</option>
-                      {countries.map((c) => {
-                        return (
-                          <option key={c.name_en} value={c.name_en}>
-                            {c.name_en}
-                          </option>
-                        );
-                      })}
-                    </select>
-                  </div>
-                ) : (
-                  <div className="col-lg-12">Please select a sport</div>
-                )}
-              </div>
-
-              <div className="row">
-                {leagues && leagues.length > 0 ? (
-                  <div className="col-lg-4 col-sm-4 col-md-4 league">
-                    <label>Competition</label>
-                    <select
-                      defaultValue={""}
-                      onChange={(e) => leagueChange(e)}
-                      className="form-control"
-                    >
-                      <option value="">Please select a competition</option>
-                      {leagues.map((l) => {
-                        return (
-                          <option
-                            key={l.idLeague}
-                            data-idleague={l.idLeague}
-                            value={l.strLeague}
-                          >
-                            {l.strLeague}
-                          </option>
-                        );
-                      })}
-                    </select>
-                  </div>
-                ) : sports === "" ? (
-                  ""
-                ) : (
-                  <div className="col-lg-12">No leagues found</div>
-                )}
-              </div>
-
-              {leagueId.length > 0 ? (
-                <div className="row">
-                  <div
-                          className="col-lg-4 col-sm-4 col-md-4">
-                  <button
-                    className="btn btn-info"
-                    onClick={() => showLeagueTable()}
-                  >
-                    Table
-                  </button>
-                  &nbsp;
-                  <Spinner animation="border" className={spinnerClassName} />
-                </div>
-                <Table data={tableData} />
-                <br/><br/>
-                </div>
-                
-              ) : (
-                ""
-              )}
-
-              <div className="row">
-                {data
-                  ? data.map((d) => {
-                      return (
-                        <div
-                          className="col-lg-4 col-sm-4 col-md-4 team"
-                          key={d.strTeam}
-                          data-idteam={d.idTeam}
+          <Tab.Container id="left-tabs-example" defaultActiveKey="home">
+            <div className="col-lg-3">
+              <NavNew1 variant="pills" className="flex-column">
+                <NavNew1.Item>
+                  <Nav.Link eventKey="home">Home</Nav.Link>
+                </NavNew1.Item>
+                <NavNew1.Item>
+                  <Nav.Link eventKey="player">Player</Nav.Link>
+                </NavNew1.Item>
+              </NavNew1>
+            </div>
+            <div className="col-lg-12">
+              <Tab.Content>
+                <Tab.Pane eventKey="home">
+                  <br />
+                  <div className="row">
+                    {allSports ? (
+                      <div className="col-lg-6 col-sm-6 col-md-6 league">
+                        <label>Sport</label>
+                        <select
+                          defaultValue={""}
+                          onChange={(e) => sportsChange(e)}
+                          className="form-control"
                         >
-                          <img
-                            src={d.strTeamBadge}
-                            className="img-team"
-                            alt={d.strTeam}
-                          />
-                          <h5>{d.strTeam}</h5>
-                          <button
-                            className="btn btn-info"
-                            onClick={() => showDesc(d.strDescriptionEN)}
-                          >
-                            Description
-                          </button>
-                          &nbsp;
-                          <button
-                            className="btn btn-dark"
-                            onClick={() => showLastMatches(d.idTeam)}
-                          >
-                            Past Matches
-                          </button>
-                          &nbsp;
-                          <button
-                            className="btn btn-success"
-                            onClick={() => showNextMatchAction(d.idTeam)}
-                          >
-                            Next Match
-                          </button>
-                          <div>
-                            <p>{d.strKeywords}</p>
-                            <p>Since: {d.intFormedYear}</p>
-                            <p>Stadium: {d.strStadiumLocation}</p>
-                            <p>
-                              <a
-                                href={"https://" + d.strFacebook}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                              >
-                                <i
-                                  className="fa fa-facebook-square"
-                                  aria-hidden="true"
-                                ></i>
-                              </a>
-                              &nbsp;
-                              <a
-                                href={"https://" + d.strInstagram}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                              >
-                                <i
-                                  className="fa fa-instagram"
-                                  aria-hidden="true"
-                                ></i>
-                              </a>
-                              &nbsp;
-                              <a
-                                href={"https://" + d.strTwitter}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                              >
-                                <i
-                                  className="fa fa-twitter"
-                                  aria-hidden="true"
-                                ></i>
-                              </a>
-                              &nbsp;
-                              <a
-                                href={"https://" + d.strWebsite}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                              >
-                                <i
-                                  className="fa fa-link"
-                                  aria-hidden="true"
-                                ></i>
-                              </a>
-                              &nbsp;
-                              <a
-                                href={"https://" + d.strYoutube}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                              >
-                                <i
-                                  className="fa fa-youtube"
-                                  aria-hidden="true"
-                                ></i>
-                              </a>
-                              &nbsp;
-                            </p>
-                          </div>
-                          <PastMatch
-                            data={
-                              pastMatches
-                                ? pastMatches.t.find((s) => s.id === d.idTeam)
-                                : {}
-                            }
-                          />
-                        </div>
-                      );
-                    })
-                  : "Nothing found"}
+                          <option value="">Please select a sport</option>
+                          {allSports.map((c) => {
+                            return (
+                              <option key={c.idSport} value={c.strSport}>
+                                {c.strSport}
+                              </option>
+                            );
+                          })}
+                        </select>
+                      </div>
+                    ) : (
+                      <div className="col-lg-12">
+                        Server error or Api key not working
+                      </div>
+                    )}
+                  </div>
 
-                <Modal show={show} onHide={handleClose}>
-                  <Modal.Header closeButton>
-                    <Modal.Title><P1>Description</P1></Modal.Title>
-                  </Modal.Header>
-                  <Modal.Body dangerouslySetInnerHTML={modalBody}></Modal.Body>
-                  <Modal.Footer>
-                    <button
-                      className="btn btn-dark"
-                      onClick={() => handleClose()}
-                    >
-                      Close
-                    </button>
-                  </Modal.Footer>
-                </Modal>
+                  <div className="row">
+                    {countries && sports !== "" ? (
+                      <div className="col-lg-6 col-sm-6 col-md-6 league">
+                        <label>Country</label>
+                        <select
+                          defaultValue={""}
+                          onChange={(e) => countryChange(e)}
+                          className="form-control"
+                        >
+                          <option value="">Please select a country</option>
+                          {countries.map((c) => {
+                            return (
+                              <option key={c.name_en} value={c.name_en}>
+                                {c.name_en}
+                              </option>
+                            );
+                          })}
+                        </select>
+                      </div>
+                    ) : (
+                      <div className="col-lg-12">Please select a sport</div>
+                    )}
+                  </div>
 
-                <Modal show={showNextMatch} onHide={handleCloseNextMatch}>
-                  <Modal.Header closeButton>
-                    <Modal.Title><P1>Next Match</P1></Modal.Title>
-                  </Modal.Header>
-                  <Modal.Body
-                    dangerouslySetInnerHTML={modalBodyNextMatch}
-                  ></Modal.Body>
-                  <Modal.Footer>
-                    <button
-                      className="btn btn-dark"
-                      onClick={() => handleCloseNextMatch()}
-                    >
-                      Close
-                    </button>
-                  </Modal.Footer>
-                </Modal>
-              </div>
-            </Tab>
-            <Tab eventKey="player" title="Player">
-              <br />
-              <Player />
-            </Tab>
-          </Tabs>
+                  <div className="row">
+                    {leagues && leagues.length > 0 ? (
+                      <div className="col-lg-6 col-sm-6 col-md-6 league">
+                        <label>Competition</label>
+                        <select
+                          defaultValue={""}
+                          onChange={(e) => leagueChange(e)}
+                          className="form-control"
+                        >
+                          <option value="">Please select a competition</option>
+                          {leagues.map((l) => {
+                            return (
+                              <option
+                                key={l.idLeague}
+                                data-idleague={l.idLeague}
+                                value={l.strLeague}
+                              >
+                                {l.strLeague}
+                              </option>
+                            );
+                          })}
+                        </select>
+                      </div>
+                    ) : sports === "" ? (
+                      ""
+                    ) : (
+                      <div className="col-lg-12">No leagues found</div>
+                    )}
+                  </div>
+
+                  {leagueId.length > 0 ? (
+                    <div className="row">
+                      <div className="col-lg-6 col-sm-6 col-md-6">
+                        <button
+                          className="btn btn-info"
+                          onClick={() => showLeagueTable()}
+                        >
+                          Table
+                        </button>
+                        &nbsp;
+                        <Spinner
+                          animation="border"
+                          className={spinnerClassName}
+                        />
+                      </div>
+                      <Table data={tableData} />
+                      <br />
+                      <br />
+                    </div>
+                  ) : (
+                    ""
+                  )}
+
+                  <div className="row">
+                    {data
+                      ? data.map((d) => {
+                          return (
+                            <div
+                              className="col-lg-6 col-sm-6 col-md-6 team"
+                              key={d.strTeam}
+                              data-idteam={d.idTeam}
+                            >
+                              <img
+                                src={d.strTeamBadge}
+                                className="img-team"
+                                alt={d.strTeam}
+                              />
+                              <h5>{d.strTeam}</h5>
+                              <button
+                                className="btn btn-info"
+                                onClick={() => showDesc(d.strDescriptionEN)}
+                              >
+                                Description
+                              </button>
+                              &nbsp;
+                              <button
+                                className="btn btn-dark"
+                                onClick={() => showLastMatches(d.idTeam)}
+                              >
+                                Past Matches
+                              </button>
+                              &nbsp;
+                              <button
+                                className="btn btn-success"
+                                onClick={() => showNextMatchAction(d.idTeam)}
+                              >
+                                Next Match
+                              </button>
+                              <div>
+                                <p>{d.strKeywords}</p>
+                                <p>Since: {d.intFormedYear}</p>
+                                <p>Stadium: {d.strStadiumLocation}</p>
+                                <p>
+                                  <a
+                                    href={"https://" + d.strFacebook}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                  >
+                                    <i
+                                      className="fa fa-facebook-square"
+                                      aria-hidden="true"
+                                    ></i>
+                                  </a>
+                                  &nbsp;
+                                  <a
+                                    href={"https://" + d.strInstagram}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                  >
+                                    <i
+                                      className="fa fa-instagram"
+                                      aria-hidden="true"
+                                    ></i>
+                                  </a>
+                                  &nbsp;
+                                  <a
+                                    href={"https://" + d.strTwitter}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                  >
+                                    <i
+                                      className="fa fa-twitter"
+                                      aria-hidden="true"
+                                    ></i>
+                                  </a>
+                                  &nbsp;
+                                  <a
+                                    href={"https://" + d.strWebsite}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                  >
+                                    <i
+                                      className="fa fa-link"
+                                      aria-hidden="true"
+                                    ></i>
+                                  </a>
+                                  &nbsp;
+                                  <a
+                                    href={"https://" + d.strYoutube}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                  >
+                                    <i
+                                      className="fa fa-youtube"
+                                      aria-hidden="true"
+                                    ></i>
+                                  </a>
+                                  &nbsp;
+                                </p>
+                              </div>
+                              <PastMatch
+                                data={
+                                  pastMatches
+                                    ? pastMatches.t.find(
+                                        (s) => s.id === d.idTeam
+                                      )
+                                    : {}
+                                }
+                              />
+                            </div>
+                          );
+                        })
+                      : "Nothing found"}
+
+                    <Modal show={show} onHide={handleClose}>
+                      <Modal.Header closeButton>
+                        <Modal.Title>
+                          <P1>Description</P1>
+                        </Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body
+                        dangerouslySetInnerHTML={modalBody}
+                      ></Modal.Body>
+                      <Modal.Footer>
+                        <button
+                          className="btn btn-dark"
+                          onClick={() => handleClose()}
+                        >
+                          Close
+                        </button>
+                      </Modal.Footer>
+                    </Modal>
+
+                    <Modal show={showNextMatch} onHide={handleCloseNextMatch}>
+                      <Modal.Header closeButton>
+                        <Modal.Title>
+                          <P1>Next Match</P1>
+                        </Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body
+                        dangerouslySetInnerHTML={modalBodyNextMatch}
+                      ></Modal.Body>
+                      <Modal.Footer>
+                        <button
+                          className="btn btn-dark"
+                          onClick={() => handleCloseNextMatch()}
+                        >
+                          Close
+                        </button>
+                      </Modal.Footer>
+                    </Modal>
+                  </div>
+                </Tab.Pane>
+                <Tab.Pane eventKey="player">
+                  <br />
+                  <Player />
+                </Tab.Pane>
+              </Tab.Content>
+            </div>
+          </Tab.Container>
         </div>
       </div>
     </div>
