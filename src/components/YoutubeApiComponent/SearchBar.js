@@ -28,7 +28,10 @@ function Searchbar(props) {
   useEffect(() => {
     setState((prevState) => (prevState = "ABC"));
     setTimeout(() => {
-      document.getElementById("searchSubmitButton").click();
+      if (document.getElementById("searchSubmitButton"))
+      {
+        document.getElementById("searchSubmitButton").click();
+      }
     }, 200);
   }, []);
 

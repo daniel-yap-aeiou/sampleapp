@@ -199,7 +199,10 @@ function Index(props) {
   useEffect(() => {
     setState((prevValue) => (prevValue = "melbourne,au"));
     setTimeout(() => {
-      document.getElementById("weatherSubmitButton").click();
+      if (document.getElementById("weatherSubmitButton"))
+      {
+        document.getElementById("weatherSubmitButton").click();
+      }
     }, 200);
 
     return () => {

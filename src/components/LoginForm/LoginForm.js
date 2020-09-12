@@ -24,6 +24,25 @@ function LoginForm() {
     }));
   };
 
+  const handleDemoLogin = (e) => {
+    e.preventDefault();
+
+    const payload = {
+      email: "demo@example.com",
+      password: "demo123!",
+    };
+
+    setState((prevState) => ({
+      ...prevState,
+      successMessage: "Login successful. Redirecting to home page..",
+    }));
+
+    setTimeout(() => {
+      userContext.SignIn(payload);
+      redirectToHome();
+    }, 2000);
+  };
+
   const handleSubmitClick = (e) => {
     e.preventDefault();
 
@@ -98,6 +117,13 @@ function LoginForm() {
           />
         </div>
         <div className="form-check"></div>
+        <button
+          type="submit"
+          className="btn btn-warning"
+          onClick={handleDemoLogin}
+        >
+          Demo
+        </button>&nbsp;
         <button
           type="submit"
           className="btn btn-primary"

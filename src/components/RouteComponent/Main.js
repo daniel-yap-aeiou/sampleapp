@@ -26,7 +26,7 @@ import SportsDbApi from "../SportsDbApiComponent/Index";
 
 import Covid19 from "../Covid19Component/Index";
 
-import { Switch, Route, withRouter, useHistory } from "react-router-dom";
+import { Switch, Route, withRouter, useHistory, useLocation  } from "react-router-dom";
 
 import { useUserContext } from "../../contexts/UserContext";
 
@@ -38,12 +38,25 @@ import { useUserContext } from "../../contexts/UserContext";
 function Main() {
   const userContext = useUserContext();
   const history = useHistory();
+  const location = useLocation();
 
   useEffect(() => {
-    if (!userContext.IsUserLoggedIn()) {
-      history.push("/login");
-    }
-  }, [history, userContext]);
+    const interval = setInterval(() => {
+      if (!userContext.IsUserLoggedIn()) {
+        userContext.SignOut();
+        if (history.location.pathname.indexOf("login") === -1 && history.location.pathname.indexOf("register") === -1)
+        {
+          history.push("/login");
+          _clearInterval();
+        }
+      }
+    }, 1);
+  
+    const _clearInterval = function () {
+      clearInterval(interval);
+    };
+
+  }, [location.pathname]);
 
   const Page404 = ({ location }) => (
     <div>

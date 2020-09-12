@@ -7,6 +7,7 @@ export const useUserContext = () => {
 };
 
 export function UserProvider({ children }) {
+
   const IsUserLoggedIn = () => {
     const user = localStorage.getItem("user");
 
@@ -35,7 +36,7 @@ export function UserProvider({ children }) {
 
   const HomePage = () => {
     return "/youtubeapi";
-  }
+  };
 
   const context = {
     IsUserLoggedIn,
