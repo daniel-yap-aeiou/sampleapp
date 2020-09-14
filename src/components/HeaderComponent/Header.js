@@ -234,7 +234,7 @@ function Header({ itemCount }) {
               </select>
             </li>
 
-            <User showLoggedInMenu={showLoggedInMenu} loggedInAs={loggedInAs} />
+            <User showLoggedInMenu={showLoggedInMenu} loggedInAs={loggedInAs} sidebar={false} />
 
             {menus.menuRight.map((m) => {
               return (

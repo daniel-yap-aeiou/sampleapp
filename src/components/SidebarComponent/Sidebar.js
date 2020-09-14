@@ -10,6 +10,8 @@ import "./Sidebar.css";
 import { useUserContext } from "../../contexts/UserContext";
 import { useUtilContext } from "../../contexts/UtilContext";
 
+import { DIV, LinkNew, A } from "../../Theme/styles";
+
 function Sidebar({ itemCount }) {
   const userContext = useUserContext();
   const utilContext = useUtilContext();
@@ -45,86 +47,87 @@ function Sidebar({ itemCount }) {
   return !userContext.IsUserLoggedIn() ? (
     ""
   ) : (
-    <div>
-      <div id="mySidebar" className="sidebar">
-        <a href="##" className="closebtn" onClick={utilContext.closeNav}>
+    <>
+      <DIV id="mySidebar" className="sidebar">
+        <A href="##" className="closebtn" onClick={utilContext.closeNav}>
           &times;
-        </a>
+        </A>
         {menus.menuLeft1.map((m) => {
           return (
-            <Link
+            <LinkNew
               key={m.id}
               to={m.to}
               style={{ display: showLoggedInMenu }}
               onClick={() => handleMenuOnClick()}
             >
               {m.text}
-            </Link>
+            </LinkNew>
           );
         })}
 
         {menus.menuLeftDropdown1.map((m) => {
           return (
-            <Link
+            <LinkNew
               key={m.id}
               to={m.to}
               style={{ display: showLoggedInMenu }}
               onClick={() => handleMenuOnClick()}
             >
               {m.text}
-            </Link>
+            </LinkNew>
           );
         })}
 
         {menus.menuLeftDropdown2.map((m) => {
           return (
-            <Link
+            <LinkNew
               key={m.id}
               to={m.to}
               style={{ display: showLoggedInMenu }}
               onClick={() => handleMenuOnClick()}
             >
               {m.text}
-            </Link>
+            </LinkNew>
           );
         })}
 
-        <Link
+        <LinkNew
           to="/shopping"
           style={{ display: showLoggedInMenu }}
           onClick={() => handleMenuOnClick()}
         >
           Shopping
-        </Link>
-        <Link
+        </LinkNew>
+        <LinkNew
           to="/cart"
           style={{ display: showLoggedInMenu }}
           onClick={() => handleMenuOnClick()}
         >
           <i className="material-icons">shopping_cart</i> ({itemCount})
-        </Link>
+        </LinkNew>
 
         {menus.menuLeft2.map((m) => {
           return (
-            <Link
+            <LinkNew
               key={m.id}
               to={m.to}
               style={{ display: showLoggedInMenu }}
               onClick={() => handleMenuOnClick()}
             >
               {m.text}
-            </Link>
+            </LinkNew>
           );
         })}
 
         <User
           showLoggedInMenu={showLoggedInMenu}
           loggedInAs={loggedInAs}
+          sidebar={true}
         />
 
         {menus.menuRight.map((m) => {
           return (
-            <Link
+            <LinkNew
               key={m.id}
               to={m.to}
               className="nav-link"
@@ -138,11 +141,11 @@ function Sidebar({ itemCount }) {
               }}
             >
               {m.text}
-            </Link>
+            </LinkNew>
           );
         })}
-      </div>
-    </div>
+      </DIV>
+    </>
   );
 }
 

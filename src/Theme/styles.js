@@ -1,5 +1,11 @@
 import styled from "styled-components";
 import { Nav } from "react-bootstrap";
+import { Link } from "react-router-dom";
+
+export const LinkNew = styled(Link)`
+    background-color: ${({ theme }) => theme.body};
+    color: ${({ theme }) => theme.a};
+`;
 
 export const NavNew1 = styled(Nav)`
   .nav-link.active {
