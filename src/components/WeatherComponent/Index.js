@@ -6,7 +6,7 @@ import "./Index.css";
 import Modal from "./Modal";
 import { useUtilContext } from "../../contexts/UtilContext";
 
-const initialState = {
+let initialState = {
   weatherList: [],
   forecastList: {},
   cityList: [],
@@ -194,7 +194,16 @@ function Index(props) {
     setState((prevValue) => (prevValue = ""));
   };
 
-  useEffect(utilContext.hideLoader, []);
+  useEffect(() => {
+    utilContext.hideLoader();
+  
+    initialState = {
+      weatherList: [],
+      forecastList: {},
+      cityList: [],
+      enteredCity: []
+    };
+  }, []);
 
   useEffect(() => {
     setState((prevValue) => (prevValue = "melbourne,au"));

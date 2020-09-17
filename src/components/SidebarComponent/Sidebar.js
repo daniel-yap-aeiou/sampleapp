@@ -44,12 +44,17 @@ function Sidebar({ itemCount }) {
     utilContext.showLoader();
   };
 
+  const closeNav = () => {
+    utilContext.closeNav();
+    return false;
+  }
+
   return !userContext.IsUserLoggedIn() ? (
     ""
   ) : (
     <>
       <DIV id="mySidebar" className="sidebar">
-        <A href="##" className="closebtn" onClick={utilContext.closeNav}>
+        <A className="closebtn" onClick={closeNav}>
           &times;
         </A>
         {menus.menuLeft1.map((m) => {

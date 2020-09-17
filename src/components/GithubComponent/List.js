@@ -59,7 +59,7 @@ const List = (props) => {
   }, [repos]);
 
   if (!repos || repos.length === 0)
-    return <div className="col-12">No repos, sorry</div>;
+    return <div className="col-12">No repos, sorry (API limit reached)</div>;
 
   return (
     <ul>
@@ -78,7 +78,7 @@ const List = (props) => {
             let langs = r.langs;
 
             return (
-              <li key={repo.id} className="list">
+              <li key={repo.id} className="list github">
                 <span className="repo-text">
                   <A
                     href={repo.html_url}
@@ -99,7 +99,7 @@ const List = (props) => {
                 <span style={{ fontWeight: "bold" }}>Fork:&nbsp;</span>
                 <span>{repo.forks_count || 0}</span>
                 <br />
-                {langs ? (
+                {langs && langs.length > 0 ? (
                   langs.map((l) => {
                     return (
                       <span key={l}>
@@ -108,7 +108,7 @@ const List = (props) => {
                     );
                   })
                 ) : (
-                  <span>...</span>
+                  <span style={{fontStyle: "italic", fontSize: "11px"}}>NA</span>
                 )}
                 <br />
                 <span className="updatedat" title="updated at">
