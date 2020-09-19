@@ -127,7 +127,7 @@ function Index() {
         {state.selectedVideo == null ? (
           <>
             <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-              {state.videos ? (
+              {state.videos && state.videos.length > 0 ? (
                 <VideoList
                   handleVideoSelect={handleVideoSelect}
                   videos={state.videos}
@@ -144,7 +144,7 @@ function Index() {
               <VideoDetail video={state.selectedVideo} />
             </div>
             <div className="col-sm-5 col-md-5 col-lg-5">
-              {state.videos ? (
+              {state.videos && state.videos.length > 0 ? (
                 <VideoList
                   handleVideoSelect={handleVideoSelect}
                   videos={state.videos}

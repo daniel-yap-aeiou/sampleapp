@@ -2,6 +2,8 @@ import React, { useContext } from "react";
 
 const UserContext = React.createContext();
 
+const USER_KEY = 'sample-react-app-user';
+
 export const useUserContext = () => {
   return useContext(UserContext);
 };
@@ -9,14 +11,14 @@ export const useUserContext = () => {
 export function UserProvider({ children }) {
 
   const IsUserLoggedIn = () => {
-    const user = localStorage.getItem("user");
+    const user = localStorage.getItem(USER_KEY);
 
     return user != null;
   };
 
   const GetUserEmailAddress = () => {
     if (IsUserLoggedIn()) {
-      const user = localStorage.getItem("user");
+      const user = localStorage.getItem(USER_KEY);
       const userJson = JSON.parse(user);
       return userJson.email;
     }
@@ -25,12 +27,12 @@ export function UserProvider({ children }) {
   };
 
   const SignOut = () => {
-    localStorage.removeItem("user");
+    localStorage.removeItem(USER_KEY);
   };
 
   const SignIn = (payload) => {
     if (payload) {
-      localStorage.setItem("user", JSON.stringify(payload));
+      localStorage.setItem(USER_KEY, JSON.stringify(payload));
     }
   };
 

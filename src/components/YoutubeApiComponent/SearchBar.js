@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
+import useLocalStorage from "../../hooks/useLocalStorage";
 
 function Searchbar(props) {
-  const [term, setState] = useState("");
-  const [maxResults, setMaxResults] = useState(15);
+  const [term, setTerm] = useLocalStorage("term", "");
+  const [maxResults, setMaxResults] = useLocalStorage("maxResults", 15);
 
   const handleChange = (event) => {
     let t = event.target.value;
-    setState((prevState) => (prevState = t));
+    setTerm((prevState) => (prevState = t));
   };
 
   const handleResultCountChange = (event) => {
@@ -26,7 +27,6 @@ function Searchbar(props) {
   };
 
   useEffect(() => {
-    setState((prevState) => (prevState = "ABC"));
     setTimeout(() => {
       if (document.getElementById("searchSubmitButton"))
       {
@@ -52,7 +52,7 @@ function Searchbar(props) {
 
           <div className="col-lg-5">
             <label htmlFor="video-search">Result Count</label>
-            <select onChange={handleResultCountChange} className="form-control">
+            <select onChange={handleResultCountChange} className="form-control" value={maxResults}>
               <option value="15">15</option>
               <option value="30">30</option>
               <option value="50">50</option>
