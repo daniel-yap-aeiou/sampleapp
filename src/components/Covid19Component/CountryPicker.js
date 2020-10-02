@@ -8,17 +8,18 @@ const Countries = ({ handleCountryChange }) => {
   useEffect(() => {
     let mounted = true;
     if (mounted) {
-      
       const fetchAPI = async () => {
         const data = await fetchCountries();
-        setCountries(data.countries);
+        if (mounted) {
+          setCountries(data.countries);
+        }
       };
 
       if (countries.length === 0) {
         fetchAPI();
       }
     }
-    
+
     return () => {
       mounted = false;
     };

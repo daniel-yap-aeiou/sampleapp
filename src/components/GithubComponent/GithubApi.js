@@ -3,7 +3,6 @@ import axios from "axios";
 import "./GithubApi.css";
 import List from "./List";
 import withListLoading from "./WithListLoading";
-import { withRouter } from "react-router-dom";
 import { useUtilContext } from "../../contexts/UtilContext";
 
 function GithubApi(props) {
@@ -54,4 +53,4 @@ function GithubApi(props) {
   );
 }
 
-export default withRouter(GithubApi);
+export default GithubApi;

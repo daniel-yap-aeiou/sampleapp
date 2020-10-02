@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { withRouter } from "react-router-dom";
 import "./Covid19.css";
 
 import Card from "./Card";
@@ -8,12 +7,13 @@ import Chart from "./Chart";
 import { fetchData } from "./api/index";
 import { useUtilContext } from "../../contexts/UtilContext";
 
-function Covid19(props) {
+function Covid19() {
   const utilContext = useUtilContext();
 
   const [state, setState] = useState({
     data: {},
     country: "",
+    handleCountryChange: null,
   });
 
   const { data, country } = state;
@@ -27,14 +27,33 @@ function Covid19(props) {
       fetchData()
         .then((data) => {
           cancelToken1 = data.cancelToken1;
-          setState((prevState) => ({
-            ...prevState,
-            data: data,
-          }));
+          if (mounted) {
+            setState((prevState) => ({
+              ...prevState,
+              data: data,
+            }));
+          }
         })
         .catch((err) => {
           console.log(err);
         });
+
+      const handleCountryChange = async (country) => {
+        const data = await fetchData(country);
+
+        if (mounted) {
+          setState((prevState) => ({
+            ...prevState,
+            data: data,
+            country: country,
+          }));
+        }
+      };
+
+      setState((prevState) => ({
+        ...prevState,
+        handleCountryChange: handleCountryChange,
+      }));
     }
 
     return () => {
@@ -43,22 +62,15 @@ function Covid19(props) {
     };
   }, []);
 
-  const handleCountryChange = async (country) => {
-    const data =  await fetchData(country);
-
-    setState((prevState) => ({
-      ...prevState,
-      data: data,
-      country: country,
-    }));
-  };
-
   return (
     <div className="container covid-container">
       <div className="row">
         <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
           <Card data={data} />
-          <CountryPicker handleCountryChange={handleCountryChange} />
+          {state.handleCountryChange ? (
+            <CountryPicker handleCountryChange={state.handleCountryChange} />
+          ) : null}
+
           <Chart data={data} country={country} />
         </div>
       </div>
@@ -66,4 +78,4 @@ function Covid19(props) {
   );
 }
 
-export default withRouter(Covid19);
+export default Covid19;

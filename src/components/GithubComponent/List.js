@@ -12,6 +12,8 @@ const List = (props) => {
   let [avatarUrl, setAvatarUrl] = useState("");
 
   useEffect(() => {
+    let mounted = true;
+
     const loadLanguages = (repo, url) => {
       console.log(url + " called");
       if (!url) return false;
@@ -27,33 +29,43 @@ const List = (props) => {
 
           let r = repoList.data;
           r.push({ repo, langs });
-          setState((prevState) => ({
-            ...prevState,
-            data: r,
-          }));
+
+          if (mounted) {
+            setState((prevState) => ({
+              ...prevState,
+              data: r,
+            }));
+          }
         })
         .catch((err) => {
           langs = [];
           let r = repoList.data;
           r.push({ repo, langs });
-          setState((prevState) => ({
-            ...prevState,
-            data: r,
-          }));
+          if (mounted) {
+            setState((prevState) => ({
+              ...prevState,
+              data: r,
+            }));
+          }
         });
     };
 
     if (repos) {
       if (repos[0] && repos[0].owner && repos[0].owner.avatar_url) {
-        setAvatarUrl(repos[0].owner.avatar_url);
+        if (mounted) {
+          setAvatarUrl(repos[0].owner.avatar_url);
+        }
       }
 
       repos.map((repo) => {
-        loadLanguages(repo, repo.languages_url);
+        if (mounted) {
+          loadLanguages(repo, repo.languages_url);
+        }
       });
     }
 
     return () => {
+      mounted = false;
       console.log("cleaned up...");
     };
   }, [repos]);
@@ -108,7 +120,9 @@ const List = (props) => {
                     );
                   })
                 ) : (
-                  <span style={{fontStyle: "italic", fontSize: "11px"}}>NA</span>
+                  <span style={{ fontStyle: "italic", fontSize: "11px" }}>
+                    NA
+                  </span>
                 )}
                 <br />
                 <span className="updatedat" title="updated at">
