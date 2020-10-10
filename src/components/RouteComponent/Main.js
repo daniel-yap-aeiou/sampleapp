@@ -48,7 +48,7 @@ function Main() {
   const history = useHistory();
   const location = useLocation();
 
-  const transitions = useTransition(location, location => location.pathname, {
+  const transitions = useTransition(location, (location) => location.pathname, {
     from: { opacity: 0 },
     enter: { opacity: 1 },
     leave: { opacity: 0, display: "none" },
@@ -71,7 +71,7 @@ function Main() {
     const _clearInterval = function () {
       clearInterval(interval);
     };
-  }, [location.pathname]);
+  }, [history, location.pathname, userContext]);
 
   const Page404 = ({ location }) => (
     <div>
@@ -86,7 +86,40 @@ function Main() {
       <Title />
       <AlertComponent />
 
-      {transitions.map(({ item: location, props, key }) => (
+      <Switch>
+        <Route path="/" exact={true}>
+          <RegistrationForm />
+        </Route>
+        <Route path="/register">
+          <RegistrationForm />
+        </Route>
+        <Route path="/login">
+          <LoginForm />
+        </Route>
+
+        <Route path="/home" component={() => <Home />} />
+        <Route path="/user" component={() => <User />} />
+        <Route path="/comment" component={() => <Comment />} />
+        <Route path="/chat" component={() => <Chat />} />
+        <Route path="/paginate" component={() => <Paginate />} />
+        <Route path="/covid19" component={() => <Covid19 />} />
+
+        <Route path="/shopping" component={() => <ShoppingIndex />} />
+        <Route path="/cart" component={() => <Cart />} />
+        <Route path="/account" component={() => <Account />} />
+        <Route path="/news" component={() => <News />} />
+        <Route path="/githubapi" component={() => <GithubApi />} />
+        <Route path="/githubjobsapi" component={() => <GithubJobsApi />} />
+        <Route path="/youtubeapi" component={() => <YoutubeApi />} />
+        <Route path="/redditclientapi" component={() => <RedditClientApi />} />
+        <Route path="/weatherapi" component={() => <WeatherApi />} />
+        <Route path="/movieapi" component={() => <MovieApi />} />
+        <Route path="/sportsdbapi" component={() => <SportsDbApi />} />
+
+        <Route component={Page404} />
+      </Switch>
+
+      {/* {transitions.map(({ item: location, props, key }) => (
         <animated.div style={props} key={key}>
           <Switch location={location}>
             <Route path="/" exact={true}>
@@ -124,7 +157,7 @@ function Main() {
             <Route component={Page404} />
           </Switch>
         </animated.div>
-      ))}
+      ))} */}
     </main>
   );
 }

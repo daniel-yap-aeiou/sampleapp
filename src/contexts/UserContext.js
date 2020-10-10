@@ -37,7 +37,7 @@ export function UserProvider({ children }) {
   };
 
   const HomePage = () => {
-    return "/youtubeapi";
+    return "/redditclientapi";
   };
 
   const context = {
