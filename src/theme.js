@@ -29,3 +29,11 @@ export const purpleTheme = {
   gradient: 'linear-gradient(#091236, #1E215D)',
   a: '#484848'
 }
+
+export const blackTheme = {
+  body: '#000000',
+  text: '#fff !important',
+  toggleBorder: '#fff',
+  gradient: 'linear-gradient(#091236, #1E215D)',
+  a: '#fff'
+}

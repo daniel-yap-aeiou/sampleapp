@@ -61,7 +61,7 @@ function Header({ itemCount }) {
   };
 
   const setNavBarClassName = (theme) => {
-    if (theme === "dark" || theme === "pink" || theme === "purple") {
+    if (theme === "dark" || theme === "pink" || theme === "purple" || theme === "black") {
       setNarBarClassName((pv) => (pv = "navbar-dark bg-dark fixed-top"));
     } else {
       setNarBarClassName((pv) => (pv = "navbar-light bg-light fixed-top"));
@@ -227,6 +227,7 @@ function Header({ itemCount }) {
                 onChange={toggleNavBarMode}
                 style={{marginTop: 8}}
               >
+                <option value="black">Black</option>
                 <option value="light">Light</option>
                 <option value="dark">Dark</option>
                 <option value="pink">Pink</option>
