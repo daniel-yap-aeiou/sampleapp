@@ -16,6 +16,16 @@ export function UserProvider({ children }) {
     return user != null;
   };
 
+  const GetStatus = () => {
+    if (IsUserLoggedIn()) {
+      const user = localStorage.getItem(USER_KEY);
+      const userJson = JSON.parse(user);
+      return userJson.status;
+    }
+
+    return "Offline";
+  };
+
   const GetUserEmailAddress = () => {
     if (IsUserLoggedIn()) {
       const user = localStorage.getItem(USER_KEY);
@@ -42,6 +52,7 @@ export function UserProvider({ children }) {
 
   const context = {
     IsUserLoggedIn,
+    GetStatus,
     GetUserEmailAddress,
     SignOut,
     SignIn,

@@ -34,6 +34,7 @@ function RegistrationForm() {
       const payload = {
         email: state.email,
         password: state.password,
+        status: "Online",
       };
 
       setState((prevState) => ({
@@ -86,7 +87,7 @@ function RegistrationForm() {
   });
 
   return (
-    <Card className="card col-12 col-lg-4 login-card mt-2 hv-center">
+    <Card className="card col-12 col-lg-4 login-card mt-2 hv-center" id="form-register">
       <form>
         <div className="form-group text-left">
           <label htmlFor="exampleInputEmail1">Email address</label>

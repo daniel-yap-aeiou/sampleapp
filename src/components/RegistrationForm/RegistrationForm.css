@@ -8,3 +8,7 @@
     color: green;
     font-weight: bold;
 }
+
+div#form-register {
+    box-shadow: 5px 10px #888888;
+}

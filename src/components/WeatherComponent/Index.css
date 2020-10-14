@@ -46,6 +46,7 @@ ul.cities {
     opacity: 0.3;
     border-radius: 20px;
     background-color: #4bbb7d;
+    box-shadow: 5px 10px #888888;
 }
 
 .ajax-section figcaption {

@@ -27,6 +27,7 @@ function Account() {
     <Card className="card">
       <img src={Logo} alt="John" />
       <H5>{loggedInAs}</H5>
+      <h3>Status: {userContext.GetStatus()}</h3>
       <p className="title">CEO & Founder, Example</p>
       <p>RMIT University</p>
       <div>

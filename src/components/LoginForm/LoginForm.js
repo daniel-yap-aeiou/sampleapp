@@ -30,6 +30,7 @@ function LoginForm() {
     const payload = {
       email: "demo@example.com",
       password: "demo123!",
+      status: "Online",
     };
 
     setState((prevState) => ({
@@ -62,6 +63,7 @@ function LoginForm() {
     const payload = {
       email: state.email,
       password: state.password,
+      status: "Online",
     };
 
     setState((prevState) => ({
@@ -88,7 +90,7 @@ function LoginForm() {
   useEffect(utilContext.hideLoader, []);
 
   return (
-    <Card className="card col-12 col-lg-4 login-card mt-2 hv-center">
+    <Card className="card col-12 col-lg-4 login-card mt-2 hv-center" id="form-login">
       <form>
         <div className="form-group text-left">
           <label htmlFor="exampleInputEmail1">Email address</label>
