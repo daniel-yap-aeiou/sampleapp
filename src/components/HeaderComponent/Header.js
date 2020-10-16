@@ -227,11 +227,11 @@ function Header({ itemCount }) {
                 onChange={toggleNavBarMode}
                 style={{marginTop: 8}}
               >
-                <option value="light">Light</option>
-                <option value="dark">Dark</option>
-                <option value="pink">Pink</option>
-                <option value="purple">Purple</option>
-                <option value="black">Black</option>
+                <option value="light">Light Saber</option>
+                <option value="dark">Dark Chocolate</option>
+                <option value="pink">Pinky Promise</option>
+                <option value="purple">Purple Rain</option>
+                <option value="black">Black Label</option>
               </select>
             </li>
 
