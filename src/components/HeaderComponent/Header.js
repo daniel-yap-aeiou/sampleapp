@@ -231,7 +231,7 @@ function Header({ itemCount }) {
                 <option value="dark">Dark Chocolate</option>
                 <option value="pink">Pinky Promise</option>
                 <option value="purple">Purple Rain</option>
-                <option value="black">Black Label</option>
+                <option value="black">Black Forest</option>
               </select>
             </li>
 
