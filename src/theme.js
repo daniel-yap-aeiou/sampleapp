@@ -37,3 +37,28 @@ export const blackTheme = {
   gradient: 'linear-gradient(#091236, #1E215D)',
   a: '#fff'
 }
+
+export const yellowTheme = {
+  body: '#FCE205',
+  text: '#000 !important',
+  toggleBorder: '#000',
+  gradient: 'linear-gradient(#091236, #1E215D)',
+  a: '#000'
+}
+
+export const greenTheme = {
+  body: '#0B6623',
+  text: '#000 !important',
+  toggleBorder: '#000',
+  gradient: 'linear-gradient(#091236, #1E215D)',
+  a: '#000' 
+}
+
+
+export const blueTheme = {
+  body: '#1974D2',
+  text: '#000 !important',
+  toggleBorder: '#000',
+  gradient: 'linear-gradient(#091236, #1E215D)',
+  a: '#000' 
+}

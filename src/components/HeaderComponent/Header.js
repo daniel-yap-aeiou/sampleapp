@@ -61,7 +61,7 @@ function Header({ itemCount }) {
   };
 
   const setNavBarClassName = (theme) => {
-    if (theme === "dark" || theme === "pink" || theme === "purple" || theme === "black") {
+    if (theme === "dark" || theme === "pink" || theme === "purple" || theme === "black" || theme === "yellow" || theme === "green" || theme === "blue") {
       setNarBarClassName((pv) => (pv = "navbar-dark bg-dark fixed-top"));
     } else {
       setNarBarClassName((pv) => (pv = "navbar-light bg-light fixed-top"));
@@ -231,7 +231,10 @@ function Header({ itemCount }) {
                 <option value="dark">Dark Chocolate</option>
                 <option value="pink">Pinky Promise</option>
                 <option value="purple">Purple Rain</option>
-                <option value="black">Black Forest</option>
+                <option value="black">Black Thorny</option>
+                <option value="yellow">Yellow Metour</option>
+                <option value="green">Green Forest</option>
+                <option value="blue">Feeling Blue</option>
               </select>
             </li>
 

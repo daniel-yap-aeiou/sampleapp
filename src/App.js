@@ -5,7 +5,7 @@ import Main from "./components/RouteComponent/Main";
 import "./App.css";
 import { withRouter } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
-import { lightTheme, darkTheme, pinkTheme, purpleTheme, blackTheme } from "./theme";
+import { lightTheme, darkTheme, pinkTheme, purpleTheme, blackTheme, yellowTheme, greenTheme, blueTheme } from "./theme";
 import { GlobalStyles } from "./global";
 
 import { useThemeContext } from "./contexts/ThemeContext";
@@ -29,6 +29,15 @@ function App() {
     }
     else if (theme === "black") {
       return blackTheme;
+    }
+    else if (theme === "yellow") {
+      return yellowTheme;
+    }
+    else if (theme === "green") {
+      return greenTheme;
+    }
+    else if (theme === "blue") {
+      return blueTheme;
     }
     else {
       return lightTheme;
