@@ -62,3 +62,11 @@ export const blueTheme = {
   gradient: 'linear-gradient(#091236, #1E215D)',
   a: '#000' 
 }
+
+export const tealLanternTheme = {
+  body: '#008080',
+  text: '#000 !important',
+  toggleBorder: '#000',
+  gradient: 'linear-gradient(#091236, #1E215D)',
+  a: '#000' 
+}

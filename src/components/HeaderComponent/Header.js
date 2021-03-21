@@ -61,7 +61,7 @@ function Header({ itemCount }) {
   };
 
   const setNavBarClassName = (theme) => {
-    if (theme === "dark" || theme === "pink" || theme === "purple" || theme === "black" || theme === "yellow" || theme === "green" || theme === "blue") {
+    if (theme === "dark" || theme === "pink" || theme === "purple" || theme === "black" || theme === "yellow" || theme === "green" || theme === "blue" || theme === "teal") {
       setNarBarClassName((pv) => (pv = "navbar-dark bg-dark fixed-top"));
     } else {
       setNarBarClassName((pv) => (pv = "navbar-light bg-light fixed-top"));
@@ -77,7 +77,7 @@ function Header({ itemCount }) {
     <header>
       <NavNew className={navBarClassName + " navbar navbar-expand-lg fixed-top"}>
         <Link to="/" className="navbar-brand">
-          <img src={Logo} className="App-logo" alt="App" /> &nbsp;
+          <img src={Logo} className="App-logo" alt="App" /> &nbsp; MY REACT APP
         </Link>
         <button
           className="navbar-toggler"
@@ -227,14 +227,16 @@ function Header({ itemCount }) {
                 onChange={toggleNavBarMode}
                 style={{marginTop: 8}}
               >
-                <option value="light">Light Saber</option>
-                <option value="dark">Dark Chocolate</option>
-                <option value="pink">Pinky Promise</option>
-                <option value="purple">Purple Rain</option>
-                <option value="black">Black Thorny</option>
-                <option value="yellow">Yellow Metour</option>
-                <option value="green">Green Forest</option>
-                <option value="blue">Feeling Blue</option>
+                <option value="light">Colour Light Saber</option>
+                <option value="dark">Colour Dark Chocolate</option>
+                <option value="pink">Colour Pinky Promise</option>
+                <option value="purple">Colour Purple Rain</option>
+                <option value="black">Colour Black Thorny</option>
+                <option value="yellow">Colour Yellow Metour</option>
+                <option value="green">Colour Green Forest</option>
+                <option value="blue">Colour Feeling Blue</option>
+                <option value=""></option>
+                <option value="teal">Colour Teal Lantern</option>
               </select>
             </li>
 
