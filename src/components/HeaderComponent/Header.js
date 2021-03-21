@@ -77,7 +77,7 @@ function Header({ itemCount }) {
     <header>
       <NavNew className={navBarClassName + " navbar navbar-expand-lg fixed-top"}>
         <Link to="/" className="navbar-brand">
-          <img src={Logo} className="App-logo" alt="App" /> &nbsp; MY REACT APP
+          <img src={Logo} className="App-logo" alt="App" /> &nbsp; YAP TECK FOO - MY REACT APP
         </Link>
         <button
           className="navbar-toggler"
