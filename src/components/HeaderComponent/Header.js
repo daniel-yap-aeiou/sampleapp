@@ -235,7 +235,6 @@ function Header({ itemCount }) {
                 <option value="yellow">Colour Yellow Metour</option>
                 <option value="green">Colour Green Forest</option>
                 <option value="blue">Colour Feeling Blue</option>
-                <option value=""></option>
                 <option value="teal">Colour Teal Lantern</option>
               </select>
             </li>
